@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header">
     <h2>Platzhalter Logo</h2>
     <h1>Platzhalter Titel</h1>
   </div>
@@ -11,4 +11,9 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  display: flex;
+  background-color: orange;
+  margin-bottom: 50px;
+}
 </style>
