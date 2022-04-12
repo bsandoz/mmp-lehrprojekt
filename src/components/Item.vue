@@ -1,5 +1,8 @@
 <template>
-  <h3>Platzhalter-Text Item</h3>
+  <div>
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.text }}</p>
+  </div>
 </template>
 
 <script>
@@ -12,4 +15,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  div {
+    width: 50%;
+    height: 0;
+    padding-bottom: 20%;
+  }
 </style>

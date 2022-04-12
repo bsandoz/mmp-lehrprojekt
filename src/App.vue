@@ -1,11 +1,3 @@
-<script setup>
-import Header from './components/Header.vue'
-import Footer from './components/Footer.vue'
-import Lead from './components/Lead.vue'
-import Content from './components/Content.vue'
-
-</script>
-
 <template>
   <header>
     <Header />
@@ -19,10 +11,47 @@ import Content from './components/Content.vue'
     consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
     nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
     Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
-    <Content />
+    <Content :content="content"/>
   </main>
   <Footer />
 </template>
+
+<script>
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import Lead from './components/Lead.vue'
+import Content from './components/Content.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Header,
+    Footer,
+    Lead,
+    Content,
+  },
+  data() {
+    return {
+      content: [],
+    }
+  },
+  created() {
+    this.content = [
+      {
+        id: 1,
+        title: 'Platzhalter-Text Item 1',
+        text: 'Dies ist ein Platzhalter für Modul 1.',
+      },
+      {
+        id: 2,
+        title: 'Platzhalter-Text Item 2',
+        text: 'Dies ist ein Platzhalter für Modul 2.',
+      },
+    ]
+  }
+}
+
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');

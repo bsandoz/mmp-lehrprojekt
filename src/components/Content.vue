@@ -1,8 +1,7 @@
 <template>
-  <div class="container">
-    <div>
-      <Item />
-    </div>
+  <p>Content</p>
+  <div :key="item.id" v-for="item in content" class="container">
+    <Item :item="item" />
   </div>
 </template>
 
@@ -10,19 +9,27 @@
 import Item from './Item.vue'
 
 export default {
-  name: 'Container',
+  name: 'Content',
   props: {
-    containerItems: Array,
+    content: Array,
   },
   components: {
     Item,
-  }
+  },
 }
 </script>
 
 <style lang="css" scoped>
   .container {
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-width: 75%;
+    margin: 30px auto;
+    overflow: auto;
+    min-height: 300px;
+    border: 1px solid steelblue;
+    padding: 30px;
+    border-radius: 5px;
   }
 </style>
