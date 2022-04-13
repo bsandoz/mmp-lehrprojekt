@@ -41,13 +41,26 @@ export default {
         id: 1,
         title: 'Platzhalter-Text Item 1',
         text: 'Dies ist ein Platzhalter für Modul 1.',
+        isCompleted: true,
+        progress: 100,
       },
       {
         id: 2,
         title: 'Platzhalter-Text Item 2',
         text: 'Dies ist ein Platzhalter für Modul 2.',
+        isCompleted: false,
+        progress: 25,
       },
     ]
+  },
+  methods: {
+    getModuleInfo: function() {
+      fetch('')
+        .then(response => response.json())
+        .then(json => {
+          this.content = json.resultList.result;
+        });
+    }
   }
 }
 

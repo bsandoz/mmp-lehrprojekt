@@ -15,5 +15,6 @@ export default {
   display: flex;
   background-color: orange;
   margin-bottom: 50px;
+  min-height: 100px;
 }
 </style>

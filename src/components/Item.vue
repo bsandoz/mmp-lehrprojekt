@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ completed: item.isCompleted }">
     <h3>{{ item.title }}</h3>
     <p>{{ item.text }}</p>
   </div>
@@ -19,5 +19,8 @@ export default {
     width: 50%;
     height: 0;
     padding-bottom: 20%;
+  }
+  .completed {
+    background-color: green;
   }
 </style>

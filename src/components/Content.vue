@@ -1,5 +1,4 @@
 <template>
-  <p>Content</p>
   <div :key="item.id" v-for="item in content" class="container">
     <Item :item="item" />
   </div>
