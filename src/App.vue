@@ -35,33 +35,14 @@ export default {
       content: [],
     }
   },
-  created() {
-    this.content = [
-      {
-        id: 1,
-        title: 'Platzhalter-Text Item 1',
-        text: 'Dies ist ein Platzhalter für Modul 1.',
-        isCompleted: true,
-        progress: 100,
-      },
-      {
-        id: 2,
-        title: 'Platzhalter-Text Item 2',
-        text: 'Dies ist ein Platzhalter für Modul 2.',
-        isCompleted: false,
-        progress: 25,
-      },
-    ]
-  },
   methods: {
-    getModuleInfo: function() {
-      fetch('')
-        .then(response => response.json())
-        .then(json => {
-          this.content = json.resultList.result;
-        });
-    }
-  }
+    fetchData() {
+      axios.get('system/ajax/getModules.php').then(response => (this.content = response.data));
+    },
+  },
+  created() {
+    this.fetchData();
+  },
 }
 
 </script>
