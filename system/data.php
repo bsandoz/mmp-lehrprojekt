@@ -4,7 +4,7 @@
 // Änderungen: Zeile 7 Pfad statt require_once($_SERVER['DOCUMENT_ROOT'].'/config.php') nur '../../config.php'
 
 // Die Variablen $db_host, $db_name, $db_user, $db_pass, $db_charset sind in config.php zentral gespeichert.
-require_once('../../config.php');
+require_once('../config.php');
 
 // Datenbank Verbindung aufbauen
 // Siehe: https://www.php-einfach.de/mysql-tutorial/crashkurs-pdo/
@@ -17,6 +17,7 @@ function dbVerbindungErzeugen(){
 	Um sie innerhalb einer Funktion zugänglich zu machen, müssen sie mit dem Schlüsselwort global innerhalb der Funktion gekennzeichnet werden.
 	Siehe: https://www.php.net/manual/de/language.variables.scope.php
 	*/
+
 	global $db_host, $db_name, $db_user, $db_pass, $db_charset;
 
 	$dsn = "mysql:host=$db_host;dbname=$db_name;charset=$db_charset"; // siehe https://en.wikipedia.org/wiki/Data_source_name

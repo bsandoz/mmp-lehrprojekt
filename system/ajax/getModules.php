@@ -17,7 +17,7 @@ $resultat = $db->query($sql);
 $resultatArray = $resultat->fetchAll();
 
 // Inhalt des Arrays als JSON ausgeben
-//echo json_encode($resultatArray);
+echo json_encode($resultatArray);
 
 // Datei auf Festplatte speichern
 /*

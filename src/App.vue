@@ -32,16 +32,26 @@ export default {
   },
   data() {
     return {
-      content: [],
+      content: null,
     }
   },
   methods: {
+    /*
     fetchData() {
       axios.get('system/ajax/getModules.php').then(response => (this.content = response.data));
     },
+    */
+  },
+  mounted() {
+    axios
+      .get ('http://localhost:8055/items/articles')
+      .then (response => (this.content = response))
+      .catch (function(error) {
+        console.log(error);
+      })
   },
   created() {
-    this.fetchData();
+    //this.fetchData();
   },
 }
 
