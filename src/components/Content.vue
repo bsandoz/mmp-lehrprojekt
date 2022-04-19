@@ -1,7 +1,7 @@
 <template>
-  <div :key="item.id" v-for="item in content" class="container">
+  <router-link to="/module" tag="div" :key="item.id" v-for="item in content" class="container">
     <Item :item="item" />
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -15,6 +15,11 @@ export default {
   components: {
     Item,
   },
+  methods: {
+    onClick() {
+
+    }
+  }
 }
 </script>
 
@@ -32,3 +37,11 @@ export default {
     border-radius: 5px;
   }
 </style>
+
+<!--
+<template>
+  <div :key="item.id" v-for="item in content" class="container">
+    <Item :item="item" />
+  </div>
+</template>
+-->

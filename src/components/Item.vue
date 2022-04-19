@@ -1,6 +1,7 @@
 <template>
   <div :class="{ completed: item.isCompleted }">
     <h3>{{ item.title }}</h3>
+    <router-link to="/module">Platzhalter-Link</router-link>
     <p>{{ item.text }}</p>
     <p class="progress-bar">Progress: {{ item.progress }}%</p>
   </div>
