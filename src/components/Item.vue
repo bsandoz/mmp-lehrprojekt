@@ -2,6 +2,7 @@
   <div :class="{ completed: item.isCompleted }">
     <h3>{{ item.title }}</h3>
     <p>{{ item.text }}</p>
+    <p class="progress-bar">Progress: {{ item.progress }}%</p>
   </div>
 </template>
 
@@ -22,5 +23,8 @@ export default {
   }
   .completed {
     background-color: green;
+  }
+  .progress-bar {
+    font-style: italic;
   }
 </style>

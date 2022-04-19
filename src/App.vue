@@ -44,8 +44,8 @@ export default {
   },
   mounted() {
     axios
-      .get ('http://localhost:8055/items/articles')
-      .then (response => (this.content = response))
+      .get ('https://ifuu2646.directus.app/items/modules')
+      .then (response => (this.content = response.data.data))
       .catch (function(error) {
         console.log(error);
       })
