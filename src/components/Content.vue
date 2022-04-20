@@ -1,24 +1,33 @@
 <template>
-  <router-link to="/module" tag="div" :key="item.id" v-for="item in content" class="container">
+  <router-link v-if="module" :to="moduleLink" tag="div" :key="item.id" v-for="item in content" class="container">
     <Item :item="item" />
   </router-link>
 </template>
 
 <script>
-import Item from './Item.vue'
+import Item from './Item.vue';
 
 export default {
   name: 'Content',
+  components: {
+    Item
+  },
   props: {
     content: Array,
-  },
-  components: {
-    Item,
-  },
-  methods: {
-    onClick() {
-
+    module: {
+      type: Object,
+      required: true
     }
+  },
+  data() {
+    return {
+      moduleUrl: '/module/'
+    }
+  },
+  computed: {
+    moduleLink() {
+      return this.module.id ? this.moduleUrl + this.module.id : null
+    },
   }
 }
 </script>
