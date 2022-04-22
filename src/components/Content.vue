@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="module" :to="moduleLink" tag="div" :key="item.id" v-for="item in content" class="container">
+  <router-link :to="`/module/${currentModuleId}`" tag="div" :key="item.id" v-for="item in content" class="container">
     <Item :item="item" />
   </router-link>
 </template>
@@ -14,21 +14,13 @@ export default {
   },
   props: {
     content: Array,
-    module: {
-      type: Object,
-      required: true
-    }
+    currentModuleId: Number,
   },
   data() {
     return {
-      moduleUrl: '/module/'
+      //currentModuleId: 1,
     }
   },
-  computed: {
-    moduleLink() {
-      return this.module.id ? this.moduleUrl + this.module.id : null
-    },
-  }
 }
 </script>
 
