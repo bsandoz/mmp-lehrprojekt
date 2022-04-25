@@ -4,7 +4,6 @@
     tag="div"
     v-for="singleModule in content"
     :key="singleModule.id"
-    @click="updateModuleId()"
     class="container"
     >
     <SingleModule :single-module="singleModule" />
@@ -28,12 +27,13 @@ export default {
       currentModuleId: null,
     }
   },
+  /*
   methods: {
     updateModuleId() {
       console.log("Called updateModuleId()");
       localStorage.setItem('currentModuleId', '1');
     },
-  },
+  },*/
 }
 </script>
 

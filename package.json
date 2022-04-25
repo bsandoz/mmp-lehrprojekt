@@ -2,16 +2,18 @@
   "name": "bachelor-lerntool",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
+    "dev": "vite",
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
+    "pinia": "^2.0.13",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.1",
-    "vite": "^2.9.1"
+    "vite": "^2.9.1",
+    "vue-cli-plugin-pinia": "~0.1.2"
   }
 }

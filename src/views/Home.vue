@@ -1,14 +1,20 @@
 <template>
+  <div>
+    <span>{{ userTest }}</span>
+  </div>
   <Lead lead="Willkommen auf der Homepage dieses Lerntools! Dies ist ein Leadtext. Lorem ipsum dolor sit amet,
   consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
   nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
   Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
-  <Content :content="content" :array-module-id="arrayModuleId"/>
+  <Content :content="content" />
 </template>
 
 <script>
 import Lead from '../components/Lead.vue'
 import Content from '../components/Content.vue'
+import { useUserStore } from '@/store/UserStore.js'
+
+import { mapState } from 'pinia';
 
 export default {
   name: 'Home',
@@ -22,11 +28,11 @@ export default {
   data() {
     return {
       content: null,
-      arrayModuleId: null,
+      //arrayModuleId: null,
     }
   },
   computed: {
-
+    ...mapState(useUserStore, ["userTest"]),
   },
   mounted() {
     axios
@@ -35,12 +41,14 @@ export default {
       .catch (function(error) {
         console.log(error);
       })
+    /*
     axios
       .get ('https://ifuu2646.directus.app/items/modules')
       .then (response => (this.arrayModuleId = response.data.data.id))
       .catch (function(error) {
         console.log(error);
       })
+      */
   },
 }
 </script>

@@ -30,7 +30,7 @@ export default {
   computed: {
     filteredModules() {
       let self = this;
-      console.log(self.currentModuleId);
+      console.log(store.activeModule);
       return self.modules.filter(function (obj) {
         return obj.id === self.currentModuleId;
       })
