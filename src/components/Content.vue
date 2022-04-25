@@ -1,25 +1,38 @@
 <template>
-  <router-link :to="`/module/${currentModuleId}`" tag="div" :key="item.id" v-for="item in content" class="container">
-    <Item :item="item" />
+  <router-link
+    to="/module"
+    tag="div"
+    v-for="singleModule in content"
+    :key="singleModule.id"
+    @click="updateModuleId()"
+    class="container"
+    >
+    <SingleModule :single-module="singleModule" />
   </router-link>
 </template>
 
 <script>
-import Item from './Item.vue';
+import SingleModule from './SingleModule.vue';
 
 export default {
   name: 'Content',
   components: {
-    Item
+    SingleModule,
   },
   props: {
-    content: Array,
-    currentModuleId: Number,
+    content: Object,
+    arrayModuleId: Array,
   },
   data() {
     return {
-      //currentModuleId: 1,
+      currentModuleId: null,
     }
+  },
+  methods: {
+    updateModuleId() {
+      console.log("Called updateModuleId()");
+      localStorage.setItem('currentModuleId', '1');
+    },
   },
 }
 </script>

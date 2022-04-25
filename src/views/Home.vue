@@ -3,7 +3,7 @@
   consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
   nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
   Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
-  <Content :content="content" :currentModuleId="1"/>
+  <Content :content="content" :array-module-id="arrayModuleId"/>
 </template>
 
 <script>
@@ -17,11 +17,12 @@ export default {
     Content,
   },
   props: {
-    currentModuleId: Number,
+    //currentModuleId: Number,
   },
   data() {
     return {
       content: null,
+      arrayModuleId: null,
     }
   },
   computed: {
@@ -31,6 +32,12 @@ export default {
     axios
       .get ('https://ifuu2646.directus.app/items/modules')
       .then (response => (this.content = response.data.data))
+      .catch (function(error) {
+        console.log(error);
+      })
+    axios
+      .get ('https://ifuu2646.directus.app/items/modules')
+      .then (response => (this.arrayModuleId = response.data.data.id))
       .catch (function(error) {
         console.log(error);
       })

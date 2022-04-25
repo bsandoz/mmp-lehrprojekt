@@ -1,31 +1,48 @@
 <template>
-  <Lead lead="Dies ist Platzhalter-Modul 1. Hier folgt die Beschreibung bzw. Zusammenfassung dieses Moduls. "/>
+  <Text
+    v-for="item in filteredModules"
+    :key="item.id"
+    :text="item.text"
+  />
 </template>
 
 <script>
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
-import Lead from '../components/Lead.vue'
+import Text from '../components/Text.vue'
 import Content from '../components/Content.vue'
 
 export default {
   name: 'Module',
-  props: {
-
-  },
   components: {
-    Lead,
+    Text,
     Content,
+  },
+  props: {
+    content: Object,
   },
   data() {
     return {
-      text: null,
+      modules: [],
+      currentModuleId: Number,
     }
+  },
+  computed: {
+    filteredModules() {
+      let self = this;
+      console.log(self.currentModuleId);
+      return self.modules.filter(function (obj) {
+        return obj.id === self.currentModuleId;
+      })
+    }
+  },
+  created() {
+    this.currentModuleId = localStorage.getItem('currentModuleId');
   },
   mounted() {
     axios
       .get ('https://ifuu2646.directus.app/items/modules')
-      .then (response => (this.text = response.data.data))
+      .then (response => (this.modules = response.data.data))
       .catch (function(error) {
         console.log(error);
       })
