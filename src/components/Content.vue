@@ -1,17 +1,25 @@
 <template>
-  <router-link
-    to="/module"
-    tag="div"
-    v-for="singleModule in content"
-    :key="singleModule.id"
-    class="container"
-    >
-    <SingleModule :single-module="singleModule" />
-  </router-link>
+  <div v-if="content">
+    <router-link
+      class="container"
+      :to="moduleLink"
+      tag="div"
+      v-for="singleModule in content"
+      :key="singleModule.id"
+      @click="setActiveModule(singleModule)"
+      :single-module="singleModule"
+      >
+    </router-link>
+  </div>
 </template>
 
 <script>
 import SingleModule from './SingleModule.vue';
+
+import { useModuleStore } from '@/store/ModuleStore.js'
+
+import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'Content',
@@ -20,20 +28,27 @@ export default {
   },
   props: {
     content: Object,
-    arrayModuleId: Array,
+    //arrayModuleId: Array,
+    singleModule: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       currentModuleId: null,
+      moduleUrl: "/module/"
     }
   },
-  /*
+  computed: {
+    ...mapState(useModuleStore, ['activeModule']),
+    moduleLink() {
+      return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
+    }
+  },
   methods: {
-    updateModuleId() {
-      console.log("Called updateModuleId()");
-      localStorage.setItem('currentModuleId', '1');
-    },
-  },*/
+    ...mapActions(useModuleStore, ['setActiveModule']),
+  },
 }
 </script>
 
