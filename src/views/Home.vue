@@ -28,7 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useUserStore, ['userTest']),
+    ...mapState(useUserStore, ['userIsLoggedIn']),
     ...mapState(useModuleStore, ['allModules']),
   },
   methods: {

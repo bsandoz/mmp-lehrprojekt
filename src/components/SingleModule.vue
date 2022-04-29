@@ -1,5 +1,5 @@
 <template>
-  <router-link v-if="singleModule" :to="moduleLink">
+  <router-link v-if="singleModule && userIsLoggedIn" :to="moduleLink">
     <div :class="{ completed: singleModule.isCompleted }">
       <h3>{{ singleModule.title }}</h3>
       <p>{{ singleModule.text }}</p>
@@ -9,6 +9,10 @@
 </template>
 
 <script>
+import { useUserStore } from '@/store/UserStore.js'
+
+import { mapState } from 'pinia';
+
 export default {
   name: 'SingleModule',
   props: {
@@ -23,6 +27,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(useUserStore, ['userIsLoggedIn']),
     moduleLink() {
       //return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
       return this.moduleUrl + this.singleModule.id;

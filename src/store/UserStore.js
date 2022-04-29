@@ -9,7 +9,14 @@ export const useUserStore = defineStore("UserStore", {
     };
   },
   //actions
-
+  actions: {
+    userLogIn() {
+      this.userIsLoggedIn = true;
+    },
+    userLogOut() {
+      this.userIsLoggedIn = false;
+    },
+  }
   //getters
 
 });
