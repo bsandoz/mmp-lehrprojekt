@@ -25,12 +25,6 @@ export default {
   },
   props: {
     content: Object,
-    //arrayModuleId: Array,
-  },
-  data() {
-    return {
-      currentModuleId: null,
-    }
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
@@ -55,11 +49,3 @@ export default {
     border-radius: 5px;
   }
 </style>
-
-<!--
-<template>
-  <div :key="item.id" v-for="item in content" class="container">
-    <Item :item="item" />
-  </div>
-</template>
--->

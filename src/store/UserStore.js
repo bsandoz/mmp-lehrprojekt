@@ -6,7 +6,6 @@ export const useUserStore = defineStore("UserStore", {
     return {
       userIsLoggedIn: false,
       userData: null,
-      userTest: "Test 2",
     };
   },
   //actions

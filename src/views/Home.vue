@@ -21,13 +21,9 @@ export default {
     Lead,
     Content,
   },
-  props: {
-    //currentModuleId: Number,
-  },
   data() {
     return {
       content: null,
-      //arrayModuleId: null,
       singleModule: null,
     }
   },
@@ -43,20 +39,6 @@ export default {
     //RETURNS NULL?
     await console.log(this.allModules);
     return this.content = this.allModules;
-    /*
-    axios
-      .get ('https://ifuu2646.directus.app/items/modules')
-      .then (response => (this.content = response.data.data))
-      .catch (function(error) {
-        console.log(error);
-      })
-    axios
-      .get ('https://ifuu2646.directus.app/items/modules')
-      .then (response => (this.arrayModuleId = response.data.data.id))
-      .catch (function(error) {
-        console.log(error);
-      })
-      */
   },
 }
 </script>

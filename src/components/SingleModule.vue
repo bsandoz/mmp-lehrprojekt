@@ -24,7 +24,8 @@ export default {
   },
   computed: {
     moduleLink() {
-      return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
+      //return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
+      return this.moduleUrl + this.singleModule.id;
     },
   }
 }
