@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <h2>Platzhalter Logo</h2>
-    <h1>Platzhalter Titel</h1>
+    <h1>EasyMusicTheory</h1>
   </div>
 </template>
 

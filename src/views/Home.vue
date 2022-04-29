@@ -36,7 +36,6 @@ export default {
   },
   async mounted() {
     await this.getAllModules('https://ifuu2646.directus.app/items/modules')
-    //RETURNS NULL?
     await console.log(this.allModules);
     return this.content = this.allModules;
   },

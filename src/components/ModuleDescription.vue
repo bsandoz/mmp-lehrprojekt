@@ -1,4 +1,5 @@
 <template>
+  <router-link to="/">Zurück zur Übersicht</router-link>
   <h2>{{ this.activeModule.title }}</h2>
   <h4>{{ this.activeModule.text }}</h4>
   <p>{{ this.activeModule.details }}</p>
