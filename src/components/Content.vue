@@ -1,15 +1,12 @@
 <template>
   <div v-if="content">
-    <router-link
+    <SingleModule
       class="container"
-      :to="moduleLink"
-      tag="div"
       v-for="singleModule in content"
       :key="singleModule.id"
       @click="setActiveModule(singleModule)"
       :single-module="singleModule"
-      >
-    </router-link>
+    />
   </div>
 </template>
 
@@ -29,22 +26,14 @@ export default {
   props: {
     content: Object,
     //arrayModuleId: Array,
-    singleModule: {
-      type: Object,
-      required: true,
-    },
   },
   data() {
     return {
       currentModuleId: null,
-      moduleUrl: "/module/"
     }
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
-    moduleLink() {
-      return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
-    }
   },
   methods: {
     ...mapActions(useModuleStore, ['setActiveModule']),

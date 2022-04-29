@@ -28,16 +28,15 @@ export default {
     return {
       content: null,
       //arrayModuleId: null,
+      singleModule: null,
     }
   },
   computed: {
     ...mapState(useUserStore, ['userTest']),
     ...mapState(useModuleStore, ['allModules']),
-    ...mapState(useModuleStore, ['activeModule']),
   },
   methods: {
     ...mapActions(useModuleStore, ['getAllModules']),
-    ...mapActions(useModuleStore, ['setActiveModule']),
   },
   async mounted() {
     await this.getAllModules('https://ifuu2646.directus.app/items/modules')
