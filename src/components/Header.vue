@@ -5,7 +5,16 @@
       <h1>EasyMusicTheory</h1>
     </div>
     <div class="header-right">
-      <button type="button" name="button-login" v-if="!userIsLoggedIn" @click="logInOut()">Login</button>
+      <button type="button" name="button-register">Registrieren</button>
+      <button type="button" name="button-login" v-if="!userIsLoggedIn" @click="showModal = true">Login</button>
+      <Teleport to="body">
+        <!-- use the modal component, pass in the prop -->
+        <modal :show="showModal" @close="showModal = false">
+          <template #header>
+            <h3>Login</h3>
+          </template>
+        </modal>
+      </Teleport>
       <span v-if="userIsLoggedIn">Willkommen, User!</span>
       <button type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
     </div>
@@ -13,12 +22,22 @@
 </template>
 
 <script>
+import Modal from './modals/ModalLogin.vue'
+
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
 import { mapActions } from 'pinia';
 
 export default {
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      showModal: false,
+    }
+  },
   computed: {
     ...mapState(useUserStore, ['userIsLoggedIn']),
   },
