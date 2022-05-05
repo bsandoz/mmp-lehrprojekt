@@ -11,7 +11,7 @@
             <form @submit.prevent="login">
               <input v-model="username" type="text" placeholder="Benutzername">
               <input v-model="password" type="password" placeholder="Passwort">
-              <input type="submit" value="Einloggen">
+              <input type="submit" value="Einloggen" @click="login">
             </form>
           </div>
 
@@ -31,6 +31,13 @@
 </template>
 
 <script>
+import { useUserStore } from '@/store/UserStore.js'
+
+import bcrypt from 'bcryptjs'
+
+import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
+
 export default {
   name: "ModalLogin",
   props: {
@@ -42,23 +49,25 @@ export default {
       password: "",
     }
   },
+  computed: {
+    ...mapState(useUserStore, ['userData']),
+  },
   methods: {
+    ...mapActions(useUserStore, ['getAllUsersData']),
+
     async login() {
-      const { username, password } = this;
-      const res = await fetch("https://ifuu2646.directus.app/items/users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ username, password })
+      await this.getAllUsersData("https://ifuu2646.directus.app/items/users");
+      await bcrypt.compare(this.password, this.userData[0].password, function(err, res) {
+        if (res) {
+          console.log(res);
+        } else {
+          console.error(err);
         }
-      );
-      const data = await res.json();
-      console.log(data);
+      });
     }
   }
 }
+
 </script>
 
 
