@@ -21,10 +21,15 @@ const routes = [
     component: Module,
   },
   {
-    path: '/exercise',
-    name: 'Exercise',
+    path: '/exercise-memory',
+    name: 'Memory-Exercise',
     component: Exercise,
   },
+  {
+    path: '/exercise-hangman',
+    name: 'Hangman-Exercise',
+    component: Exercise,
+  }
 ]
 
 //console.log(import.meta.env.BASE_URL);

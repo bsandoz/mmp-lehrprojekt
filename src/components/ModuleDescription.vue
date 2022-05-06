@@ -4,7 +4,8 @@
   <h4>{{ this.activeModule.text }}</h4>
   <p>{{ this.activeModule.details }}</p>
   <div class="start-exercise">
-    <router-link to="/exercise">Übung starten</router-link>
+    <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
+    <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
   </div>
   <div class="next-exercise">
     <h3>Klicke hier, um zur nächsten Übung zu gelangen!</h3>

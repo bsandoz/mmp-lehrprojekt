@@ -1,7 +1,7 @@
 <template>
   <div class="exercise">
     <div class="memory-container" @click="startGame" :if="this.testQuizCompleted === false">
-      <h4 v-if="this.isGameRunning === false">Übung starten!</h4>
+      <h4 v-if="this.isGameRunning === false">Memory starten!</h4>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
         <div class="memory-box" @click="toggleVisibility(item)"
         :class="{visible: item.isVisible},{solved: item.isSolved}">
@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import { h } from 'vue'
-
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
