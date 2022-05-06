@@ -1,6 +1,6 @@
 <template>
   <div class="exercise">
-    <div class="memory-container" @click="startGame">
+    <div class="memory-container" @click="startGame" :if="this.testQuizCompleted === false">
       <h4 v-if="this.isGameRunning === false">Übung starten!</h4>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
         <div class="memory-box" @click="toggleVisibility(item)"
@@ -16,6 +16,10 @@
 <script>
 import { h } from 'vue'
 
+import { useUserStore } from '@/store/UserStore.js'
+
+import { mapState } from 'pinia';
+
 export default {
   name: 'Memory',
   data() {
@@ -28,6 +32,8 @@ export default {
       secondBoxPair: 0,
       firstBoxClicked: null,
       secondBoxClicked: null,
+
+      testQuizCompleted: null,
     }
   },
   methods: {
@@ -113,12 +119,28 @@ export default {
       if (this.firstBoxPair === this.secondBoxPair) {
         firstBox.isSolved = true;
         secondBox.isSolved = true;
+        this.checkIfComplete(this.memoryboxArray);
+      }
+    },
+    checkIfComplete(array) {
+      let counter = 0;
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].isSolved) {
+          counter++;
+          console.log(counter);
+        }
+      }
+      if (array.length === counter) {
+        console.log("All boxes solved");
+        this.testQuizCompleted = true;
+        localStorage.setItem("testQuizCompleted", true);
       }
     }
   },
-  render() {
-    console.log("Render function called");
-    return h('div', this.msg)
+  created() {
+    this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
+    console.log("Get localstorage");
+    console.log(this.testQuizCompleted);
   }
 }
 </script>

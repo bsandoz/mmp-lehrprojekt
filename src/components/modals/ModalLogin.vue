@@ -11,7 +11,7 @@
             <form @submit.prevent="login">
               <input v-model="username" type="text" placeholder="Benutzername">
               <input v-model="password" type="password" placeholder="Passwort">
-              <input type="submit" value="Einloggen" @click="login">
+              <input type="submit" value="Einloggen">
             </form>
           </div>
 
@@ -51,25 +51,28 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ['userData']),
+    ...mapState(useUserStore, ['userIsLoggedIn']),
   },
   methods: {
     ...mapActions(useUserStore, ['getAllUsersData']),
+    ...mapActions(useUserStore, ['userLogIn']),
 
     async login() {
       await this.getAllUsersData("https://ifuu2646.directus.app/items/users");
       await console.log(this.username);
-      //const filter = `filter[username][_eq]=${this.username}`;
       let filteredUsersData = this.userData.filter(item => item.username === this.username);
       await console.log(filteredUsersData);
       await console.log(filteredUsersData[0].password);
-      console.log(this.password);
-      await bcrypt.compare(this.password, filteredUsersData[0].password).then((pw) => {
-        if (pw) {
-          console.log(pw);
-        } else {
-          console.log("Fehler");
-        }
-      })
+      await console.log(this.password);
+      const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
+      if (res) {
+        console.log("Login successful");
+        this.userLogIn();
+        localStorage.setItem('username', filteredUsersData[0].username);
+        localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
+      } else {
+        console.log("Password is not correct");
+      }
     }
   }
 }

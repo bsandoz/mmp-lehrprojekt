@@ -25,7 +25,6 @@ export const useUserStore = defineStore("UserStore", {
           .catch (function(error) {
             console.log(error);
           })
-        await console.log(this.userData);
         } catch (error) {
           console.log(error);
         }
