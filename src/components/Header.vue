@@ -5,15 +5,23 @@
       <h1>EasyMusicTheory</h1>
     </div>
     <div class="header-right">
-      <button type="button" name="button-register">Registrieren</button>
-      <button type="button" name="button-login" v-if="!userIsLoggedIn" @click="showModal = true">Login</button>
+      <button type="button" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
+      <button type="button" name="button-login" v-if="!userIsLoggedIn" @click="showModalLogin = true">Login</button>
       <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
-        <modal :show="showModal" @close="showModal = false">
+        <ModalLogin :show="showModalLogin" @close="showModalLogin = false">
           <template #header>
             <h3>Login</h3>
           </template>
-        </modal>
+        </ModalLogin>
+      </Teleport>
+      <Teleport to="body">
+        <!-- use the modal component, pass in the prop -->
+        <ModalRegister :show="showModalRegister" @close="showModalRegister = false">
+          <template #header>
+            <h3>Registrierung</h3>
+          </template>
+        </ModalRegister>
       </Teleport>
       <span v-if="userIsLoggedIn">Willkommen, User!</span>
       <button type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
@@ -22,7 +30,8 @@
 </template>
 
 <script>
-import Modal from './modals/ModalLogin.vue'
+import ModalLogin from './modals/ModalLogin.vue'
+import ModalRegister from './modals/ModalRegister.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
 
@@ -31,11 +40,13 @@ import { mapActions } from 'pinia';
 
 export default {
   components: {
-    Modal,
+    ModalLogin,
+    ModalRegister,
   },
   data() {
     return {
-      showModal: false,
+      showModalLogin: false,
+      showModalRegister: false,
     }
   },
   computed: {

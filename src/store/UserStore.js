@@ -29,9 +29,9 @@ export const useUserStore = defineStore("UserStore", {
         } catch (error) {
           console.log(error);
         }
-      }
+      },
     }
-    
+
   //getters
 
 });

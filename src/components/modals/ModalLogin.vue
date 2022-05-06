@@ -57,13 +57,19 @@ export default {
 
     async login() {
       await this.getAllUsersData("https://ifuu2646.directus.app/items/users");
-      await bcrypt.compare(this.password, this.userData[0].password, function(err, res) {
-        if (res) {
-          console.log(res);
+      await console.log(this.username);
+      //const filter = `filter[username][_eq]=${this.username}`;
+      let filteredUsersData = this.userData.filter(item => item.username === this.username);
+      await console.log(filteredUsersData);
+      await console.log(filteredUsersData[0].password);
+      console.log(this.password);
+      await bcrypt.compare(this.password, filteredUsersData[0].password).then((pw) => {
+        if (pw) {
+          console.log(pw);
         } else {
-          console.error(err);
+          console.log("Fehler");
         }
-      });
+      })
     }
   }
 }
