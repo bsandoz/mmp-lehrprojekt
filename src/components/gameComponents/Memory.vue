@@ -32,6 +32,7 @@ export default {
       secondBoxClicked: null,
 
       testQuizCompleted: null,
+      userScore: Number,
     }
   },
   methods: {
@@ -132,8 +133,25 @@ export default {
         console.log("All boxes solved");
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
+        this.userScore = 10;
+        this.saveTestUserScore();
       }
-    }
+    },
+    async saveTestUserScore() {
+      let score = this.userScore;
+      let testUsersArray = [];
+      await axios.get ("https://ifuu2646.directus.app/items/testUsers")
+      .then (response => (testUsersArray = response.data.data))
+      .catch (function(error) {
+        console.log(error);
+      })
+      const filteredUsersArray = testUsersArray.filter(item => item.id === this.testUserId);
+      let currentUserId = filteredUsersArray[0].id;
+      console.log(currentUserId);
+    },
+  },
+  computed: {
+    ...mapState(useUserStore, ['testUserId']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");

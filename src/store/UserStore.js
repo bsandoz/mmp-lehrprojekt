@@ -8,7 +8,7 @@ export const useUserStore = defineStore("UserStore", {
       userData: null,
 
       //Data for test
-      userId: null,
+      testUserId: null,
     };
   },
   //actions
@@ -32,6 +32,9 @@ export const useUserStore = defineStore("UserStore", {
           console.log(error);
         }
       },
+      setTestUserId(id) {
+        this.testUserId = id;
+      }
     }
 
   //getters

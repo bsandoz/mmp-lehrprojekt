@@ -29,6 +29,11 @@
 </template>
 
 <script>
+import { useUserStore } from '@/store/UserStore.js'
+
+import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
+
 export default {
   name: "TestUserInfo",
   props: {
@@ -44,8 +49,11 @@ export default {
       //Rest
       testStarted: false,
       formSubmitted: false,
-      userId: null,
+      //currentUserId: null,
     }
+  },
+  computed: {
+    ...mapState(useUserStore, ['testUserId']),
   },
   methods: {
     setTestStarted() {
@@ -69,8 +77,8 @@ export default {
       const user = this.prepareUserData()
       await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
         .then((response) => {
-          this.userId = response.data.data.id;
-          console.log(this.userId);
+          this.setTestUserId(response.data.data.id);
+          console.log(this.testUserId);
           this.formSubmitted = true
 
         })
@@ -79,6 +87,13 @@ export default {
         }
       )
     },
+    /*
+    setUserInfo() {
+      console.log("Called setUserInfo in TestUserInfo");
+      this.$emit('setUserInfo', this.currentUserId);
+    }
+    */
+    ...mapActions(useUserStore, ['setTestUserId']),
   },
   emits: ['setUserInfo']
 }

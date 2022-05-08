@@ -18,6 +18,11 @@ import TestSelectGame from '../components/gameComponents/TestSelectGame.vue'
 import Memory from '../components/gameComponents/Memory.vue'
 import Hangman from '../components/gameComponents/Hangman.vue'
 
+import { useUserStore } from '@/store/UserStore.js'
+
+import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
+
 export default {
   name: 'Exercise',
   components: {
@@ -32,10 +37,17 @@ export default {
       showGames: false,
       isMemory: false,
       isHangman: false,
+
+      userId: null,
     }
+  },
+  computed: {
+    ...mapState(useUserStore, ['testUserId']),
   },
   methods: {
     setUserInfo() {
+      //log returns null here, probably because of timing issues?
+      console.log(this.testUserId);
       this.showGames = true;
       console.log("Set user info true");
     },
@@ -46,7 +58,7 @@ export default {
     setHangman() {
       this.isHangman = true;
       this.showGames = false;
-    }
+    },
   }
 
 }
