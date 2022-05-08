@@ -52,7 +52,7 @@
             this.errorCounter = 0;
             this.currentDefinition = 0;
             this.maxDefinitions = this.wordsArray.length;
-            console.log(this.wordsArray.length);
+            //console.log(this.wordsArray.length);
             await this.getStringLength();
             await this.createEmptyDefinition();
           }
@@ -63,11 +63,22 @@
       },
       getStringLength() {
         this.currentStringLength = this.wordsArray[this.currentDefinition].concept.length;
-        console.log(this.currentStringLength);
+        //console.log(this.currentStringLength);
       },
       createEmptyDefinition() {
-        for (var i = 0; i < 3; i++) {
-          this.emptyLettersArray.push("_");
+        //Reset empty letters array between each word.
+        this.emptyLettersArray = [];
+        let word = this.wordsArray[this.currentDefinition].concept;
+        let wordArray = word.split('');
+        wordArray = wordArray.replaceAll(" ", "");
+        console.log(wordArray);
+        for (var i = 0; i < this.currentStringLength; i++) {
+          if (wordArray[i] === false) {
+            //skip spaces
+            console.log("skipped");
+          } else {
+            this.emptyLettersArray.push("_");
+          }
         }
         console.log(this.emptyLettersArray);
         this.canEnterLetters = true;
@@ -75,20 +86,44 @@
       checkForLetters(l) {
         let word = this.wordsArray[this.currentDefinition].concept;
         let result = word.includes(l);
-        console.log(result);
+        //console.log(result);
         if (result) {
           let wordArray = word.split('');
-          let letterArray = [];
-          console.log(wordArray);
+          //console.log(wordArray);
           for (var i = 0; i < wordArray.length; i++) {
             if (wordArray[i] === l) {
               this.emptyLettersArray.splice(i, 1, l);
+              //console.log(this.emptyLettersArray);
+              if (wordArray.length === this.emptyLettersArray.length) {
+                //console.log("Same length");
+                let areEqual = this.arraysEqual(wordArray, this.emptyLettersArray);
+                console.log(areEqual);
+                if (areEqual) {
+                  this.getNextWord();
+                }
+              }
             }
           }
-          console.log(letterArray);
         } else {
           this.errorCounter++;
         }
+      },
+      arraysEqual(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+
+
+        for (var i = 0; i < a.length; ++i) {
+          if (a[i] !== b[i]) return false;
+        }
+        return true;
+      },
+      getNextWord() {
+        this.currentDefinition++;
+        this.errorCounter = 0;
+        this.getStringLength();
+        this.createEmptyDefinition();
       }
     }
   }

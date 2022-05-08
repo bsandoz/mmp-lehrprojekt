@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Module from '../views/Module.vue'
 import Exercise from '../views/Exercise.vue'
+import Test from '../views/Test.vue'
 
 const routes = [
   {
@@ -29,6 +30,11 @@ const routes = [
     path: '/exercise-hangman',
     name: 'Hangman-Exercise',
     component: Exercise,
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test,
   }
 ]
 
