@@ -9,6 +9,9 @@ export const useUserStore = defineStore("UserStore", {
 
       //Data for test
       testUserId: null,
+      testUserAge: null,
+      testUserGender: null,
+      testUserPreviousKnowledge: null,
     };
   },
   //actions
@@ -34,7 +37,17 @@ export const useUserStore = defineStore("UserStore", {
       },
       setTestUserId(id) {
         this.testUserId = id;
-      }
+      },
+      setTestUserAge(a) {
+        this.testUserAge = a;
+        console.log(this.testUserAge);
+      },
+      setTestUserGender(g) {
+        this.testUserGender = g;
+      },
+      setTestUserPreviousKnowledge(pk) {
+        this.testUserPreviousKnowledge = pk;
+      },
     }
 
   //getters

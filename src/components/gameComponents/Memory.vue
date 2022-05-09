@@ -134,24 +134,35 @@ export default {
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
         this.userScore = 10;
-        this.saveTestUserScore();
+        this.register();
       }
     },
-    async saveTestUserScore() {
-      let score = this.userScore;
-      let testUsersArray = [];
-      await axios.get ("https://ifuu2646.directus.app/items/testUsers")
-      .then (response => (testUsersArray = response.data.data))
-      .catch (function(error) {
-        console.log(error);
-      })
-      const filteredUsersArray = testUsersArray.filter(item => item.id === this.testUserId);
-      let currentUserId = filteredUsersArray[0].id;
-      console.log(currentUserId);
+    prepareUserData() {
+      console.log(this.userScore);
+      return {
+        age: this.testUserAge,
+        gender: this.testUserGender,
+        previousKnowledge: this.testUserPreviousKnowledge,
+        scoreMemory: this.userScore,
+      }
     },
+    async register() {
+      await console.log("Called register function in Memory.vue");
+      const user = this.prepareUserData();
+      await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(err => {
+          this.error.errorSubmit = true
+        })
+    }
   },
   computed: {
     ...mapState(useUserStore, ['testUserId']),
+    ...mapState(useUserStore, ['testUserAge']),
+    ...mapState(useUserStore, ['testUserGender']),
+    ...mapState(useUserStore, ['testUserPreviousKnowledge']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");

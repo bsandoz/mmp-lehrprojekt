@@ -54,38 +54,25 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ['testUserId']),
+    ...mapState(useUserStore, ['testUserAge']),
+    ...mapState(useUserStore, ['testUserGender']),
+    ...mapState(useUserStore, ['testUserPreviousKnowledge']),
   },
   methods: {
     setTestStarted() {
       this.testStarted = true;
     },
     handleForm() {
-      console.log(this.age);
-      console.log(this.gender);
-      console.log(this.previousKnowledge);
-      this.register();
+      this.saveUserDataInState();
     },
-    prepareUserData() {
-      return {
-        age: this.age,
-        gender: this.gender,
-        previousKnowledge: this.previousKnowledge,
-      }
-    },
-    async register() {
-      await console.log("Called register function in TestUserInfo.vue");
-      const user = this.prepareUserData()
-      await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
-        .then((response) => {
-          this.setTestUserId(response.data.data.id);
-          console.log(this.testUserId);
-          this.formSubmitted = true
-
-        })
-        .catch(err => {
-          this.error.errorSubmit = true
-        }
-      )
+    saveUserDataInState() {
+      this.setTestUserAge(this.age);
+      this.setTestUserGender(this.gender);
+      this.setTestUserPreviousKnowledge(this.previousKnowledge);
+      console.log("Saved user data in state");
+      console.log(this.testUserAge);
+      console.log(this.testUserGender);
+      console.log(this.testUserPreviousKnowledge);
     },
     /*
     setUserInfo() {
@@ -94,6 +81,9 @@ export default {
     }
     */
     ...mapActions(useUserStore, ['setTestUserId']),
+    ...mapActions(useUserStore, ['setTestUserAge']),
+    ...mapActions(useUserStore, ['setTestUserGender']),
+    ...mapActions(useUserStore, ['setTestUserPreviousKnowledge']),
   },
   emits: ['setUserInfo']
 }
