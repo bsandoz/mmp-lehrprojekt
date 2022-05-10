@@ -30,6 +30,7 @@ export default {
       secondBoxPair: 0,
       firstBoxClicked: null,
       secondBoxClicked: null,
+      triesNumber: 0,
 
       testQuizCompleted: null,
       userScore: Number,
@@ -115,6 +116,7 @@ export default {
       this.secondBoxClicked = null;
     },
     compareBoxes(firstBox, secondBox) {
+      this.triesNumber++;
       if (this.firstBoxPair === this.secondBoxPair) {
         firstBox.isSolved = true;
         secondBox.isSolved = true;
@@ -131,10 +133,14 @@ export default {
       }
       if (array.length === counter) {
         console.log("All boxes solved");
+        window.alert("Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!")
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
-        this.userScore = 10;
-        this.register();
+        this.userScore = this.triesNumber;
+        //Only register in testUsers db if values are set
+        if (this.testUserAge) {
+          this.register();
+        }
       }
     },
     prepareUserData() {
@@ -152,6 +158,7 @@ export default {
       await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
         .then((response) => {
           console.log(response);
+          window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
         })
         .catch(err => {
           this.error.errorSubmit = true

@@ -70,7 +70,6 @@ export default {
       this.setTestUserGender(this.gender);
       this.setTestUserPreviousKnowledge(this.previousKnowledge);
       console.log("Saved user data in state");
-      console.log(this.testUserAge);
       console.log(this.testUserGender);
       console.log(this.testUserPreviousKnowledge);
     },
