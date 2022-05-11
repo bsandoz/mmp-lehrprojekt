@@ -1,17 +1,17 @@
 <template>
   <div class="exercise">
     <div class="hangman-container" @click="startGame">
-      <h4 v-if="this.isGameRunning === false">Hangman starten!</h4>
+      <button class="btn" v-if="this.isGameRunning === false">Hangman starten!</button>
       <div class="hangman" v-if="this.isGameRunning">
         <p>Welcher Begriff gehört zu folgender Definition?</p>
-        <h3>{{ this.wordsArray[this.currentDefinition].definition }}</h3>
+        <h4>{{ this.wordsArray[this.currentDefinition].definition }}</h4>
         <div class="letter-gaps">
           <div class="empty-definition" v-for="item in emptyLettersArray" v-if="isGameRunning">
             <h1> {{item}} </h1>
           </div>
         </div>
         <div v-if="canEnterLetters">
-          <input id="hangmanInput" type="text" name="letter" maxlength="1" v-model="typedLetter" v-on:input="checkForLetters(typedLetter)" autocomplete="off">
+          <input id="hangman-input" type="text" name="letter" maxlength="1" v-model="typedLetter" v-on:input="checkForLetters(typedLetter)" autocomplete="off">
         </div>
         <h2>Anzahl Fehler: {{ this.errorCounter }}</h2>
       </div>
@@ -201,5 +201,11 @@ import { mapState } from 'pinia';
   }
   .letter-gaps {
     display: flex;
+  }
+  .hangman-container {
+    margin: 50px;
+  }
+  #hangman-input {
+    margin-left: 0px;
   }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>About</h3>
-    <router-link to="/about">Link</router-link>
+    <router-link to="/about">About</router-link>
   </div>
 </template>
 

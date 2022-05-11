@@ -5,8 +5,8 @@
       <h1>EasyMusicTheory</h1>
     </div>
     <div class="header-right">
-      <button type="button" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
-      <button type="button" name="button-login" v-if="!userIsLoggedIn" @click="showModalLogin = true">Login</button>
+      <button type="button" class="btn" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
+      <button type="button" class="btn" name="button-login" v-if="!userIsLoggedIn" @click="showModalLogin = true">Login</button>
       <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
         <ModalLogin :show="showModalLogin" @close="showModalLogin = false">
@@ -73,8 +73,17 @@ export default {
 <style scoped>
 .header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: orange;
-  margin-bottom: 50px;
   min-height: 100px;
+}
+.header-left {
+  margin-left: 25px;
+}
+.header-right {
+  margin-right: 25px;
+  align-self: center;
+  justify-content: flex-end;
 }
 </style>

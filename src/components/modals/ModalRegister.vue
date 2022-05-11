@@ -12,7 +12,7 @@
             <p v-if="errors.missingFields">Du hast nicht alle Felder ausgefüllt.</p>
           </div>
           <div class="modal-body">
-            <form v-if="!formSubmitted" @submit.prevent="handleForm" class="user_form">
+            <form v-if="!formSubmitted" @submit.prevent="handleForm" class="user-form">
               <div v-for="input in userForm" :key="input.name">
                 <label :for="input.name">{{ input.placeholder }}
                   <span :class="input.req">*</span>

@@ -1,9 +1,13 @@
 <template>
+  <div class="placeholder-hero">
+    <p>Platzhalter Hero-Image</p>
+  </div>
   <Lead lead="Willkommen auf der Homepage dieses Lerntools! Dies ist ein Leadtext. Lorem ipsum dolor sit amet,
   consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
   nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
   Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
   <Content :content="content" />
+  <h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
 </template>
 
 <script>
@@ -43,4 +47,12 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .placeholder-hero {
+    background-color: gray;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

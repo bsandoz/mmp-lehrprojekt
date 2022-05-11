@@ -1,11 +1,12 @@
 <template>
   <div class="exercise">
-    <div class="memory-container" @click="startGame" :if="this.testQuizCompleted === false">
-      <h4 v-if="this.isGameRunning === false">Memory starten!</h4>
+    <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
+    Kannst Du sie alle finden und richtig zuordnen?" />
+    <div class="memory-container" :if="this.testQuizCompleted === false">
+      <button class="btn" v-if="this.isGameRunning === false" @click="startGame">Memory starten!</button>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
         <div class="memory-box" @click="toggleVisibility(item)"
         :class="{visible: item.isVisible},{solved: item.isSolved}">
-          <h3>{{ item.id }}</h3>
           <p>{{ item.fieldText }}</p>
         </div>
       </div>
@@ -14,12 +15,17 @@
 </template>
 
 <script>
+import Lead from '../Lead.vue'
+
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
 
 export default {
   name: 'Memory',
+  components: {
+    Lead,
+  },
   data() {
     return {
       isGameRunning: false,
@@ -181,27 +187,35 @@ export default {
 
 <style lang="css" scoped>
   .exercise {
-    display: flex;
+
     width: 100%;
   }
   .memory-container {
     display: grid;
+    margin: 50px;
     width: 75%;
     height: auto;
     align-self: center;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .memory-box {
-    width: 200px;
-    height: 200px;
+    max-width: 250px;
+    min-width: 200px;
+    max-height: 250px;
+    min-height: 200px;
     border-style: solid;
     border-color: grey;
     margin-bottom: 50px;
     font-size: 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
   }
   .visible {
     background-color: yellow;
-    font-size: 14pt;
+    font-size: 12pt;
   }
   .solved {
     background-color: green;

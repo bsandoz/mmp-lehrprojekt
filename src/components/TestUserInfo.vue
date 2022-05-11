@@ -1,20 +1,27 @@
 <template>
-  <div class="">
-    <h3 @click="setTestStarted">Klicke hier, um zu beginnen!</h3>
+  <div>
+    <button class="site-title btn" v-if="!testStarted" @click="setTestStarted">Klicke hier, um zu beginnen!</button>
   </div>
-  <div class="" v-if="testStarted">
+  <div class="main-container" v-if="testStarted">
     <div class="" v-if="!formSubmitted">
-      <p>Bevor du beginnen kannst, benötige ich noch ein paar Infos:</p>
-      <form class="" @submit.prevent="handleForm">
+      <p class="box-text"><b>Bevor Du beginnen kannst, benötige ich noch ein paar Infos von Dir:</b></p>
+      <form class="user-form" @submit.prevent="handleForm">
         <label>Alter:</label>
+        <br>
         <input v-model="age" type="number" min="1" max="99" required>
+        <br>
+
         <label>Geschlecht:</label>
+        <br>
         <select v-model="gender" required>
           <option value="weiblich">Weiblich</option>
           <option value="männlich">Männlich</option>
           <option value="divers">Divers</option>
         </select>
+        <br>
+
         <label>Vorkenntnisse zum Thema Datenvisualisierungen (1 = Keine Vorkenntnisse, 5 = Sehr gute Vorkenntnisse)</label>
+        <br>
         <select v-model="previousKnowledge" required>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -22,7 +29,9 @@
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-        <button class="btn" @click="$emit('setUserInfo'); handleForm();">Fortfahren</button>
+        <br>
+
+        <button class="btn" @click="handleForm">Fortfahren</button>
       </form>
     </div>
   </div>
@@ -63,7 +72,12 @@ export default {
       this.testStarted = true;
     },
     handleForm() {
-      this.saveUserDataInState();
+      if (this.age && this.gender !== "" && this.previousKnowledge) {
+        this.$emit('setUserInfo');
+        this.saveUserDataInState();
+      } else {
+        console.log("Empty fields");
+      }
     },
     saveUserDataInState() {
       this.setTestUserAge(this.age);
@@ -89,4 +103,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  .box-text {
+    margin: 5px;
+  }
 </style>

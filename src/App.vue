@@ -51,6 +51,9 @@ export default {
   body {
     font-family: 'Poppins', sans-serif;
   }
+  h3 {
+    margin-left: 50px;
+  }
   .container {
     max-width: 500px;
     margin: 30px auto;
@@ -73,14 +76,53 @@ export default {
     font-size: 15px;
     font-family: inherit;
   }
-    .btn:focus {
+  .btn:focus {
     outline: none;
   }
-    .btn:active {
+  .btn:active {
     transform: scale(0.98);
   }
-    .btn-block {
+  .btn-block {
     display: block;
     width: 100%;
+  }
+  .site-title {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .main-container {
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 50px;
+    border-style: dashed;
+    border-width: thin;
+  }
+  .clickbox {
+    border-style: solid;
+    max-width: 500px;
+    min-height: 100px;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .site-title {
+    margin-top: 50px;
+  }
+  input[type=text], select {
+    max-width: 25%;
+    padding: 5px;
+    margin: 10px;
+    margin-top: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=number] {
+    margin: 10px;
+  }
+  label {
+    margin: 5px;
+    margin-bottom: 0px;
+    margin-top: 20px;
   }
 </style>
