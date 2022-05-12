@@ -1,5 +1,8 @@
 <template>
   <div class="exercise">
+    <Lead lead="Versuche, den passenden Begriff zur Definition herauszufinden! Tippe Buchstaben in das Eingabefeld.
+    Wenn der Buchstabe im Wort vorkommt, wird er aufgedeckt. Aber Vorsicht, Du darfst nicht zu viele falsche Buchstaben eingeben...
+    (Sonderzeichen wie <,>,- usw. müssen nicht eingegeben werden.)" />
     <div class="hangman-container" @click="startGame">
       <button class="btn" v-if="this.isGameRunning === false">Hangman starten!</button>
       <div class="hangman" v-if="this.isGameRunning">
@@ -20,12 +23,17 @@
 </template>
 
 <script>
+import Lead from '../Lead.vue'
+
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
 
   export default {
     name: "Hangman",
+    components: {
+      Lead,
+    },
     data() {
       return {
         isGameRunning: false,
@@ -196,7 +204,6 @@ import { mapState } from 'pinia';
 
 <style lang="css" scoped>
   .exercise {
-    display: flex;
     width: 100%;
   }
   .letter-gaps {

@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-left">
       <h2>Platzhalter Logo</h2>
-      <h1>EasyMusicTheory</h1>
+      <router-link class="home-link" to="/">EasyMusicTheory</router-link>
     </div>
     <div class="header-right">
       <button type="button" class="btn" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
@@ -85,5 +85,10 @@ export default {
   margin-right: 25px;
   align-self: center;
   justify-content: flex-end;
+}
+.home-link {
+  font-size: 20pt;
+  text-decoration: none;
+  color: black;
 }
 </style>

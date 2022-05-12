@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h3>About</h3>
+  <div class="footer-container">
     <router-link to="/about">About</router-link>
   </div>
 </template>
@@ -17,6 +16,9 @@ export default {
   width: 100%;
   background-color: grey;
   display: flex;
-  align-self: center;
+  justify-content: center;
+}
+.footer-container {
+  height: 5%;
 }
 </style>

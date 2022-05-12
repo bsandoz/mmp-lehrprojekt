@@ -1,7 +1,8 @@
 <template>
   <div class="exercise">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
-    Kannst Du sie alle finden und richtig zuordnen?" />
+    Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
+    <button class="btn continue-btn" v-show="showContinueButton" @click="makeBoxesInvisible">Verdecken & Weiter</button>
     <div class="memory-container" :if="this.testQuizCompleted === false">
       <button class="btn" v-if="this.isGameRunning === false" @click="startGame">Memory starten!</button>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
@@ -37,6 +38,7 @@ export default {
       firstBoxClicked: null,
       secondBoxClicked: null,
       triesNumber: 0,
+      showContinueButton: false,
 
       testQuizCompleted: null,
       userScore: Number,
@@ -63,7 +65,8 @@ export default {
           if (this.visibilityCounter >= 2) {
             this.stopRevealing = true;
             this.compareBoxes(this.firstBoxClicked, this.secondBoxClicked);
-            setTimeout(this.makeBoxesInvisible, 3000);
+            //setTimeout(this.makeBoxesInvisible, 3000);
+            this.showContinueButton = true;
           }
         } else {
           console.log("Not allowed to reveal more boxes right now.");
@@ -120,6 +123,7 @@ export default {
       this.secondBoxPair = 0;
       this.firstBoxClicked = null;
       this.secondBoxClicked = null;
+      this.showContinueButton = false;
     },
     compareBoxes(firstBox, secondBox) {
       this.triesNumber++;
@@ -220,6 +224,9 @@ export default {
   .solved {
     background-color: green;
     font-size: 14pt;
+  }
+  .continue-btn {
+    margin-left: 50px;
   }
 </style>
 

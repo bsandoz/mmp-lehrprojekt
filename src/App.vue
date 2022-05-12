@@ -53,6 +53,7 @@ export default {
   }
   h3 {
     margin-left: 50px;
+    margin-bottom: 30px;
   }
   .container {
     max-width: 500px;
@@ -103,9 +104,16 @@ export default {
     min-height: 100px;
     text-align: center;
     margin-top: 50px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: orange;
   }
   .site-title {
     margin-top: 50px;
+  }
+  .unstyled-link {
+    text-decoration: none;
+    color: black;
   }
   input[type=text], select {
     max-width: 25%;
