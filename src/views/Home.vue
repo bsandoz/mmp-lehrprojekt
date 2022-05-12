@@ -8,6 +8,7 @@
   Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
   <Content :content="content" />
   <h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
+  <router-link class="site-title" to="/test">Hier geht es zur Versuchsdurchführung (Kein Login nötig).</router-link>
 </template>
 
 <script>
