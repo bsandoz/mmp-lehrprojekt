@@ -20,10 +20,17 @@
       </div>
     </div>
   </div>
+  <MessageBox ref="messageBox"
+    :message="message"
+    :wordsArray="wordsArray"
+    :currentDefinition="currentDefinition"
+    :errorCounter="errorCounter"
+    />
 </template>
 
 <script>
 import Lead from '../Lead.vue'
+import MessageBox from '../modals/MessageBox.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
 
@@ -33,6 +40,7 @@ import { mapState } from 'pinia';
     name: "Hangman",
     components: {
       Lead,
+      MessageBox,
     },
     data() {
       return {
@@ -47,6 +55,7 @@ import { mapState } from 'pinia';
         typedLetter: "",
         wordScore: 9,
         totalScore: 0,
+        message: "Test",
 
         userScore: Number,
       }
@@ -102,6 +111,7 @@ import { mapState } from 'pinia';
       },
       checkForLetters(l) {
         let word = this.wordsArray[this.currentDefinition].concept;
+        l = l.toLowerCase(l);
         let result = word.includes(l);
         console.log(result);
         if (result) {
@@ -116,9 +126,9 @@ import { mapState } from 'pinia';
                 let areEqual = this.arraysEqual(wordArray, this.emptyLettersArray);
                 console.log(areEqual);
                 if (areEqual) {
-                  this.showSuccessMessage();
-                  this.getNextWord();
                   this.typedLetter = "";
+                  setTimeout(this.getNextWord, 2000);
+                  this.showSuccessMessage();
                   return;
                 }
               }
@@ -147,6 +157,7 @@ import { mapState } from 'pinia';
         return true;
       },
       getNextWord() {
+        //this.showSuccessMessage();
         this.totalScore += this.wordScore;
         console.log("Totale Punktzahl: " + this.totalScore);
         this.wordScore = 9;
@@ -166,10 +177,14 @@ import { mapState } from 'pinia';
         }
       },
       showSuccessMessage() {
-        window.alert("Korrekt! Das Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Du hattest bei diesem Wort " + this.errorCounter + " Fehler.");
+        this.$refs.messageBox.showMessageBox();
+        this.message = "Korrekt! Das Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Du hattest bei diesem Wort " + this.errorCounter + " Fehler.";
+        //window.alert("Korrekt! Das Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Du hattest bei diesem Wort " + this.errorCounter + " Fehler.");
       },
       showFailureMessage() {
-        window.alert("Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?");
+        this.$refs.messageBox.showMessageBox();
+        this.message = "Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?";
+        //window.alert("Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?");
       },
       prepareUserData() {
         console.log(this.userScore);
@@ -186,7 +201,9 @@ import { mapState } from 'pinia';
         await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
           .then((response) => {
             console.log(response);
-            window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
+            this.$refs.messageBox.showMessageBox();
+            this.message = "Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.";
+            //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
           })
           .catch(err => {
             this.error.errorSubmit = true
