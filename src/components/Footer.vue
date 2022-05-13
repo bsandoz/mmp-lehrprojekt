@@ -1,6 +1,7 @@
 <template>
   <div class="footer-container">
-    <router-link to="/about">About</router-link>
+    <router-link class="link" to="/about">About</router-link>
+    <p>Bachelor-Projekt von Bénédict Sandoz, 2022</p>
   </div>
 </template>
 
@@ -16,9 +17,14 @@ export default {
   width: 100%;
   background-color: grey;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
 }
 .footer-container {
-  height: 5%;
+  height: 7.5%;
+}
+.link {
+  position: relative;
+  bottom: auto;
 }
 </style>

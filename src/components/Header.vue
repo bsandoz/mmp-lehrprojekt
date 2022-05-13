@@ -1,12 +1,14 @@
 <template>
   <div class="header">
     <div class="header-left">
-      <h2>Platzhalter Logo</h2>
-      <router-link class="home-link" to="/">EasyMusicTheory</router-link>
+      <!--<h2>Platzhalter Logo</h2>-->
+      <router-link class="home-link" to="/">Versuch Gamifiziertes Lernen - Datenvisualisierungen</router-link>
     </div>
     <div class="header-right">
+      <!--Buttons ausblenden für Test
       <button type="button" class="btn" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
       <button type="button" class="btn" name="button-login" v-if="!userIsLoggedIn" @click="showModalLogin = true">Login</button>
+      -->
       <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
         <ModalLogin :show="showModalLogin" @close="showModalLogin = false">

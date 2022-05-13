@@ -115,6 +115,9 @@ export default {
     text-decoration: none;
     color: black;
   }
+  .temporary-style {
+    margin-top: 100px;
+  }
   input[type=text], select {
     max-width: 25%;
     padding: 5px;

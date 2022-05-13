@@ -1,14 +1,15 @@
 <template>
+  <!-- Ausgeblendet für Test
   <div class="placeholder-hero">
     <p>Platzhalter Hero-Image</p>
   </div>
-  <Lead lead="Willkommen auf der Homepage dieses Lerntools! Dies ist ein Leadtext. Lorem ipsum dolor sit amet,
-  consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-  nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-  Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. "/>
+  -->
+  <Lead lead="Willkommen auf der Homepage dieses Lerntools! Im Rahmen meiner Bachelorarbeit zum Thema Gamification für Lerntools habe ich einen Test zu
+  Datenvisualisierungen erarbeitet, mit dem zwei Ansätze von Gamification getestet werden sollen. Dieser Test dauert ungefähr 15 Minuten. Es sind keine Vorkenntnisse
+  notwendig. Ich wünsche Dir viel Spass und bedanke mich für deine Mithilfe! "/>
   <Content :content="content" />
-  <h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
-  <router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung (Kein Login nötig).</router-link>
+  <!--<h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>-->
+  <router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>
 </template>
 
 <script>

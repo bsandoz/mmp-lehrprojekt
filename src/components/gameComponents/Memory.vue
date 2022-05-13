@@ -2,7 +2,7 @@
   <div class="exercise">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
-    <button class="btn continue-btn" v-show="showContinueButton" @click="makeBoxesInvisible">Verdecken & Weiter</button>
+    <button class="btn continue-btn" :class="{ active: canContinue }" v-if="showContinueButton" @click="makeBoxesInvisible">Weiter</button>
     <div class="memory-container" :if="this.testQuizCompleted === false">
       <button class="btn" v-if="this.isGameRunning === false" @click="startGame">Memory starten!</button>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
@@ -39,6 +39,7 @@ export default {
       secondBoxClicked: null,
       triesNumber: 0,
       showContinueButton: false,
+      canContinue: false,
 
       testQuizCompleted: null,
       userScore: Number,
@@ -66,7 +67,7 @@ export default {
             this.stopRevealing = true;
             this.compareBoxes(this.firstBoxClicked, this.secondBoxClicked);
             //setTimeout(this.makeBoxesInvisible, 3000);
-            this.showContinueButton = true;
+            this.canContinue = true;
           }
         } else {
           console.log("Not allowed to reveal more boxes right now.");
@@ -90,6 +91,7 @@ export default {
             })
           await this.shuffle(this.memoryboxArray);
           this.isGameRunning = true;
+          this.showContinueButton = true;
         }
       }
       catch (error) {
@@ -114,16 +116,18 @@ export default {
       return array;
     },
     makeBoxesInvisible() {
-      for (var i = 0; i < this.memoryboxArray.length; i++) {
-        this.memoryboxArray[i].isVisible = false;
+      if (this.visibilityCounter >= 2) {
+        for (var i = 0; i < this.memoryboxArray.length; i++) {
+          this.memoryboxArray[i].isVisible = false;
+        }
+        this.visibilityCounter = 0;
+        this.stopRevealing = false;
+        this.firstBoxPair = 0;
+        this.secondBoxPair = 0;
+        this.firstBoxClicked = null;
+        this.secondBoxClicked = null;
+        this.canContinue = false;
       }
-      this.visibilityCounter = 0;
-      this.stopRevealing = false;
-      this.firstBoxPair = 0;
-      this.secondBoxPair = 0;
-      this.firstBoxClicked = null;
-      this.secondBoxClicked = null;
-      this.showContinueButton = false;
     },
     compareBoxes(firstBox, secondBox) {
       this.triesNumber++;
@@ -207,8 +211,10 @@ export default {
     min-width: 200px;
     max-height: 250px;
     min-height: 200px;
+    background-color: orange;
     border-style: solid;
-    border-color: grey;
+    border-color: black;
+    border-radius: 5px;
     margin-bottom: 50px;
     font-size: 0;
     display: flex;
@@ -218,15 +224,25 @@ export default {
     padding: 10px;
   }
   .visible {
-    background-color: yellow;
+    background-color: white;
+    border-color: grey;
     font-size: 12pt;
   }
   .solved {
-    background-color: green;
-    font-size: 14pt;
+    background-color: lightgreen;
+    font-size: 12pt;
+    border-color: green;
   }
   .continue-btn {
     margin-left: 50px;
+    background-color: grey;
+    color: red;
+    cursor: default;
+  }
+  .active {
+    background-color: black;
+    color: white;
+    cursor: pointer;
   }
 </style>
 
