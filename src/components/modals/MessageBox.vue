@@ -32,6 +32,7 @@ export default {
 <style lang="css" scoped>
 #confirmation-box {
   display: none;
+  overflow: visible;
   background-color: #eee;
   border-radius: 5px;
   border: 1px solid #aaa;

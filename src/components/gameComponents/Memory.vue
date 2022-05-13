@@ -1,4 +1,5 @@
 <template>
+  <MessageBox ref="messageBox" :message="message" />
   <div class="exercise">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
@@ -17,6 +18,7 @@
 
 <script>
 import Lead from '../Lead.vue'
+import MessageBox from '../modals/MessageBox.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
 
@@ -26,6 +28,7 @@ export default {
   name: 'Memory',
   components: {
     Lead,
+    MessageBox,
   },
   data() {
     return {
@@ -40,6 +43,7 @@ export default {
       triesNumber: 0,
       showContinueButton: false,
       canContinue: false,
+      message: "",
 
       testQuizCompleted: null,
       userScore: Number,
@@ -147,7 +151,9 @@ export default {
       }
       if (array.length === counter) {
         console.log("All boxes solved");
-        window.alert("Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!")
+        //this.$refs.messageBox.showMessageBox();
+        //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!";
+        //window.alert("Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!")
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
         this.userScore = this.triesNumber;
@@ -172,7 +178,9 @@ export default {
       await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
         .then((response) => {
           console.log(response);
-          window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
+          this.$refs.messageBox.showMessageBox();
+          this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Herzlichen Dank für Deine Mithilfe. Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.";
+          //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
         })
         .catch(err => {
           this.error.errorSubmit = true
