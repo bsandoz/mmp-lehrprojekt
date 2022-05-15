@@ -1,5 +1,6 @@
 <template>
-  <div class="exercise">
+  <TestQuestions v-if="questionsActive" />
+  <div class="exercise" v-if="!questionsActive">
     <Lead lead="Versuche, den passenden Begriff zur Definition herauszufinden! Tippe Buchstaben in das Eingabefeld.
     Wenn der Buchstabe im Wort vorkommt, wird er aufgedeckt. Aber Vorsicht, Du darfst nicht zu viele falsche Buchstaben eingeben...
     (Sonderzeichen wie <,>,- usw. müssen nicht eingegeben werden.)" />
@@ -31,16 +32,19 @@
 <script>
 import Lead from '../Lead.vue'
 import MessageBox from '../modals/MessageBox.vue'
+import TestQuestions from './TestQuestions.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
 
   export default {
     name: "Hangman",
     components: {
       Lead,
       MessageBox,
+      TestQuestions,
     },
     data() {
       return {
@@ -58,6 +62,8 @@ import { mapState } from 'pinia';
         message: "Test",
 
         userScore: Number,
+
+        questionsActive: false,
       }
     },
     methods: {
@@ -170,9 +176,10 @@ import { mapState } from 'pinia';
         } else {
           console.log("All Words found!");
           this.userScore = this.totalScore;
+          this.setTestUserScoreHangman(this.userScore);
           //Only register in testUsers db if values are set
           if (this.testUserAge) {
-            this.register();
+            this.goToQuestions();
           }
         }
       },
@@ -186,13 +193,17 @@ import { mapState } from 'pinia';
         this.message = "Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?";
         //window.alert("Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?");
       },
+      goToQuestions() {
+        this.questionsActive = true;
+      },
+      /*
       prepareUserData() {
         console.log(this.userScore);
         return {
           age: this.testUserAge,
           gender: this.testUserGender,
           previousKnowledge: this.testUserPreviousKnowledge,
-          scoreHangman: this.userScore,
+          scoreHangman: this.testUserScoreHangman,
         }
       },
       async register() {
@@ -202,19 +213,21 @@ import { mapState } from 'pinia';
           .then((response) => {
             console.log(response);
             this.$refs.messageBox.showMessageBox();
-            this.message = "Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.";
+            this.message = "Du hast den Versuch abgeschlossen. Nun bitte ich Dich noch, den nachfolgenden Fragebogen kurz auszufüllen.";
             //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
           })
           .catch(err => {
             this.error.errorSubmit = true
           })
-      }
+      },*/
+      ...mapActions(useUserStore, ['setTestUserScoreHangman']),
     },
     computed: {
       ...mapState(useUserStore, ['testUserId']),
       ...mapState(useUserStore, ['testUserAge']),
       ...mapState(useUserStore, ['testUserGender']),
       ...mapState(useUserStore, ['testUserPreviousKnowledge']),
+      ...mapState(useUserStore, ['testUserScoreHangman']),
     },
   }
 </script>

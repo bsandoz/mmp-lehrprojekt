@@ -12,16 +12,17 @@ export default {
 
 <style scoped>
 * {
-  position: fixed;
-  bottom: 0;
+
+}
+.footer-container {
+  height: 200px;
   width: 100%;
   background-color: grey;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-}
-.footer-container {
-  height: 7.5%;
+  margin-top: 100px;
 }
 .link {
   position: relative;

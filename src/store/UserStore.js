@@ -12,6 +12,18 @@ export const useUserStore = defineStore("UserStore", {
       testUserAge: null,
       testUserGender: null,
       testUserPreviousKnowledge: null,
+      testUserScoreMemory: null,
+      testUserScoreHangman: null,
+
+      testQuestion1: null,
+      testQuestion2: null,
+      testQuestion3: null,
+      testQuestion4: null,
+      testQuestion5: null,
+      testQuestion6: null,
+      testQuestion7: null,
+      testQuestion8: null,
+      testQuestion9: null,
     };
   },
   //actions
@@ -47,6 +59,39 @@ export const useUserStore = defineStore("UserStore", {
       },
       setTestUserPreviousKnowledge(pk) {
         this.testUserPreviousKnowledge = pk;
+      },
+      setTestUserScoreMemory(sc) {
+        this.testUserScoreMemory = sc;
+      },
+      setTestUserScoreHangman(sc) {
+        this.testUserScoreHangman = sc;
+      },
+      setTestQuestion1(a) {
+        this.testQuestion1 = a;
+      },
+      setTestQuestion2(a) {
+        this.testQuestion2 = a;
+      },
+      setTestQuestion3(a) {
+        this.testQuestion3 = a;
+      },
+      setTestQuestion4(a) {
+        this.testQuestion4 = a;
+      },
+      setTestQuestion5(a) {
+        this.testQuestion5 = a;
+      },
+      setTestQuestion6(a) {
+        this.testQuestion6 = a;
+      },
+      setTestQuestion7(a) {
+        this.testQuestion7 = a;
+      },
+      setTestQuestion8(a) {
+        this.testQuestion8 = a;
+      },
+      setTestQuestion9(a) {
+        this.testQuestion9 = a;
       },
     }
 

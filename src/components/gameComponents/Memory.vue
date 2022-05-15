@@ -1,6 +1,7 @@
 <template>
   <MessageBox ref="messageBox" :message="message" />
-  <div class="exercise">
+  <TestQuestions v-if="questionsActive" />
+  <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
     <button class="btn continue-btn" :class="{ active: canContinue }" v-if="showContinueButton" @click="makeBoxesInvisible">Weiter</button>
@@ -19,16 +20,19 @@
 <script>
 import Lead from '../Lead.vue'
 import MessageBox from '../modals/MessageBox.vue'
+import TestQuestions from './TestQuestions.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'Memory',
   components: {
     Lead,
     MessageBox,
+    TestQuestions,
   },
   data() {
     return {
@@ -47,6 +51,8 @@ export default {
 
       testQuizCompleted: null,
       userScore: Number,
+
+      questionsActive: false,
     }
   },
   methods: {
@@ -157,19 +163,26 @@ export default {
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
         this.userScore = this.triesNumber;
+        this.setTestUserScoreMemory(this.userScore);
         //Only register in testUsers db if values are set
         if (this.testUserAge) {
-          this.register();
+          this.goToQuestions();
         }
       }
     },
+    goToQuestions() {
+      this.$refs.messageBox.showMessageBox();
+      this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
+      this.questionsActive = true;
+    },
+    /*
     prepareUserData() {
-      console.log(this.userScore);
+      //console.log(this.userScore);
       return {
         age: this.testUserAge,
         gender: this.testUserGender,
         previousKnowledge: this.testUserPreviousKnowledge,
-        scoreMemory: this.userScore,
+        scoreMemory: this.testUserScoreMemory,
       }
     },
     async register() {
@@ -179,19 +192,21 @@ export default {
         .then((response) => {
           console.log(response);
           this.$refs.messageBox.showMessageBox();
-          this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Herzlichen Dank für Deine Mithilfe. Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.";
+          this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
           //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
         })
         .catch(err => {
           this.error.errorSubmit = true
         })
-    }
+    },*/
+    ...mapActions(useUserStore, ['setTestUserScoreMemory']),
   },
   computed: {
     ...mapState(useUserStore, ['testUserId']),
     ...mapState(useUserStore, ['testUserAge']),
     ...mapState(useUserStore, ['testUserGender']),
     ...mapState(useUserStore, ['testUserPreviousKnowledge']),
+    ...mapState(useUserStore, ['testUserScoreMemory']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
