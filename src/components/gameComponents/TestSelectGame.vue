@@ -1,3 +1,19 @@
+<script>
+export default {
+  name: "TestSelectGame",
+  data() {
+    return {
+      randomBoolean: false,
+    }
+  },
+  mounted() {
+    this.randomBoolean = Math.random() < 0.5;
+    console.log(this.randomBoolean);
+  },
+  emits: ['setMemory', 'setHangman']
+}
+</script>
+
 <template>
   <div class="">
     <div class="theory-text">
@@ -12,20 +28,13 @@
       <p class="theory-paragraph">Beim Styling der Grafiken und Elemente mit CSS ist es sinnvoll, sich an die <a href="http://getbem.com/naming/" target="_blank">BEM Naming Convention</a> zu halten. BEM steht für Block, Element, Modifier.</p>
       <p class="theory-paragraph">Um Daten dynamisch mit JavaScript anzuzeigen, wird häufig das <b>JSON-Format</b> verwendet. Dabei handelt es sich um ein textbasierendes Datenformat, in dem Informationen wie Objekte, Arrays und sonstige Variablen in lesbarer Form gespeichert werden können. JSON steht für <b>JavaScript Object Notation</b>. Daten aus Excel können mithilfe von Online-Convertern in JSON umgewandelt werden. Eine Tabelle kann dann mit den Daten aus dem JSON gefüllt werden, indem man mit einem <b>For-Loop</b> durch die Daten durchgeht.</p>
     </div>
-    <h3>Wenn Du den Theorieinput durchgelesen hast, wähle bitte nachfolgend eines der zwei Spiele aus, um Dein Wissen zu testen:</h3>
+    <h3>Wenn Du den Theorieinput gelesen hast, klicke auf den Button, um weiterzufahren:</h3>
     <div id="game-choice">
-      <button class="btn" @click="$emit('setMemory')">Memory</button>
-      <button class="btn" @click="$emit('setHangman')">Hangman</button>
+      <button class="btn" v-if="!randomBoolean" @click="$emit('setMemory')">Memory starten!</button>
+      <button class="btn" v-if="randomBoolean" @click="$emit('setHangman')">Hangman starten!</button>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "TestSelectGame",
-  emits: ['setMemory', 'setHangman']
-}
-</script>
 
 <style lang="css" scoped>
   .list {

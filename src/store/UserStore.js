@@ -14,6 +14,8 @@ export const useUserStore = defineStore("UserStore", {
       testUserPreviousKnowledge: null,
       testUserScoreMemory: null,
       testUserScoreHangman: null,
+      testUserStartTime: null,
+      testUserEndTime: null,
 
       testQuestion1: null,
       testQuestion2: null,
@@ -65,6 +67,12 @@ export const useUserStore = defineStore("UserStore", {
       },
       setTestUserScoreHangman(sc) {
         this.testUserScoreHangman = sc;
+      },
+      setTestUserStartTime(t) {
+        this.testUserStartTime = t;
+      },
+      setTestUserEndTime(t) {
+        this.testUserEndTime = t;
       },
       setTestQuestion1(a) {
         this.testQuestion1 = a;

@@ -51,6 +51,8 @@ export default {
 
       testQuizCompleted: null,
       userScore: Number,
+      startTime: null,
+      endTime: null,
 
       questionsActive: false,
     }
@@ -102,6 +104,12 @@ export default {
           await this.shuffle(this.memoryboxArray);
           this.isGameRunning = true;
           this.showContinueButton = true;
+
+          let today = new Date();
+          let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+          console.log(time);
+          this.startTime = time;
+          this.setTestUserStartTime(this.startTime);
         }
       }
       catch (error) {
@@ -166,6 +174,10 @@ export default {
         this.setTestUserScoreMemory(this.userScore);
         //Only register in testUsers db if values are set
         if (this.testUserAge) {
+          let today = new Date();
+          let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+          this.endTime = time;
+          this.setTestUserEndTime(this.endTime);
           this.goToQuestions();
         }
       }
@@ -200,6 +212,8 @@ export default {
         })
     },*/
     ...mapActions(useUserStore, ['setTestUserScoreMemory']),
+    ...mapActions(useUserStore, ['setTestUserStartTime']),
+    ...mapActions(useUserStore, ['setTestUserEndTime']),
   },
   computed: {
     ...mapState(useUserStore, ['testUserId']),
@@ -207,6 +221,8 @@ export default {
     ...mapState(useUserStore, ['testUserGender']),
     ...mapState(useUserStore, ['testUserPreviousKnowledge']),
     ...mapState(useUserStore, ['testUserScoreMemory']),
+    ...mapState(useUserStore, ['testUserStartTime']),
+    ...mapState(useUserStore, ['testUserEndTime']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");

@@ -87,6 +87,11 @@ import { mapActions } from 'pinia';
             //console.log(this.wordsArray.length);
             await this.getStringLength();
             await this.createEmptyDefinition();
+            let today = new Date();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            console.log(time);
+            this.startTime = time;
+            this.setTestUserStartTime(this.startTime);
           }
         }
         catch (error) {
@@ -179,6 +184,10 @@ import { mapActions } from 'pinia';
           this.setTestUserScoreHangman(this.userScore);
           //Only register in testUsers db if values are set
           if (this.testUserAge) {
+            let today = new Date();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            this.endTime = time;
+            this.setTestUserEndTime(this.endTime);
             this.goToQuestions();
           }
         }
@@ -221,6 +230,8 @@ import { mapActions } from 'pinia';
           })
       },*/
       ...mapActions(useUserStore, ['setTestUserScoreHangman']),
+      ...mapActions(useUserStore, ['setTestUserStartTime']),
+      ...mapActions(useUserStore, ['setTestUserEndTime']),
     },
     computed: {
       ...mapState(useUserStore, ['testUserId']),
@@ -228,6 +239,8 @@ import { mapActions } from 'pinia';
       ...mapState(useUserStore, ['testUserGender']),
       ...mapState(useUserStore, ['testUserPreviousKnowledge']),
       ...mapState(useUserStore, ['testUserScoreHangman']),
+      ...mapState(useUserStore, ['testUserStartTime']),
+      ...mapState(useUserStore, ['testUserEndTime']),
     },
   }
 </script>

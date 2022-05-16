@@ -129,6 +129,8 @@ export default {
     ...mapState(useUserStore, ['testUserPreviousKnowledge']),
     ...mapState(useUserStore, ['testUserScoreMemory']),
     ...mapState(useUserStore, ['testUserScoreHangman']),
+    ...mapState(useUserStore, ['testUserStartTime']),
+    ...mapState(useUserStore, ['testUserEndTime']),
   },
   methods: {
     handleForm() {
@@ -172,6 +174,8 @@ export default {
         previousKnowledge: this.testUserPreviousKnowledge,
         scoreMemory: this.testUserScoreMemory,
         scoreHangman: this.testUserScoreHangman,
+        startTime: this.testUserStartTime,
+        endTime: this.testUserEndTime,
         question1: this.testQuestion1,
         question2: this.testQuestion2,
         question3: this.testQuestion3,
