@@ -1,10 +1,11 @@
 <template>
   <h3 v-if="testComplete">Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.</h3>
-  <p v-if="!testComplete" id="instruction"><b>Bitte fülle nun noch folgenden Fragebogen aus.</b></p>
+  <p v-if="!testComplete" id="instruction"><b>Bitte fülle nun noch folgenden Fragebogen aus.</b><br>
+  Felder mit * sind Pflichtfelder.</p>
   <div class="" v-if="!testComplete">
     <form class="questions-form" @submit.prevent="handleForm">
       <div class="single-question">
-        <p>1 - Wie unterhaltsam fandest Du das Lernen auf spielerische Weise mit diesem Versuch?</p>
+        <p>1 - Wie unterhaltsam fandest Du das Lernen auf spielerische Weise mit diesem Versuch? *</p>
         <input type="radio" v-model="question1" value="Gar nicht unterhaltsam" required>
         <label for="gar nicht unterhaltsam">Gar nicht unterhaltsam</label><br>
         <input type="radio" v-model="question1" value="Wenig unterhaltsam">
@@ -16,9 +17,9 @@
       </div>
       <!--<p>Test: {{ this.question1 }}</p>-->
       <div class="single-question">
-        <p>2 - Verglichen mit normalen Lernmethoden, wie schätzt Du Deinen Lernerfolg bei diesem Versuch ein?</p>
+        <p>2 - Verglichen mit normalen Lernmethoden, wie schätzt Du Deinen Lernerfolg bei diesem Versuch ein? *</p>
         <input type="radio" v-model="question2" value="Viel schlechter als normal" required>
-        <label for="viel schlechter als normal">Viel schlechter aks normal</label><br>
+        <label for="viel schlechter als normal">Viel schlechter als normal</label><br>
         <input type="radio" v-model="question2" value="Etwas schlechter als normal">
         <label for="etwas schlechter als normal">Etwas schlechter als normal</label><br>
         <input type="radio" v-model="question2" value="Etwas besser als normal">
@@ -28,12 +29,12 @@
       </div>
       <div class="single-question">
         <p>3 - Es folgt eine Wissensfrage, deren Beantwortung mir beim Auswerten des Versuchs hilft:
-                Nenne ein textbasierendes Datenformat, das verwendet wird, um Daten über das Netzwerk zu übermitteln.
+                Nenne ein textbasierendes Datenformat, das verwendet wird, um Daten über das Netzwerk zu übermitteln. *
         </p>
         <input type="text" v-model="question3" required>
       </div>
       <div class="single-question">
-        <p>4 - Wie benutzerfreundlich schätzt Du den Versuch ein?</p>
+        <p>4 - Wie benutzerfreundlich schätzt Du den Versuch ein? *</p>
         <input type="radio" v-model="question4" value="Gar nicht benutzerfreundlich" required>
         <label for="gar nicht benutzerfreundlich">Gar nicht benutzerfreundlich</label><br>
         <input type="radio" v-model="question4" value="Wenig benutzerfreundlich">
@@ -44,7 +45,7 @@
         <label for="sehr benutzerfreundlich">Sehr benutzerfreundlich</label><br>
       </div>
       <div class="single-question">
-        <p>5 - Wie schätzt Du die Verständlichkeit der Anweisungen während dem Versuch ein?</p>
+        <p>5 - Wie schätzt Du die Verständlichkeit der Anweisungen während dem Versuch ein? *</p>
         <input type="radio" v-model="question5" value="Sehr unverständlich" required>
         <label for="sehr unverständlich">Sehr unverständlich</label><br>
         <input type="radio" v-model="question5" value="Etwas unverständlich">
@@ -55,11 +56,11 @@
         <label for="sehr verständlich">Sehr verständlich</label><br>
       </div>
       <div class="single-question">
-        <p>6 - Es folgt eine weitere Wissensfrage, deren Beantwortung mit beim Auswerten des Versuchs hilft: Nenne drei Aspekte, die bei der Gestaltung von Infografiken beachtet werden sollten.</p>
-        <input type="text" v-model="question6" required>
+        <p>6 - Es folgt eine weitere Wissensfrage, deren Beantwortung mit beim Auswerten des Versuchs hilft: Nenne drei Aspekte, die bei der Gestaltung von Infografiken beachtet werden sollten. *</p>
+        <textarea v-model="question6" rows="4" cols="50" required></textarea>
       </div>
       <div class="single-question">
-        <p>7 - Wie vertraut bist Du allgemein mit Computerspielen?</p>
+        <p>7 - Wie vertraut bist Du allgemein mit Computerspielen? *</p>
         <input type="radio" v-model="question7" value="Gar nicht vertraut" required>
         <label for="gar nicht vertraut">Gar nicht vertraut</label><br>
         <input type="radio" v-model="question7" value="Wenig vertraut">
@@ -70,15 +71,15 @@
         <label for="sehr vertraut">Sehr vertraut</label><br>
       </div>
       <div class="single-question">
-        <p>8 - Könntest Du dir vorstellen, ein solches bzw. ähnliches Lerntool in Zukunft zu nutzen?</p>
+        <p>8 - Könntest Du dir vorstellen, ein solches bzw. ähnliches Lerntool in Zukunft zu nutzen? *</p>
         <input type="radio" v-model="question8" value="Nein" required>
         <label for="nein">Nein</label><br>
         <input type="radio" v-model="question8" value="Ja">
         <label for="ja">Ja</label><br>
       </div>
       <div class="single-question">
-        <p>9 - Hast Du weiteres Feedback, Verbesserungsvorschläge oder Kritik? </p>
-        <input type="text" v-model="question9">
+        <p>9 - Hast Du weiteres Feedback, Verbesserungsvorschläge oder Kritik?</p>
+        <textarea v-model="question9" rows="4" cols="50"></textarea>
       </div>
       <button class="btn" @click="handleForm">Fortfahren</button>
     </form>
@@ -194,6 +195,8 @@ export default {
         .then((response) => {
           console.log(response);
           this.testComplete = true;
+          localStorage.setItem("testFinished", "true");
+          console.log(localStorage.getItem("testFinished"));
           //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
         })
         .catch(err => {
@@ -214,11 +217,22 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  p {
+    margin-bottom: 10px;
+  }
+  .questions-form {
+    max-width: 750px;
+  }
   .single-question {
     margin-left: 50px;
     margin-top: 50px;
   }
   #instruction {
     margin-left: 50px;
+  }
+  .btn {
+    margin-top: 25px;
+    margin-left: 50px;
+    margin-bottom: 100px;
   }
 </style>

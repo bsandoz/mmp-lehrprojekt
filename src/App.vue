@@ -92,8 +92,8 @@ export default {
     margin-right: 50px;
   }
   .main-container {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 50px;
+    margin-right: 750px;
     margin-top: 50px;
     border-style: dashed;
     border-width: thin;

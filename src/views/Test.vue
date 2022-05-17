@@ -1,14 +1,18 @@
 <template>
-  <h3 class="site-title">Versuchsdurchführung Thesis</h3>
-  <Lead v-if="!showGames && !isMemory && !isHangman" lead="Willkommen zur Versuchsdurchführung für meine Bachelorthesis! Es folgt ein kurzer Theorieinput
-    (Lesezeit ca. 5 Minuten) zum Thema Datenvisualisierungen. Daraufhin wirst Du gebeten, eines von zwei bekannten Spielen
-    zu spielen, mithilfe deren Dein erlerntes Wissen zu Datenvisualisierungen auf unterhaltsame Art
-    abgefragt und gefestigt werden soll. Zum Schluss folgt noch ein kurzer Fragebogen zum Versuch. Ich wünsche Dir viel Erfolg und viel Spass!"/>
-  <TestUserInfo v-if="!showGames && !isMemory && !isHangman" @set-user-info="setUserInfo"/>
-  <TestSelectGame v-if="showGames" @set-memory="setMemory" @set-hangman="setHangman" />
-  <Memory v-if="isMemory" />
-  <Hangman v-if="isHangman" />
-
+  <div v-if="!testFinished">
+    <h3 class="site-title">Versuchsdurchführung Thesis</h3>
+    <Lead v-if="!showGames && !isMemory && !isHangman" lead="Willkommen zur Versuchsdurchführung für meine Bachelorthesis! Es folgt ein kurzer Theorieinput
+      (Lesezeit ca. 5 Minuten) zum Thema Datenvisualisierungen. Daraufhin wirst Du gebeten, eines von zwei bekannten Spielen
+      zu spielen, mithilfe deren Dein erlerntes Wissen zu Datenvisualisierungen auf unterhaltsame Art
+      abgefragt und gefestigt werden soll. Zum Schluss folgt noch ein kurzer Fragebogen zum Versuch. Ich wünsche Dir viel Erfolg und viel Spass!"/>
+    <TestUserInfo v-if="!showGames && !isMemory && !isHangman" @set-user-info="setUserInfo"/>
+    <TestSelectGame v-if="showGames" @set-memory="setMemory" @set-hangman="setHangman" />
+    <Memory v-if="isMemory" />
+    <Hangman v-if="isHangman" />
+  </div>
+  <div v-if="testFinished" id="error-message">
+    <h3>Du hast den Versuch bereits durchgeführt!</h3>
+  </div>
 </template>
 
 <script>
@@ -42,6 +46,7 @@ export default {
       isHangman: false,
 
       userId: null,
+      testFinished: false,
     }
   },
   computed: {
@@ -62,10 +67,17 @@ export default {
       this.isHangman = true;
       this.showGames = false;
     },
+  },
+  mounted() {
+    this.testFinished = localStorage.getItem("testFinished");
+    console.log(this.testFinished);
   }
 
 }
 </script>
 
 <style lang="css" scoped>
+  #error-message {
+    margin-top: 50px;
+  }
 </style>
