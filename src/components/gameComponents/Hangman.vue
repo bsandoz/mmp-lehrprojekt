@@ -1,5 +1,5 @@
 <template>
-  <TestQuestions v-if="questionsActive" />
+  <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
   <MessageBox ref="messageBox"
     :message="message"
     :wordsArray="wordsArray"
@@ -241,6 +241,9 @@ import { mapActions } from 'pinia';
           this.goToQuestions();
         }
       },
+      hideTestLead() {
+        this.$emit("hideTestLead");
+      },
       /*
       prepareUserData() {
         console.log(this.userScore);
@@ -278,6 +281,7 @@ import { mapActions } from 'pinia';
       ...mapState(useUserStore, ['testUserStartTime']),
       ...mapState(useUserStore, ['testUserEndTime']),
     },
+    emits: ['hideTestLead']
   }
 </script>
 

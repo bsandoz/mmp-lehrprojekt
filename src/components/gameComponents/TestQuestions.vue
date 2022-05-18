@@ -1,5 +1,5 @@
 <template>
-  <h3 v-if="testComplete">Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.</h3>
+  <h3 class="site-title" v-if="testComplete">Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.</h3>
   <p v-if="!testComplete" id="instruction"><b>Bitte fülle nun noch folgenden Fragebogen aus.</b><br>
   Felder mit * sind Pflichtfelder.</p>
   <div class="" v-if="!testComplete">
@@ -197,6 +197,7 @@ export default {
           this.testComplete = true;
           localStorage.setItem("testFinished", "true");
           console.log(localStorage.getItem("testFinished"));
+          this.$emit("hideTestLead");
           //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
         })
         .catch(err => {
@@ -213,6 +214,7 @@ export default {
     ...mapActions(useUserStore, ['setTestQuestion8']),
     ...mapActions(useUserStore, ['setTestQuestion9']),
   },
+  emits: ['hideTestLead']
 }
 </script>
 

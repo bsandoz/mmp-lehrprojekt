@@ -1,6 +1,6 @@
 <template>
   <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox"/>
-  <TestQuestions v-if="questionsActive" />
+  <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
@@ -203,6 +203,9 @@ export default {
         window.alert("Ein Fehler ist aufgetreten.")
       }
     },
+    hideTestLead() {
+      this.$emit("hideTestLead");
+    },
     /*
     prepareUserData() {
       //console.log(this.userScore);
@@ -244,7 +247,8 @@ export default {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
     console.log("Get localstorage");
     console.log(this.testQuizCompleted);
-  }
+  },
+  emits: ['hideTestLead']
 }
 </script>
 
