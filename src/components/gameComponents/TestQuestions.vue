@@ -6,7 +6,7 @@
     <form class="questions-form" @submit.prevent="handleForm">
       <div class="single-question">
         <p>1 - Wie unterhaltsam fandest Du das Lernen auf spielerische Weise mit diesem Versuch? *</p>
-        <input type="radio" v-model="question1" value="Gar nicht unterhaltsam" required>
+        <input type="radio" v-model="question1" value="Gar nicht unterhaltsam">
         <label for="gar nicht unterhaltsam">Gar nicht unterhaltsam</label><br>
         <input type="radio" v-model="question1" value="Wenig unterhaltsam">
         <label for="wenig unterhaltsam">Wenig unterhaltsam</label><br>
@@ -18,7 +18,7 @@
       <!--<p>Test: {{ this.question1 }}</p>-->
       <div class="single-question">
         <p>2 - Verglichen mit normalen Lernmethoden, wie schätzt Du Deinen Lernerfolg bei diesem Versuch ein? *</p>
-        <input type="radio" v-model="question2" value="Viel schlechter als normal" required>
+        <input type="radio" v-model="question2" value="Viel schlechter als normal">
         <label for="viel schlechter als normal">Viel schlechter als normal</label><br>
         <input type="radio" v-model="question2" value="Etwas schlechter als normal">
         <label for="etwas schlechter als normal">Etwas schlechter als normal</label><br>
@@ -35,7 +35,7 @@
       </div>
       <div class="single-question">
         <p>4 - Wie benutzerfreundlich schätzt Du den Versuch ein? *</p>
-        <input type="radio" v-model="question4" value="Gar nicht benutzerfreundlich" required>
+        <input type="radio" v-model="question4" value="Gar nicht benutzerfreundlich">
         <label for="gar nicht benutzerfreundlich">Gar nicht benutzerfreundlich</label><br>
         <input type="radio" v-model="question4" value="Wenig benutzerfreundlich">
         <label for="wenig benutzerfreundlich">Wenig benutzerfreundlich</label><br>
@@ -46,7 +46,7 @@
       </div>
       <div class="single-question">
         <p>5 - Wie schätzt Du die Verständlichkeit der Anweisungen während dem Versuch ein? *</p>
-        <input type="radio" v-model="question5" value="Sehr unverständlich" required>
+        <input type="radio" v-model="question5" value="Sehr unverständlich">
         <label for="sehr unverständlich">Sehr unverständlich</label><br>
         <input type="radio" v-model="question5" value="Etwas unverständlich">
         <label for="etwas unverständlich">Etwas unverständlich</label><br>
@@ -61,7 +61,7 @@
       </div>
       <div class="single-question">
         <p>7 - Wie vertraut bist Du allgemein mit Computerspielen? *</p>
-        <input type="radio" v-model="question7" value="Gar nicht vertraut" required>
+        <input type="radio" v-model="question7" value="Gar nicht vertraut">
         <label for="gar nicht vertraut">Gar nicht vertraut</label><br>
         <input type="radio" v-model="question7" value="Wenig vertraut">
         <label for="wenig vertraut">Wenig vertraut</label><br>
@@ -72,7 +72,7 @@
       </div>
       <div class="single-question">
         <p>8 - Könntest Du dir vorstellen, ein solches bzw. ähnliches Lerntool in Zukunft zu nutzen? *</p>
-        <input type="radio" v-model="question8" value="Nein" required>
+        <input type="radio" v-model="question8" value="Nein">
         <label for="nein">Nein</label><br>
         <input type="radio" v-model="question8" value="Ja">
         <label for="ja">Ja</label><br>
@@ -140,7 +140,6 @@ export default {
         this.saveUserAnswersInState();
         this.prepareUserData();
         this.register();
-        }
       } else {
         console.log("Empty fields");
       }
