@@ -15,17 +15,28 @@ export default {
     currentDefinition: Number,
     errorCounter: Number,
   },
+  data() {
+    return {
+      box: null,
+    }
+  },
   methods: {
     showMessageBox() {
-      let box = document.getElementById('confirmation-box');
-      box.style.display="block";
+      let self = this;
+      //let box = document.getElementById('confirmation-box');
+      this.box.style.display="block";
 
       document.getElementById('confirmation-btn').onclick = function(){
          console.log("Click");
-         box.style.display="none";
+         self.$emit('clickedMessageBox');
+         self.box.style.display="none";
       };
     },
   },
+  mounted() {
+    this.box = document.getElementById('confirmation-box');
+  },
+  emits: ['clickedMessageBox']
 }
 </script>
 

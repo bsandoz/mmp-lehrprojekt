@@ -5,6 +5,7 @@
     :wordsArray="wordsArray"
     :currentDefinition="currentDefinition"
     :errorCounter="errorCounter"
+    @clickedMessageBox="clickedMessageBox"
     />
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="Versuche, den passenden Begriff zur Definition herauszufinden! Tippe Buchstaben in das Eingabefeld.
@@ -71,6 +72,7 @@ import { mapActions } from 'pinia';
         wordScore: 8,
         totalScore: 0,
         message: "Test",
+        messageType: String,
 
         userScore: Number,
 
@@ -148,8 +150,8 @@ import { mapActions } from 'pinia';
                 let areEqual = this.arraysEqual(wordArray, this.emptyLettersArray);
                 console.log(areEqual);
                 if (areEqual) {
-                  this.typedLetter = "";
-                  setTimeout(this.getNextWord, 2000);
+                  //this.typedLetter = "";
+                  //setTimeout(this.getNextWord, 2000);
                   this.showSuccessMessage();
                   return;
                 }
@@ -161,8 +163,10 @@ import { mapActions } from 'pinia';
           this.wordScore--;
           if (this.errorCounter >= 8) {
             this.showFailureMessage();
+            /*
             this.getNextWord();
             this.typedLetter = "";
+            */
           }
         }
         this.typedLetter = "";
@@ -199,22 +203,43 @@ import { mapActions } from 'pinia';
             let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             this.endTime = time;
             this.setTestUserEndTime(this.endTime);
-            this.goToQuestions();
+            setTimeout(this.showCompletionMessage, 200);
+            //this.goToQuestions();
           }
         }
       },
       showSuccessMessage() {
+        this.messageType = "success";
         this.$refs.messageBox.showMessageBox();
         this.message = "Korrekt! Das Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Du hattest bei diesem Wort " + this.errorCounter + " Fehler.";
         //window.alert("Korrekt! Das Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Du hattest bei diesem Wort " + this.errorCounter + " Fehler.");
       },
       showFailureMessage() {
+        this.messageType = "fail";
         this.$refs.messageBox.showMessageBox();
         this.message = "Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?";
         //window.alert("Du hast leider verloren! Das richtige Wort lautete " + this.wordsArray[this.currentDefinition].concept + ". Weiter zum nächsten Wort?");
       },
+      showCompletionMessage() {
+        console.log("Completion message");
+        this.messageType = "complete";
+        this.$refs.messageBox.showMessageBox();
+        this.message = "Du hast das Spiel hiermit abgeschlossen. Nun folgt noch ein kurzer Fragebogen für die Versuchsauswertung.";
+      },
       goToQuestions() {
         this.questionsActive = true;
+      },
+      clickedMessageBox() {
+        console.log("Click emit");
+        if (this.messageType === "fail") {
+          this.getNextWord();
+          this.typedLetter = "";
+        } else if (this.messageType === "success") {
+          this.typedLetter = "";
+          this.getNextWord();
+        } else if (this.messageType === "complete") {
+          this.goToQuestions();
+        }
       },
       /*
       prepareUserData() {

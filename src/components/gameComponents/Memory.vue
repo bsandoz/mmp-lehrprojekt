@@ -1,5 +1,5 @@
 <template>
-  <MessageBox ref="messageBox" :message="message" />
+  <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox"/>
   <TestQuestions v-if="questionsActive" />
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
@@ -48,6 +48,7 @@ export default {
       showContinueButton: false,
       canContinue: false,
       message: "",
+      messageType: String,
 
       testQuizCompleted: null,
       userScore: Number,
@@ -178,14 +179,29 @@ export default {
           let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
           this.endTime = time;
           this.setTestUserEndTime(this.endTime);
-          this.goToQuestions();
+          //this.goToQuestions();
+          this.showCompletionMessage();
         }
       }
     },
     goToQuestions() {
+      /*
       this.$refs.messageBox.showMessageBox();
       this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
+      */
       this.questionsActive = true;
+    },
+    showCompletionMessage() {
+      this.messageType = "complete";
+      this.$refs.messageBox.showMessageBox();
+      this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
+    },
+    clickedMessageBox() {
+      if (this.messageType === "complete") {
+        this.goToQuestions();
+      } else {
+        window.alert("Ein Fehler ist aufgetreten.")
+      }
     },
     /*
     prepareUserData() {
