@@ -137,9 +137,13 @@ export default {
     handleForm() {
       console.log("Called handleForm");
       if (this.question1 && this.question2 && this.question3 && this.question4 && this.question5 && this.question6 && this.question7 && this.question8) {
-        this.saveUserAnswersInState();
-        this.prepareUserData();
-        this.register();
+        if (localStorage.getItem("testFinished") === false) {
+          this.saveUserAnswersInState();
+          this.prepareUserData();
+          this.register();
+        } else {
+          console.log("Already completed");
+        }
       } else {
         console.log("Empty fields");
       }
