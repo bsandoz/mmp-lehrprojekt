@@ -1,8 +1,14 @@
 <template>
   <TestQuestions v-if="questionsActive" />
+  <MessageBox ref="messageBox"
+    :message="message"
+    :wordsArray="wordsArray"
+    :currentDefinition="currentDefinition"
+    :errorCounter="errorCounter"
+    />
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="Versuche, den passenden Begriff zur Definition herauszufinden! Tippe Buchstaben in das Eingabefeld.
-    Wenn der Buchstabe im Wort vorkommt, wird er aufgedeckt. Aber Vorsicht, Du darfst nicht zu viele falsche Buchstaben eingeben...
+    Wenn der Buchstabe im Wort vorkommt, wird er aufgedeckt. Aber Vorsicht, bei jedem falschen Buchstaben wird das Galgenmännchen weitergezeichnet...
     (Sonderzeichen wie <,>,- usw. müssen nicht eingegeben werden.)" />
     <div class="hangman-container" @click="startGame">
       <button class="btn" v-if="this.isGameRunning === false">Hangman starten!</button>
@@ -18,15 +24,20 @@
           <input id="hangman-input" type="text" name="letter" maxlength="1" v-model="typedLetter" v-on:input="checkForLetters(typedLetter)" autocomplete="off">
         </div>
         <h2>Anzahl Fehler: {{ this.errorCounter }}</h2>
+        <div class="hangman-illustration">
+          <img src="../../assets/hangman/hangman_1.png" alt="Illustration Hangman" v-if="errorCounter === 0">
+          <img src="../../assets/hangman/hangman_2.png" alt="Illustration Hangman" v-if="errorCounter === 1">
+          <img src="../../assets/hangman/hangman_3.png" alt="Illustration Hangman" v-if="errorCounter === 2">
+          <img src="../../assets/hangman/hangman_4.png" alt="Illustration Hangman" v-if="errorCounter === 3">
+          <img src="../../assets/hangman/hangman_5.png" alt="Illustration Hangman" v-if="errorCounter === 4">
+          <img src="../../assets/hangman/hangman_6.png" alt="Illustration Hangman" v-if="errorCounter === 5">
+          <img src="../../assets/hangman/hangman_7.png" alt="Illustration Hangman" v-if="errorCounter === 6">
+          <img src="../../assets/hangman/hangman_8.png" alt="Illustration Hangman" v-if="errorCounter === 7">
+          <img src="../../assets/hangman/hangman_9.png" alt="Illustration Hangman" v-if="errorCounter === 8">
+        </div>
       </div>
     </div>
   </div>
-  <MessageBox ref="messageBox"
-    :message="message"
-    :wordsArray="wordsArray"
-    :currentDefinition="currentDefinition"
-    :errorCounter="errorCounter"
-    />
 </template>
 
 <script>
@@ -57,7 +68,7 @@ import { mapActions } from 'pinia';
         emptyLettersArray: [],
         canEnterLetters: false,
         typedLetter: "",
-        wordScore: 9,
+        wordScore: 8,
         totalScore: 0,
         message: "Test",
 
@@ -148,7 +159,7 @@ import { mapActions } from 'pinia';
         } else {
           this.errorCounter++;
           this.wordScore--;
-          if (this.errorCounter >= 9) {
+          if (this.errorCounter >= 8) {
             this.showFailureMessage();
             this.getNextWord();
             this.typedLetter = "";

@@ -1,7 +1,7 @@
 <template>
   <div id="confirmation-box">
     <p class="confirmation-text"> {{ message }} </p>
-    <button class="btn" id="confirmation-btn">Ok</button>
+    <button class="btn" id="confirmation-btn">OK</button>
   </div>
 
 </template>
@@ -21,8 +21,8 @@ export default {
       box.style.display="block";
 
       document.getElementById('confirmation-btn').onclick = function(){
-         // Do your delete operation
-          box.style.display="none";
+         console.log("Click");
+         box.style.display="none";
       };
     },
   },
