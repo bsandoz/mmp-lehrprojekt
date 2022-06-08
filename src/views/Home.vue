@@ -1,15 +1,13 @@
 <template>
-  <!-- Ausgeblendet für Test
   <div class="placeholder-hero">
     <p>Platzhalter Hero-Image</p>
   </div>
-  -->
   <Lead lead="Willkommen auf der Homepage dieses Lerntools! Im Rahmen meiner Bachelorarbeit zum Thema Gamification für Lerntools habe ich einen Test zu
   Datenvisualisierungen erarbeitet, mit dem zwei Ansätze von Gamification getestet werden sollen. Dieser Test dauert ungefähr 15 Minuten. Es sind keine Vorkenntnisse
   notwendig. Ich wünsche Dir viel Spass und bedanke mich für deine Mithilfe! "/>
   <Content :content="content" />
-  <!--<h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>-->
-  <router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>
+  <h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
+  <!--<router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>-->
 </template>
 
 <script>

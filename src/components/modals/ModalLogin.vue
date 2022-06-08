@@ -70,6 +70,7 @@ export default {
         this.userLogIn();
         localStorage.setItem('username', filteredUsersData[0].username);
         localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
+        this.$emit('close');
       } else {
         console.log("Password is not correct");
       }
