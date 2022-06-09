@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-left">
       <h2>Platzhalter Logo</h2>
-      <router-link class="home-link" to="/">Versuch Gamifiziertes Lernen - Datenvisualisierungen</router-link>
+      <router-link class="home-link" to="/">EasyMusicTheory</router-link>
     </div>
     <div class="header-right">
       <button type="button" class="btn" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
@@ -24,6 +24,10 @@
         </ModalRegister>
       </Teleport>
       <span v-if="userIsLoggedIn">Willkommen, User!</span>
+      <!-- Temporary profile link -->
+      <router-link v-if="userIsLoggedIn" to="/profile/0" custom v-slot="{ navigate }">
+        <button @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
+      </router-link>
       <button type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
     </div>
   </div>

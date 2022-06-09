@@ -17,7 +17,6 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              Du hast noch keinen Account? Registriere dich hier!
               <button
                 class="modal-default-button"
                 @click="$emit('close')"

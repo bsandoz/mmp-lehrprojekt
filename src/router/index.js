@@ -4,6 +4,7 @@ import About from '../views/About.vue'
 import Module from '../views/Module.vue'
 import Exercise from '../views/Exercise.vue'
 import Test from '../views/Test.vue'
+import Profile from '../views/Profile.vue'
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About,
+  },
+  {
+    path: '/profile/:id',
+    name: 'Profile',
+    component: Profile,
   },
   {
     path: '/module/:id',
