@@ -23,7 +23,7 @@
           </template>
         </ModalRegister>
       </Teleport>
-      <span v-if="userIsLoggedIn">Willkommen, User!</span>
+      <span v-if="userIsLoggedIn">Willkommen, {{ userName }}!</span>
       <!-- Temporary profile link -->
       <router-link v-if="userIsLoggedIn" to="/profile/0" custom v-slot="{ navigate }">
         <button @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
@@ -51,14 +51,17 @@ export default {
     return {
       showModalLogin: false,
       showModalRegister: false,
+      userName: null,
     }
   },
   computed: {
     ...mapState(useUserStore, ['userIsLoggedIn']),
+    ...mapState(useUserStore, ['userData']),
   },
   methods: {
     ...mapActions(useUserStore, ['userLogIn']),
     ...mapActions(useUserStore, ['userLogOut']),
+
     logInOut() {
       if (this.userIsLoggedIn) {
         //logout
@@ -71,6 +74,11 @@ export default {
       }
     },
   },
+  updated() {
+    if (this.userData) {
+      this.userName = this.userData.username;
+    }
+  }
 }
 </script>
 

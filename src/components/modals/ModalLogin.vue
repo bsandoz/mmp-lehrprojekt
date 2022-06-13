@@ -55,6 +55,7 @@ export default {
   methods: {
     ...mapActions(useUserStore, ['getAllUsersData']),
     ...mapActions(useUserStore, ['userLogIn']),
+    ...mapActions(useUserStore, ['setUserData']),
 
     async login() {
       await this.getAllUsersData("https://ifuu2646.directus.app/items/users");
@@ -67,6 +68,7 @@ export default {
       if (res) {
         console.log("Login successful");
         this.userLogIn();
+        this.setUserData(filteredUsersData[0]);
         localStorage.setItem('username', filteredUsersData[0].username);
         localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
         this.$emit('close');

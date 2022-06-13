@@ -45,10 +45,17 @@ export const useUserStore = defineStore("UserStore", {
           .catch (function(error) {
             console.log(error);
           })
-        } catch (error) {
-          console.log(error);
-        }
-      },
+          } catch (error) {
+            console.log(error);
+          }
+        },
+    setUserData(data) {
+      this.userData = data;
+      console.log(this.userData);
+    },
+
+
+      //Actions for Test
       setTestUserId(id) {
         this.testUserId = id;
       },
