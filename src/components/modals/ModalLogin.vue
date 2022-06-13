@@ -70,6 +70,7 @@ export default {
         this.userLogIn();
         this.setUserData(filteredUsersData[0]);
         localStorage.setItem('username', filteredUsersData[0].username);
+        localStorage.setItem('userId', filteredUsersData[0].id);
         localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
         this.$emit('close');
       } else {

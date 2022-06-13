@@ -6,6 +6,7 @@ export const useUserStore = defineStore("UserStore", {
     return {
       userIsLoggedIn: false,
       userData: null,
+      completedModulesArray: [],
 
       //Data for test
       testUserId: null,
@@ -53,7 +54,11 @@ export const useUserStore = defineStore("UserStore", {
       this.userData = data;
       console.log(this.userData);
     },
-
+    setCompletedModulesArray() {
+        this.completedModulesArray.push(this.userData.module1Completed);
+        this.completedModulesArray.push(this.userData.module2Completed);
+        this.completedModulesArray.push(this.userData.module3Completed);
+    },
 
       //Actions for Test
       setTestUserId(id) {

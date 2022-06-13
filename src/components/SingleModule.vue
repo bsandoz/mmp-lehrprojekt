@@ -3,7 +3,9 @@
     <div :class="{ completed: singleModule.isCompleted }">
       <h3>{{ singleModule.title }}</h3>
       <p>{{ singleModule.text }}</p>
+      <!--Change Progress to Users db
       <p class="progress-bar">Progress: {{ singleModule.progress }}%</p>
+      -->
     </div>
   </router-link>
 </template>
@@ -12,6 +14,7 @@
 import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
 
 export default {
   name: 'SingleModule',
@@ -28,10 +31,27 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ['userIsLoggedIn']),
+    ...mapState(useUserStore, ['userData']),
+    ...mapState(useUserStore, ['completedModulesArray']),
+
     moduleLink() {
       //return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
       return this.moduleUrl + this.singleModule.id;
     },
+  },
+  methods: {
+    ...mapActions(useUserStore, ['setCompletedModulesArray']),
+  },
+  mounted() {
+    /* Needs to be moved to Home?
+    if (this.userData) {
+      this.setCompletedModulesArray();
+      for (var i = 0; i < this.completedModulesArray.length; i++) {
+        if (this.completedModulesArray[i]) {
+
+        }
+      }
+    } */
   }
 }
 </script>

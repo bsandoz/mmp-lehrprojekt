@@ -25,7 +25,7 @@
       </Teleport>
       <span v-if="userIsLoggedIn">Willkommen, {{ userName }}!</span>
       <!-- Temporary profile link -->
-      <router-link v-if="userIsLoggedIn" to="/profile/0" custom v-slot="{ navigate }">
+      <router-link v-if="userIsLoggedIn" :to="this.profileLink" custom v-slot="{ navigate }">
         <button @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
       </router-link>
       <button type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
@@ -52,6 +52,9 @@ export default {
       showModalLogin: false,
       showModalRegister: false,
       userName: null,
+      userId: null,
+
+      profileLink: String,
     }
   },
   computed: {
@@ -67,6 +70,7 @@ export default {
         //logout
         console.log("Logging out");
         this.userLogOut();
+        this.$router.go('/');
       } else {
         //login
         console.log("Logging in");
@@ -78,6 +82,9 @@ export default {
     if (this.userData) {
       this.userName = this.userData.username;
     }
+    this.userId = localStorage.getItem("userId");
+    this.profileLink = "/profile/" + this.userId;
+    console.log(this.profileLink);
   }
 }
 </script>
