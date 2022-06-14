@@ -66,11 +66,12 @@ export default {
     ...mapActions(useUserStore, ['userLogOut']),
 
     logInOut() {
+      console.log("Called logInOut");
       if (this.userIsLoggedIn) {
         //logout
         console.log("Logging out");
         this.userLogOut();
-        this.$router.go('/');
+        this.$router.push({ name: 'Home' });
       } else {
         //login
         console.log("Logging in");

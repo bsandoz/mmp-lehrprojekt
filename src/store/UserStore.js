@@ -35,6 +35,8 @@ export const useUserStore = defineStore("UserStore", {
       this.userIsLoggedIn = true;
     },
     userLogOut() {
+      this.userData = null;
+      this.completedModulesArray = [];
       this.userIsLoggedIn = false;
     },
     async getAllUsersData(api) {
@@ -116,8 +118,10 @@ export const useUserStore = defineStore("UserStore", {
       setTestQuestion9(a) {
         this.testQuestion9 = a;
       },
-    }
+    },
 
   //getters
 
+  //persist option
+  persist: true,
 });

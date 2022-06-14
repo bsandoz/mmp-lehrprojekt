@@ -30,26 +30,30 @@ export default {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
   mounted() {
-    this.userName = this.userData.username;
-    this.userMail = this.userData.email;
-    console.log(this.userName);
+    if (!this.userData) {
+      //this.$router.push({ name: 'Home' });
+    } else {
+      this.userName = this.userData.username;
+      this.userMail = this.userData.email;
+      console.log(this.userName);
 
-    /*
-    //clear array before filling it
-    this.completionBooleanArray = [];
+      /*
+      //clear array before filling it
+      this.completionBooleanArray = [];
 
-    this.completionBooleanArray.push(this.userData.module1Completed);
-    this.completionBooleanArray.push(this.userData.module2Completed);
-    this.completionBooleanArray.push(this.userData.module3Completed);
-    */
-    this.setCompletedModulesArray();
+      this.completionBooleanArray.push(this.userData.module1Completed);
+      this.completionBooleanArray.push(this.userData.module2Completed);
+      this.completionBooleanArray.push(this.userData.module3Completed);
+      */
+      this.setCompletedModulesArray();
 
-    //Compare module IDs with IDs of completed modules saved in userStore
-    console.log(this.allModules);
-    for (var i = 0; i < this.completedModulesArray.length; i++) {
-       if (this.completedModulesArray[i]) {
-         this.completedModules.push(this.allModules[i].title);
-       }
+      //Compare module IDs with IDs of completed modules saved in userStore
+      console.log(this.allModules);
+      for (var i = 0; i < this.completedModulesArray.length; i++) {
+         if (this.completedModulesArray[i]) {
+           this.completedModules.push(this.allModules[i].title);
+         }
+      }
     }
   },
 }

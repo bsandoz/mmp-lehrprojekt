@@ -39,4 +39,6 @@ export const useModuleStore = defineStore("ModuleStore", {
   },
   //getters
 
+  //persist option
+  persist: true,
 });
