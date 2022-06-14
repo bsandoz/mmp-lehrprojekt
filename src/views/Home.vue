@@ -33,16 +33,30 @@ export default {
   },
   computed: {
     ...mapState(useUserStore, ['userIsLoggedIn']),
+    ...mapState(useUserStore, ['userData']),
+    ...mapState(useUserStore, ['completedModulesArray']),
     ...mapState(useModuleStore, ['allModules']),
   },
   methods: {
     ...mapActions(useModuleStore, ['getAllModules']),
+    ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
   async mounted() {
     await this.getAllModules('https://ifuu2646.directus.app/items/modules')
-    await console.log(this.allModules);
-    return this.content = this.allModules;
+    this.content = this.allModules;
+    await console.log(this.content);
   },
+  updated() {
+    //Show completed modules
+    if (this.userData) {
+      this.setCompletedModulesArray();
+      for (var i = 0; i < this.completedModulesArray.length; i++) {
+        if (this.completedModulesArray[i]) {
+          this.content[i].isCompleted = true;
+        }
+      }
+    }
+  }
 }
 </script>
 

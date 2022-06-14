@@ -55,6 +55,9 @@ export const useUserStore = defineStore("UserStore", {
       console.log(this.userData);
     },
     setCompletedModulesArray() {
+        //clear array before filling
+        this.completedModulesArray = [];
+
         this.completedModulesArray.push(this.userData.module1Completed);
         this.completedModulesArray.push(this.userData.module2Completed);
         this.completedModulesArray.push(this.userData.module3Completed);
