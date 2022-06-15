@@ -3,6 +3,7 @@
   <h2>{{ this.activeModule.title }}</h2>
   <h4>{{ this.activeModule.text }}</h4>
   <p>{{ this.activeModule.details }}</p>
+  <div id="content"></div>
   <div class="start-exercise">
     <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
     <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
@@ -25,9 +26,19 @@ export default {
   props: {
 
   },
+  data() {
+    return {
+      content: null,
+    }
+  },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
   },
+  mounted() {
+    this.content = this.activeModule.content;
+    let doc = document.getElementById("content");
+    doc.innerHTML = this.content;
+  }
 }
 </script>
 
