@@ -5,8 +5,11 @@
   <p>{{ this.activeModule.details }}</p>
   <div id="content"></div>
   <div class="start-exercise">
+    <!--
     <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
     <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
+    -->
+    <router-link v-if="isMounted" :to="this.exerciseLink">Übung starten</router-link>
   </div>
   <div class="next-exercise">
     <h3>Klicke hier, um zur nächsten Übung zu gelangen!</h3>
@@ -29,15 +32,26 @@ export default {
   data() {
     return {
       content: null,
+      exerciseLink: null,
+      isMounted: false,
     }
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
   },
   mounted() {
+    console.log("Mounted");
     this.content = this.activeModule.content;
     let doc = document.getElementById("content");
     doc.innerHTML = this.content;
+
+    this.exerciseLink = "/exercise/" + this.activeModule.id;
+    console.log(this.exerciseLink);
+
+    console.log(this.activeModule);
+
+    this.isMounted = true;
+
   }
 }
 </script>

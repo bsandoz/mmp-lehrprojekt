@@ -38,6 +38,11 @@ const routes = [
     component: Exercise,
   },
   {
+    path: '/exercise/:id',
+    name: 'Exercise',
+    component: Exercise,
+  },
+  {
     path: '/test',
     name: 'Test',
     component: Test,
