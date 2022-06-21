@@ -11,11 +11,25 @@ export default {
   data() {
     return {
       elementsArray: [],
+
+      question1Array: [],
+      question2Array: [],
+      question3Array: [],
+      question4Array: [],
+      question5Array: [],
+
+      questionCounter: 0,
+
       filteredQuestionsArray: [],
       filteredAnswersArray: [],
+      correctAnswer: null,
 
       question: null,
       answers: [],
+
+      answerChosen: false,
+      isAnswerCorrect: false,
+      quizPoints: null,
 
       apiLink: null,
       isGameRunning: false,
@@ -51,11 +65,48 @@ export default {
       console.log(this.apiLink);
     },
 
-    filterArrayForQuestion() {
+    splitArray(array) {
+      this.question1Array = array.slice(0, 5);
+      this.question2Array = array.slice(5, 10);
+      this.question3Array = array.slice(10, 15);
+      this.question4Array = array.slice(15, 20);
+      this.question5Array = array.slice(20, 25);
+
+      console.log(this.question1Array);
+      console.log(this.question2Array);
+      console.log(this.question3Array);
+    },
+
+    nextQuestion() {
+      this.questionCounter++;
+
+      this.resetQuestion();
+
+      let questionArray;
+
+      if (this.questionCounter === 1) {
+        questionArray = this.question1Array;
+      } else if (this.questionCounter === 2) {
+        questionArray = this.question2Array;
+      } else if (this.questionCounter === 3) {
+        questionArray = this.question3Array;
+      } else if (this.questionCounter === 4) {
+        questionArray = this.question4Array;
+      } else if (this.questionCounter === 5) {
+        questionArray = this.question5Array;
+      } else {
+        console.log("questionCounter Error");
+      }
+
+      this.filterArrayForQuestion(questionArray);
+      this.filterArrayForAnswers(questionArray);
+    },
+
+    filterArrayForQuestion(array) {
       this.isGameRunning = true;
-      for (var i = 0; i < this.elementsArray.length; i++) {
-        if (this.elementsArray[i].fieldType === "question") {
-          this.filteredQuestionsArray.push(this.elementsArray[i]);
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].fieldType === "question") {
+          this.filteredQuestionsArray.push(array[i]);
         }
       }
       console.log(this.filteredQuestionsArray);
@@ -65,10 +116,10 @@ export default {
       doc.innerHTML = this.question;
     },
 
-    filterArrayForAnswers() {
-      for (var i = 0; i < this.elementsArray.length; i++) {
-        if (this.elementsArray[i].fieldType === "answer") {
-          this.filteredAnswersArray.push(this.elementsArray[i]);
+    filterArrayForAnswers(array) {
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].fieldType === "answer") {
+          this.filteredAnswersArray.push(array[i]);
         }
       }
       console.log(this.filteredAnswersArray);
@@ -84,14 +135,59 @@ export default {
 
     },
 
-    checkAnswer(id) {
-      console.log("Clicked answer button with id " + id + ".");
-      if (this.filteredAnswersArray[id].isCorrect === true) {
-        console.log("Correct answer!");
-      } else {
-        console.log("Wrong answer.");
+    saveCorrectAnswer() {
+      for (var i = 0; i < this.filteredAnswersArray.length; i++) {
+        if (this.filteredAnswersArray[i].isCorrect === true) {
+          console.log(this.filteredAnswersArray);
+          this.correctAnswer = this.filteredAnswersArray[i].id;
+          //Adjust id because array includes question
+          this.correctAnswer = this.correctAnswer - 1;
+          console.log(this.correctAnswer);
+        }
       }
-    }
+    },
+
+    checkAnswer(id) {
+      this.saveCorrectAnswer();
+      if (this.answerChosen === false) {
+        console.log("Clicked answer button with id " + id + ".");
+        if (this.filteredAnswersArray[id].isCorrect === true) {
+          console.log("Correct answer!");
+          this.quizPoints++;
+          this.answerChosen = true;
+          this.isAnswerCorrect = true;
+          let adjustedId = id + 1;
+          let btn = document.getElementById("answer-" + adjustedId);
+          btn.classList.add("correct");
+        } else {
+          console.log("Wrong answer.");
+          this.answerChosen = true;
+          this.isAnswerCorrect = false;
+          let adjustedId = id + 1;
+          let btnCorrect = document.getElementById("answer-" + this.correctAnswer);
+          btnCorrect.classList.add("correct");
+          let btnWrong = document.getElementById("answer-" + adjustedId);
+          btnWrong.classList.add("wrong");
+        }
+      } else {
+        console.log("Answer already given.");
+      }
+    },
+
+    resetQuestion() {
+      this.filteredQuestionsArray = [];
+      this.filteredAnswersArray = [];
+      this.correctAnswer = null;
+      this.question = null;
+      this.answers = [];
+      this.answerChosen = false;
+      this.isAnswerCorrect = false;
+
+      let buttons = document.getElementsByClassName("btn");
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("wrong", "correct");
+      }
+    },
 
   },
   computed: {
@@ -109,7 +205,7 @@ export default {
     <p>Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
       Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
   </div>
-  <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="filterArrayForQuestion(); filterArrayForAnswers();">Spiel starten</button>
+  <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
   <div class="quiz">
     <!--
     <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
@@ -132,6 +228,11 @@ export default {
 
       </button>
     </div>
+    <div class="result-message" v-if="answerChosen">
+      <h3 v-if="isAnswerCorrect">Korrekt! Weiter zur nächsten Frage?</h3>
+      <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter zur nächsten Frage?</h3>
+      <button id="next-button" class="btn" @click="nextQuestion">-></button>
+    </div>
   </div>
 </template>
 
@@ -144,5 +245,12 @@ export default {
   }
   .visible {
     visibility: visible;
+  }
+  .correct {
+    background-color: darkgreen;
+  }
+
+  .wrong {
+    background-color: darkred;
   }
 </style>
