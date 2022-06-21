@@ -1,6 +1,5 @@
 <template>
   <div class="" v-if="isQuiz">
-    <p>Quiz</p>
     <Quiz />
   </div>
   <div class="" v-if="isMemory">

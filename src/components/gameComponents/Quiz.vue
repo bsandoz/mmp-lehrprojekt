@@ -35,8 +35,9 @@ export default {
             .catch (function(error) {
               console.log(error);
             })
-          this.isGameRunning = true;
-          this.showContinueButton = true;
+          //this.isGameRunning = true;
+          //this.showContinueButton = true;
+
         }
       }
       catch (error) {
@@ -51,6 +52,7 @@ export default {
     },
 
     filterArrayForQuestion() {
+      this.isGameRunning = true;
       for (var i = 0; i < this.elementsArray.length; i++) {
         if (this.elementsArray[i].fieldType === "question") {
           this.filteredQuestionsArray.push(this.elementsArray[i]);
@@ -79,6 +81,16 @@ export default {
       doc3.innerHTML = this.filteredAnswersArray[2].fieldContent;
       let doc4 = document.getElementById("answer-4");
       doc4.innerHTML = this.filteredAnswersArray[3].fieldContent;
+
+    },
+
+    checkAnswer(id) {
+      console.log("Clicked answer button with id " + id + ".");
+      if (this.filteredAnswersArray[id].isCorrect === true) {
+        console.log("Correct answer!");
+      } else {
+        console.log("Wrong answer.");
+      }
     }
 
   },
@@ -93,26 +105,44 @@ export default {
 </script>
 
 <template>
-  <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
-  <button type="button" name="button" class="btn" @click="filterArrayForAnswers">Start</button>
-  <div id="question">
-
+  <div v-if="!isGameRunning">
+    <p>Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
+      Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
   </div>
-  <div id="answers">
-    <div id="answer-1">
+  <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="filterArrayForQuestion(); filterArrayForAnswers();">Spiel starten</button>
+  <div class="quiz">
+    <!--
+    <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
+    <button type="button" name="button" class="btn" @click="filterArrayForAnswers">Start</button>
+    -->
+    <div id="question">
 
     </div>
-    <div id="answer-2">
+    <div id="answers" class="answer-buttons" :class="{visible: this.isGameRunning}">
+      <button id="answer-1" class="btn" @click="checkAnswer(0)">
 
-    </div>
-    <div id="answer-3">
+      </button>
+      <button id="answer-2" class="btn" @click="checkAnswer(1)">
 
-    </div>
-    <div id="answer-4">
+      </button>
+      <button id="answer-3" class="btn" @click="checkAnswer(2)">
 
+      </button>
+      <button id="answer-4" class="btn" @click="checkAnswer(3)">
+
+      </button>
     </div>
   </div>
 </template>
 
 <style lang="css" scoped>
+  .answer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    visibility: hidden;
+  }
+  .visible {
+    visibility: visible;
+  }
 </style>
