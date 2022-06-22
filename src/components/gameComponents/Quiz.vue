@@ -3,10 +3,12 @@ import { useModuleStore } from '@/store/ModuleStore.js'
 
 import { mapState } from 'pinia';
 
+import MessageBox from '../modals/MessageBox.vue';
+
 export default {
   name: 'Quiz',
   components: {
-
+    MessageBox,
   },
   data() {
     return {
@@ -35,6 +37,8 @@ export default {
 
       apiLink: null,
       isGameRunning: false,
+
+      message: null,
     }
   },
   methods: {
@@ -95,6 +99,8 @@ export default {
 
       if (this.questionCounter >= this.numberOfQuestions) {
         console.log("All questions answered");
+        this.$refs.messageBox.showMessageBox();
+
       } else {
         this.questionCounter++;
         this.resetQuestion();
@@ -170,6 +176,8 @@ export default {
         if (this.filteredAnswersArray[id].isCorrect === true) {
           console.log("Correct answer!");
           this.quizPoints++;
+          this.message = "Du hast " + this.quizPoints + " Punkte erreicht.";
+          console.log(this.quizPoints);
           this.answerChosen = true;
           this.isAnswerCorrect = true;
           let adjustedId = id + 1;
@@ -204,6 +212,9 @@ export default {
         buttons[i].classList.remove("wrong", "correct");
       }
     },
+    clickedMessageBox() {
+      this.$router.push({ name: 'Home' });
+    },
 
   },
   computed: {
@@ -217,6 +228,7 @@ export default {
 </script>
 
 <template>
+  <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox" />
   <div v-if="!isGameRunning">
     <p>Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
       Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
