@@ -12,6 +12,8 @@ export default {
     return {
       elementsArray: [],
 
+      numberOfQuestions: null,
+
       question1Array: [],
       question2Array: [],
       question3Array: [],
@@ -77,29 +79,45 @@ export default {
       console.log(this.question3Array);
     },
 
+    setNumberOfQuestions() {
+      for (var i = 0; i < this.elementsArray.length; i++) {
+        if (this.elementsArray[i].fieldType === "question") {
+          this.numberOfQuestions++;
+        }
+      }
+      console.log(this.numberOfQuestions);
+    },
+
     nextQuestion() {
-      this.questionCounter++;
-
-      this.resetQuestion();
-
-      let questionArray;
-
-      if (this.questionCounter === 1) {
-        questionArray = this.question1Array;
-      } else if (this.questionCounter === 2) {
-        questionArray = this.question2Array;
-      } else if (this.questionCounter === 3) {
-        questionArray = this.question3Array;
-      } else if (this.questionCounter === 4) {
-        questionArray = this.question4Array;
-      } else if (this.questionCounter === 5) {
-        questionArray = this.question5Array;
-      } else {
-        console.log("questionCounter Error");
+      if (this.numberOfQuestions === null) {
+        this.setNumberOfQuestions();
       }
 
-      this.filterArrayForQuestion(questionArray);
-      this.filterArrayForAnswers(questionArray);
+      if (this.questionCounter >= this.numberOfQuestions) {
+        console.log("All questions answered");
+      } else {
+        this.questionCounter++;
+        this.resetQuestion();
+
+        let questionArray;
+
+        if (this.questionCounter === 1) {
+          questionArray = this.question1Array;
+        } else if (this.questionCounter === 2) {
+          questionArray = this.question2Array;
+        } else if (this.questionCounter === 3) {
+          questionArray = this.question3Array;
+        } else if (this.questionCounter === 4) {
+          questionArray = this.question4Array;
+        } else if (this.questionCounter === 5) {
+          questionArray = this.question5Array;
+        } else {
+          console.log("questionCounter Error");
+        }
+
+        this.filterArrayForQuestion(questionArray);
+        this.filterArrayForAnswers(questionArray);
+      }
     },
 
     filterArrayForQuestion(array) {
@@ -139,9 +157,7 @@ export default {
       for (var i = 0; i < this.filteredAnswersArray.length; i++) {
         if (this.filteredAnswersArray[i].isCorrect === true) {
           console.log(this.filteredAnswersArray);
-          this.correctAnswer = this.filteredAnswersArray[i].id;
-          //Adjust id because array includes question
-          this.correctAnswer = this.correctAnswer - 1;
+          this.correctAnswer = this.filteredAnswersArray[i].answerNumber;
           console.log(this.correctAnswer);
         }
       }
@@ -233,6 +249,7 @@ export default {
       <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter zur nächsten Frage?</h3>
       <button id="next-button" class="btn" @click="nextQuestion">-></button>
     </div>
+    <p v-if="numberOfQuestions">{{ this.questionCounter }}/{{ this.numberOfQuestions }}</p>
   </div>
 </template>
 
