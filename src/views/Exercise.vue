@@ -4,9 +4,6 @@
   </div>
   <div class="" v-if="isMemory">
     <h3>Begriffs-Memory</h3>
-    <p>In diesem Memory-Spiel sind X Begriffe und ihre Definitionen versteckt.
-      Ordne den Begriffen ihre zugehörigen Definitionen zu!
-    </p>
     <Memory />
   </div>
 </template>
@@ -35,6 +32,7 @@ export default {
     ...mapState(useModuleStore, ['activeModule']),
   },
   mounted() {
+    console.log(this.activeModule.gameType);
     if (this.activeModule.gameType === "memory") {
       this.isMemory = true;
     } else if (this.activeModule.gameType === "quiz") {

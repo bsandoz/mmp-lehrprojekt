@@ -2,19 +2,20 @@
   <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox"/>
   <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
   <div class="exercise" v-if="!questionsActive">
-    <Lead lead="In diesem Memory sind 6 Begriffe zu Datenvisualisierungen und ihre Definitionen versteckt.
+    <Lead lead="In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
     <button class="btn continue-btn" :class="{ active: canContinue }" v-if="showContinueButton" @click="makeBoxesInvisible">Weiter</button>
     <div class="memory-container" :if="this.testQuizCompleted === false">
-      <button class="btn" v-if="this.isGameRunning === false" @click="startGame">Memory starten!</button>
+      <button class="btn" v-if="this.isGameRunning === false" @click="setMemoryBoxes">Memory starten!</button>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
         <div class="memory-box" @click="toggleVisibility(item)"
         :class="{visible: item.isVisible},{solved: item.isSolved}">
-          <p>{{ item.fieldText }}</p>
+
         </div>
       </div>
     </div>
   </div>
+  <button type="button" name="button" @click="setMemoryBoxes">test</button>
 </template>
 
 <script>
@@ -23,6 +24,7 @@ import MessageBox from '../modals/MessageBox.vue'
 import TestQuestions from './TestQuestions.vue'
 
 import { useUserStore } from '@/store/UserStore.js'
+import { useModuleStore } from '@/store/ModuleStore.js'
 
 import { mapState } from 'pinia';
 import { mapActions } from 'pinia';
@@ -56,9 +58,43 @@ export default {
       endTime: null,
 
       questionsActive: false,
+
+      apiLink: null,
     }
   },
   methods: {
+
+    createApiLink() {
+      let id = this.activeModule.id + 1;
+      this.apiLink = "https://ifuu2646.directus.app/items/module" + id + "GameElements";
+      console.log(this.apiLink);
+    },
+
+    async startGame() {
+      this.createApiLink();
+      try {
+        if (this.isGameRunning) {
+          await console.log("Already running game");
+        } else {
+          await console.log("Started game");
+
+          await axios
+            .get (this.apiLink)
+            .then (response => (this.memoryboxArray = response.data.data))
+            .catch (function(error) {
+              console.log(error);
+            })
+          //await this.setMemoryBoxes();
+          await this.shuffle(this.memoryboxArray);
+          this.isGameRunning = true;
+          this.showContinueButton = true;
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
+    },
+
     toggleVisibility(item) {
       if (item.isSolved === false) {
         if (item.isVisible) {
@@ -89,34 +125,19 @@ export default {
         console.log("Clicked box is already solved");
       }
     },
-    async startGame() {
-      try {
-        if (this.isGameRunning) {
-          await console.log("Already running game");
-        } else {
-          await console.log("Started game");
 
-          await axios
-            .get ("https://ifuu2646.directus.app/items/memoryGameElements")
-            .then (response => (this.memoryboxArray = response.data.data))
-            .catch (function(error) {
-              console.log(error);
-            })
-          await this.shuffle(this.memoryboxArray);
-          this.isGameRunning = true;
-          this.showContinueButton = true;
+    setMemoryBoxes() {
+      let htmlList = document.getElementsByClassName('memory-box');
+      console.log(htmlList);
+      let array = Array.from(htmlList);
+      console.log(array);
 
-          let today = new Date();
-          let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-          console.log(time);
-          this.startTime = time;
-          this.setTestUserStartTime(this.startTime);
-        }
-      }
-      catch (error) {
-        console.log(error);
+      for (var i = 0; i < 2; i++) {
+        console.log(this.memoryboxArray[i].fieldContent);
+        array[i].innerHTML = this.memoryboxArray[i].fieldContent;
       }
     },
+
     shuffle(array) {
       let currentIndex = array.length,  randomIndex;
 
@@ -172,7 +193,7 @@ export default {
         this.testQuizCompleted = true;
         localStorage.setItem("testQuizCompleted", true);
         this.userScore = this.triesNumber;
-        this.setTestUserScoreMemory(this.userScore);
+        //this.setTestUserScoreMemory(this.userScore);
         //Only register in testUsers db if values are set
         if (this.testUserAge) {
           let today = new Date();
@@ -230,11 +251,15 @@ export default {
           this.error.errorSubmit = true
         })
     },*/
+
+    /*Test functions no longer needed
     ...mapActions(useUserStore, ['setTestUserScoreMemory']),
     ...mapActions(useUserStore, ['setTestUserStartTime']),
     ...mapActions(useUserStore, ['setTestUserEndTime']),
+    */
   },
   computed: {
+    /* Test variables no longer needed
     ...mapState(useUserStore, ['testUserId']),
     ...mapState(useUserStore, ['testUserAge']),
     ...mapState(useUserStore, ['testUserGender']),
@@ -242,11 +267,15 @@ export default {
     ...mapState(useUserStore, ['testUserScoreMemory']),
     ...mapState(useUserStore, ['testUserStartTime']),
     ...mapState(useUserStore, ['testUserEndTime']),
+    */
+
+    ...mapState(useModuleStore, ['activeModule']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
     console.log("Get localstorage");
     console.log(this.testQuizCompleted);
+    this.startGame();
   },
   emits: ['hideTestLead']
 }
