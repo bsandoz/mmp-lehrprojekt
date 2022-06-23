@@ -1,6 +1,7 @@
 <template>
   <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox"/>
   <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
+  <!--<button type="button" name="button" @click="setMemoryBoxes">test</button>-->
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
@@ -10,12 +11,11 @@
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
         <div class="memory-box" @click="toggleVisibility(item)"
         :class="{visible: item.isVisible},{solved: item.isSolved}">
-
+        <div v-html="item.fieldContent" class="memory-image" :class="{visible: item.isVisible},{solved: item.isSolved}"></div>
         </div>
       </div>
     </div>
   </div>
-  <button type="button" name="button" @click="setMemoryBoxes">test</button>
 </template>
 
 <script>
@@ -58,6 +58,8 @@ export default {
       endTime: null,
 
       questionsActive: false,
+
+      boxContentArray: [],
 
       apiLink: null,
     }
@@ -111,6 +113,7 @@ export default {
             console.log(this.secondBoxPair);
           }
           item.isVisible = true;
+
           this.visibilityCounter++;
           if (this.visibilityCounter >= 2) {
             this.stopRevealing = true;
@@ -127,15 +130,17 @@ export default {
     },
 
     setMemoryBoxes() {
+      /*
       let htmlList = document.getElementsByClassName('memory-box');
-      console.log(htmlList);
+      //console.log(htmlList);
       let array = Array.from(htmlList);
-      console.log(array);
+      //console.log(array);
 
-      for (var i = 0; i < 2; i++) {
-        console.log(this.memoryboxArray[i].fieldContent);
+      for (var i = 0; i < array.length; i++) {
+        //console.log(this.memoryboxArray[i].fieldContent);
         array[i].innerHTML = this.memoryboxArray[i].fieldContent;
       }
+      */
     },
 
     shuffle(array) {
@@ -311,15 +316,20 @@ export default {
     align-items: center;
     padding: 10px;
   }
+  .memory-image {
+    visibility: hidden;
+  }
   .visible {
     background-color: white;
     border-color: grey;
     font-size: 12pt;
+    visibility: visible;
   }
   .solved {
     background-color: lightgreen;
     font-size: 12pt;
     border-color: green;
+    visibility: visible;
   }
   .continue-btn {
     margin-left: 50px;
