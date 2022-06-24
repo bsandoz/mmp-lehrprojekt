@@ -48,10 +48,13 @@ export default {
       this.setCompletedModulesArray();
 
       //Compare module IDs with IDs of completed modules saved in userStore
+      console.log(this.userData);
       console.log(this.allModules);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
          if (this.completedModulesArray[i]) {
            this.completedModules.push(this.allModules[i].title);
+           console.log(this.completedModulesArray);
+           console.log(this.completedModules);
          }
       }
     }

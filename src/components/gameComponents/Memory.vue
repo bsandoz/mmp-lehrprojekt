@@ -52,10 +52,10 @@ export default {
       message: "",
       messageType: String,
 
-      testQuizCompleted: null,
+      //testQuizCompleted: null,
       userScore: Number,
-      startTime: null,
-      endTime: null,
+      //startTime: null,
+      //endTime: null,
 
       questionsActive: false,
 
@@ -192,14 +192,23 @@ export default {
       }
       if (array.length === counter) {
         console.log("All boxes solved");
-        //this.$refs.messageBox.showMessageBox();
-        //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!";
+        this.$refs.messageBox.showMessageBox();
+        this.userScore = 127 - (3*this.triesNumber);
+        if (this.userScore > 100) {
+          this.userScore = 100;
+        } else if (this.userScore < 0) {
+          this.userScore = 0;
+        }
+        this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Punkte: " + this.userScore + "/100";
+        this.setModule2Score(this.userScore);
+        this.register();
+        this.getAllUsersData("https://ifuu2646.directus.app/items/users/5");
+        this.setCompletedModulesArray();
         //window.alert("Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!")
-        this.testQuizCompleted = true;
-        localStorage.setItem("testQuizCompleted", true);
-        this.userScore = this.triesNumber;
+        //this.testQuizCompleted = true;
+        //localStorage.setItem("testQuizCompleted", true);
         //this.setTestUserScoreMemory(this.userScore);
-        //Only register in testUsers db if values are set
+        /* Only register in testUsers db if values are set
         if (this.testUserAge) {
           let today = new Date();
           let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -208,6 +217,8 @@ export default {
           //this.goToQuestions();
           this.showCompletionMessage();
         }
+        */
+
       }
     },
     goToQuestions() {
@@ -232,36 +243,38 @@ export default {
     hideTestLead() {
       this.$emit("hideTestLead");
     },
-    /*
+
     prepareUserData() {
       //console.log(this.userScore);
       return {
-        age: this.testUserAge,
-        gender: this.testUserGender,
-        previousKnowledge: this.testUserPreviousKnowledge,
-        scoreMemory: this.testUserScoreMemory,
+        module2Completed: true,
+        module2Score: this.module2Score,
       }
     },
+
     async register() {
       await console.log("Called register function in Memory.vue");
       const user = this.prepareUserData();
-      await axios.post("https://ifuu2646.directus.app/items/testUsers", user)
+      await axios.patch("https://ifuu2646.directus.app/items/users/5", user)
         .then((response) => {
           console.log(response);
-          this.$refs.messageBox.showMessageBox();
-          this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
-          //window.alert("Herzlichen Dank für Deine Mithilfe! Die Resultate wurden in der Datenbank gespeichert. Du kannst dieses Fenster nun schliessen.")
+          //this.$refs.messageBox.showMessageBox();
+          //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
+          window.alert("Daten in Datenbank gesichert.")
         })
         .catch(err => {
           this.error.errorSubmit = true
         })
-    },*/
+    },
 
     /*Test functions no longer needed
     ...mapActions(useUserStore, ['setTestUserScoreMemory']),
     ...mapActions(useUserStore, ['setTestUserStartTime']),
     ...mapActions(useUserStore, ['setTestUserEndTime']),
     */
+    ...mapActions(useUserStore, ['setModule2Score']),
+    ...mapActions(useUserStore, ['getAllUsersData']),
+    ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
   computed: {
     /* Test variables no longer needed
@@ -275,6 +288,7 @@ export default {
     */
 
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useUserStore, ['module2Score']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");

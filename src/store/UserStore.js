@@ -8,6 +8,14 @@ export const useUserStore = defineStore("UserStore", {
       userData: null,
       completedModulesArray: [],
 
+      //Module user data
+      //module1Completed: null,
+      module1Score: null,
+      //module2Completed: null,
+      module2Score: null,
+      //module3Completed: null,
+      module3Score: null,
+
       //Data for test
       testUserId: null,
       testUserAge: null,
@@ -63,6 +71,19 @@ export const useUserStore = defineStore("UserStore", {
         this.completedModulesArray.push(this.userData.module1Completed);
         this.completedModulesArray.push(this.userData.module2Completed);
         this.completedModulesArray.push(this.userData.module3Completed);
+    },
+
+    setModule1Score(score) {
+      this.module1Score = score;
+    },
+
+    setModule2Score(score) {
+      this.module2Score = score;
+      console.log(this.module2Score);
+    },
+
+    setModule3Score(score) {
+      this.module3Score = score;
     },
 
       //Actions for Test
