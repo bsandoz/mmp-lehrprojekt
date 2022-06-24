@@ -1,7 +1,9 @@
 <script>
 import { useModuleStore } from '@/store/ModuleStore.js'
+import { useUserStore } from '@/store/UserStore.js'
 
 import { mapState } from 'pinia';
+import { mapActions } from 'pinia';
 
 import MessageBox from '../modals/MessageBox.vue';
 
@@ -99,6 +101,7 @@ export default {
 
       if (this.questionCounter >= this.numberOfQuestions) {
         console.log("All questions answered");
+        this.register();
         this.$refs.messageBox.showMessageBox();
 
       } else {
@@ -216,9 +219,39 @@ export default {
       this.$router.push({ name: 'Home' });
     },
 
+    prepareUserData() {
+      //console.log(this.userScore);
+      return {
+        module1Completed: true,
+        module1Score: this.quizPoints,
+      }
+    },
+
+    async register() {
+      let id = localStorage.getItem("userId");
+      await console.log("Called register function in Quiz.vue");
+      const user = this.prepareUserData();
+      await axios.patch("https://ifuu2646.directus.app/items/users/" + id, user)
+        .then((response) => {
+          console.log(response);
+          //this.$refs.messageBox.showMessageBox();
+          //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
+          window.alert("Daten in Datenbank gesichert.")
+        })
+        .catch(err => {
+          this.error.errorSubmit = true
+        })
+      await this.getAllUsersData("https://ifuu2646.directus.app/items/users/" + id);
+      await this.setCompletedModulesArray();
+    },
+
+    ...mapActions(useUserStore, ['getAllUsersData']),
+    ...mapActions(useUserStore, ['setCompletedModulesArray']),
+
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useUserStore, ['userData']),
   },
   created() {
     this.createApiLink();
