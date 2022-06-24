@@ -10,11 +10,11 @@ export const useUserStore = defineStore("UserStore", {
 
       //Module user data
       //module1Completed: null,
-      module1Score: null,
+      //module1Score: null,
       //module2Completed: null,
-      module2Score: null,
+      //module2Score: null,
       //module3Completed: null,
-      module3Score: null,
+      //module3Score: null,
 
       //Data for test
       testUserId: null,
@@ -45,6 +45,9 @@ export const useUserStore = defineStore("UserStore", {
     userLogOut() {
       this.userData = null;
       this.completedModulesArray = [];
+      this.module1Score = null;
+      this.module2Score = null;
+      this.module3Score = null;
       this.userIsLoggedIn = false;
     },
     async getAllUsersData(api) {

@@ -26,9 +26,9 @@
       <span v-if="userIsLoggedIn">Willkommen, {{ userName }}!</span>
       <!-- Temporary profile link -->
       <router-link v-if="userIsLoggedIn" :to="this.profileLink" custom v-slot="{ navigate }">
-        <button @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
+        <button class="btn" @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
       </router-link>
-      <button type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
+      <button class="btn" type="button" name="button-logout" v-if="userIsLoggedIn" @click="logInOut()">Logout</button>
     </div>
   </div>
 </template>

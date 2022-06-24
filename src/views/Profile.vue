@@ -24,6 +24,10 @@ export default {
     ...mapState(useUserStore, ['userIsLoggedIn']),
     ...mapState(useUserStore, ['completedModulesArray']),
 
+    ...mapState(useUserStore, ['module1Score']),
+    ...mapState(useUserStore, ['module2Score']),
+    ...mapState(useUserStore, ['module3Score']),
+
     ...mapState(useModuleStore, ['allModules']),
   },
   methods: {
@@ -48,8 +52,9 @@ export default {
       this.setCompletedModulesArray();
 
       //Compare module IDs with IDs of completed modules saved in userStore
-      console.log(this.userData);
-      console.log(this.allModules);
+      //console.log("User data: " + this.userData);
+      //console.log("allModules Array: " + this.allModules);
+      console.log("completedModulesArray: " + this.completedModulesArray);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
          if (this.completedModulesArray[i]) {
            this.completedModules.push(this.allModules[i].title);
@@ -70,6 +75,11 @@ export default {
     <div class="module-progress">
       <p>Du hast folgende Module abgeschlossen:</p>
       <p>{{ this.completedModules }}</p>
+      <div class="module-points">
+        <p v-if="this.userData.module1Score">Punktzahl Modul 1: {{ this.userData.module1Score }}</p>
+        <p v-if="this.userData.module2Score">Punktzahl Modul 2: {{ this.userData.module2Score }}</p>
+        <p v-if="this.userData.module3Score">Punktzahl Modul 3: {{ this.userData.module3Score }}</p>
+      </div>
     </div>
     <div class="user-infos">
       <h3>Deine Profilinfos:</h3>

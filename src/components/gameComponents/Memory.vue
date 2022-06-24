@@ -200,10 +200,10 @@ export default {
           this.userScore = 0;
         }
         this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Punkte: " + this.userScore + "/100";
-        this.setModule2Score(this.userScore);
+        //this.setModule2Score(this.userScore);
         this.register();
-        this.getAllUsersData("https://ifuu2646.directus.app/items/users/5");
-        this.setCompletedModulesArray();
+        //this.getAllUsersData("https://ifuu2646.directus.app/items/users/5");
+        //this.setCompletedModulesArray();
         //window.alert("Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden!")
         //this.testQuizCompleted = true;
         //localStorage.setItem("testQuizCompleted", true);
@@ -248,14 +248,15 @@ export default {
       //console.log(this.userScore);
       return {
         module2Completed: true,
-        module2Score: this.module2Score,
+        module2Score: this.userScore,
       }
     },
 
     async register() {
+      let id = localStorage.getItem("userId");
       await console.log("Called register function in Memory.vue");
       const user = this.prepareUserData();
-      await axios.patch("https://ifuu2646.directus.app/items/users/5", user)
+      await axios.patch("https://ifuu2646.directus.app/items/users/" + id, user)
         .then((response) => {
           console.log(response);
           //this.$refs.messageBox.showMessageBox();
@@ -265,6 +266,8 @@ export default {
         .catch(err => {
           this.error.errorSubmit = true
         })
+      await this.getAllUsersData("https://ifuu2646.directus.app/items/users/" + id);
+      await this.setCompletedModulesArray();
     },
 
     /*Test functions no longer needed
@@ -289,6 +292,7 @@ export default {
 
     ...mapState(useModuleStore, ['activeModule']),
     ...mapState(useUserStore, ['module2Score']),
+    ...mapState(useUserStore, ['userData']),
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
