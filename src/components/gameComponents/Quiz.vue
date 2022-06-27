@@ -12,6 +12,9 @@ export default {
   components: {
     MessageBox,
   },
+  props: {
+    text: String,
+  },
   data() {
     return {
       elementsArray: [],
@@ -41,6 +44,7 @@ export default {
       isGameRunning: false,
 
       message: null,
+      moduleId: null,
     }
   },
   methods: {
@@ -68,8 +72,8 @@ export default {
     },
 
     createApiLink() {
-      let id = this.activeModule.id + 1;
-      this.apiLink = "https://ifuu2646.directus.app/items/module" + id + "GameElements";
+      this.moduleId = this.activeModule.id + 1;
+      this.apiLink = "https://ifuu2646.directus.app/items/module" + this.moduleId + "GameElements";
       console.log(this.apiLink);
     },
 
@@ -220,10 +224,18 @@ export default {
     },
 
     prepareUserData() {
-      //console.log(this.userScore);
-      return {
-        module1Completed: true,
-        module1Score: this.quizPoints,
+      //console.log(this.activeModule.id);
+      //let moduleId = this.activeModule.id + 1;
+      if (this.moduleId === 1) {
+        return {
+          module1Completed: true,
+          module1Score: this.quizPoints,
+        }
+      } else if (this.moduleId === 3) {
+        return {
+          module3Completed: true,
+          module3Score: this.quizPoints,
+        }
       }
     },
 
@@ -263,8 +275,10 @@ export default {
 <template>
   <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox" />
   <div v-if="!isGameRunning">
-    <p>Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
+    <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
       Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
+    <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
+    Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
   </div>
   <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
   <div class="quiz">

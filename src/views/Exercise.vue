@@ -26,6 +26,7 @@ export default {
     return {
       isMemory: false,
       isQuiz: false,
+
     }
   },
   computed: {
