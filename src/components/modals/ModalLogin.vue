@@ -11,14 +11,14 @@
             <form @submit.prevent="login">
               <input v-model="username" type="text" placeholder="Benutzername">
               <input v-model="password" type="password" placeholder="Passwort">
-              <input type="submit" value="Einloggen">
+              <input class="btn" type="submit" value="Einloggen">
             </form>
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
               <button
-                class="modal-default-button"
+                class="modal-default-button btn"
                 @click="$emit('close')"
               >Close</button>
             </slot>
@@ -91,7 +91,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--main-bg-color);
   display: table;
   transition: opacity 0.3s ease;
 }
@@ -105,7 +105,7 @@ export default {
   width: 300px;
   margin: 0px auto;
   padding: 20px 30px;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
@@ -113,7 +113,7 @@ export default {
 
 .modal-header h3 {
   margin-top: 0;
-  color: #42b983;
+  color: var(--main-text-color);
 }
 
 .modal-body {

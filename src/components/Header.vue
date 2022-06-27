@@ -95,7 +95,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: orange;
+  background-color: var(--main-accent-color);
   min-height: 100px;
 }
 .header-left {
@@ -109,6 +109,6 @@ export default {
 .home-link {
   font-size: 20pt;
   text-decoration: none;
-  color: black;
+  color: var(--main-text-color);
 }
 </style>

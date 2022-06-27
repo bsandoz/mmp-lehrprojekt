@@ -63,7 +63,7 @@ export default {
     padding-bottom: 20%;
   }
   .completed {
-    background-color: green;
+    background-color: var(--confirm-color);
   }
   .progress-bar {
     font-style: italic;

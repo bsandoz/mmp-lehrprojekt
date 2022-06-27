@@ -44,7 +44,7 @@ export default {
 #confirmation-box {
   display: none;
   overflow: visible;
-  background-color: #eee;
+  background-color: var(--main-bg-color);
   border-radius: 5px;
   border: 1px solid #aaa;
   position: fixed;
@@ -57,7 +57,7 @@ export default {
 }
 
 #confirmation-box button {
-  background-color: #ccc;
+  background-color: var(--main-dark-color);
   display: inline-block;
   border-radius: 3px;
   border: 1px solid #aaa;

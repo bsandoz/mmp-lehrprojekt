@@ -20,7 +20,8 @@ export default {
   width: 100%;
   bottom: 0;
   position: fixed;
-  background-color: grey;
+  background-color: var(--main-dark-color);
+  color: #b3b3b3;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

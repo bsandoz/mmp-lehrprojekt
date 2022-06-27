@@ -43,6 +43,17 @@ export default {
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+  :root {
+  --main-bg-color: #fff;
+  --main-text-color: #000;
+  --dark-bg-text-color: #fff;
+  --main-accent-color: #ff8c1a;
+  --main-dark-color: #000d1a;
+  --confirm-color: #85e085;
+  --mistake-color: #cc2900;
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -66,8 +77,8 @@ export default {
   }
   .btn {
     display: inline-block;
-    background: #000;
-    color: #fff;
+    background: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -106,14 +117,14 @@ export default {
     margin-top: 50px;
     padding: 10px;
     font-weight: bold;
-    background-color: orange;
+    background-color: var(--main-accent-color);
   }
   .site-title {
     margin-top: 50px;
   }
   .unstyled-link {
     text-decoration: none;
-    color: black;
+    color: var(--main-text-color);
   }
   .temporary-style {
     margin-top: 100px;

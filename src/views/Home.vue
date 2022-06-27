@@ -4,7 +4,7 @@
   </div>
   <Lead lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
   <Content :content="content" />
-  <h3 v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
+  <h3 id="notLoggedInWarning" v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
   <!--<router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>-->
 </template>
 
@@ -66,5 +66,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  #notLoggedInWarning {
+    color: var(--mistake-color);
   }
 </style>

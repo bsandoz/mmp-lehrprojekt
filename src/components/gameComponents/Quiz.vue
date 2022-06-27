@@ -323,10 +323,10 @@ export default {
     visibility: visible;
   }
   .correct {
-    background-color: darkgreen;
+    background-color: var(--confirm-color);
   }
 
   .wrong {
-    background-color: darkred;
+    background-color: var(--mistake-color);
   }
 </style>

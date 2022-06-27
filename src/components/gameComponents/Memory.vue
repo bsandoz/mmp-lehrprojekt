@@ -322,9 +322,9 @@ export default {
     min-width: 200px;
     max-height: 250px;
     min-height: 200px;
-    background-color: orange;
+    background-color: var(--main-accent-color);
     border-style: solid;
-    border-color: black;
+    border-color: var(--main-dark-color);
     border-radius: 5px;
     margin-bottom: 50px;
     font-size: 0;
@@ -338,26 +338,26 @@ export default {
     visibility: hidden;
   }
   .visible {
-    background-color: white;
-    border-color: grey;
+    background-color: var(--main-bg-color);
+    border-color: var(--main-accent-color);
     font-size: 12pt;
     visibility: visible;
   }
   .solved {
-    background-color: lightgreen;
+    background-color: var(--confirm-color);
     font-size: 12pt;
-    border-color: green;
+    border-color: var(--main-dark-color);
     visibility: visible;
   }
   .continue-btn {
     margin-left: 50px;
     background-color: grey;
-    color: red;
+    color: var(--mistake-color);
     cursor: default;
   }
   .active {
-    background-color: black;
-    color: white;
+    background-color: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
     cursor: pointer;
   }
 </style>
