@@ -1,18 +1,23 @@
 <template>
-  <router-link to="/">Zurück zur Übersicht</router-link>
-  <h2>{{ this.activeModule.title }}</h2>
-  <h4>{{ this.activeModule.text }}</h4>
-  <p>{{ this.activeModule.details }}</p>
-  <div id="content"></div>
-  <div class="start-exercise">
-    <!--
-    <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
-    <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
-    -->
-    <router-link v-if="isMounted" :to="this.exerciseLink">Übung starten</router-link>
-  </div>
-  <div class="next-exercise">
-    <h3>Klicke hier, um zur nächsten Übung zu gelangen!</h3>
+  <div id="main">
+    <router-link to="/">Zurück zur Übersicht</router-link>
+    <h2 class="module-title">{{ this.activeModule.title }}</h2>
+    <h4>{{ this.activeModule.text }}</h4>
+    <p>{{ this.activeModule.details }}</p>
+    <div id="content"></div>
+    <div id="exercise">
+      <router-link v-if="isMounted" :to="this.exerciseLink" class="unstyled-link">
+        <div class="next-exercise">
+          <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einem kurzen Quiz!</h3>
+        </div>
+        <div class="start-exercise">
+          <!--
+          <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
+          <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
+          -->
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -57,4 +62,33 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  #main {
+    padding-left: 5%;
+  }
+  p {
+    max-width: 1000px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  #content {
+    max-width: 1000px;
+  }
+  .module-title {
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
+  #exercise {
+    border-style: solid;
+    border-radius: 5px;
+    background-color: var(--main-accent-color);
+    max-width: 800px;
+    margin-top: 75px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #exercise:hover {
+    border-style: dashed;
+  }
 </style>

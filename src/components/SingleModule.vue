@@ -1,8 +1,9 @@
 <template>
-  <router-link v-if="singleModule && userIsLoggedIn" :to="moduleLink">
-    <div :class="{ completed: singleModule.isCompleted }">
+  <router-link class="unstyled-link" v-if="singleModule && userIsLoggedIn" :to="moduleLink">
+    <div>
       <h3>{{ singleModule.title }}</h3>
       <p>{{ singleModule.text }}</p>
+      <p class="completed" v-if="singleModule.isCompleted">Du hast dieses Kapitel erfolgreich abgeschlossen!</p>
       <!--Change Progress to Users db
       <p class="progress-bar">Progress: {{ singleModule.progress }}%</p>
       -->
@@ -58,12 +59,15 @@ export default {
 
 <style lang="css" scoped>
   div {
-    width: 50%;
+    width: 65%;
     height: 0;
     padding-bottom: 20%;
   }
   .completed {
-    background-color: var(--confirm-color);
+    font-size: 14pt;
+    color: var(--confirm-color);
+    margin-top: 25px;
+
   }
   .progress-bar {
     font-style: italic;

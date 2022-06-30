@@ -19,7 +19,6 @@ export default {
 .footer-container {
   width: 100%;
   bottom: 0;
-  position: fixed;
   background-color: var(--main-dark-color);
   color: #b3b3b3;
   display: flex;

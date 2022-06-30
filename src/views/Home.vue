@@ -2,7 +2,7 @@
   <div class="placeholder-hero">
     <p>Platzhalter Hero-Image</p>
   </div>
-  <Lead lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
+  <Lead class="lead-home" lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
   <Content :content="content" />
   <h3 id="notLoggedInWarning" v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
   <!--<router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>-->
@@ -62,12 +62,25 @@ export default {
   .placeholder-hero {
     background-color: gray;
     width: 100%;
-    height: 400px;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   #notLoggedInWarning {
     color: var(--mistake-color);
+  }
+  .lead-home {
+    font-weight: bold;
+    font-size: 15pt;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    margin-bottom: 50px;
+    justify-content: center;
+    background-color: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
+  }
+  #basics {
+
   }
 </style>

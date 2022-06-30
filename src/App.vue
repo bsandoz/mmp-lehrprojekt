@@ -62,9 +62,8 @@ export default {
   body {
     font-family: 'Poppins', sans-serif;
   }
-  h3 {
-    margin-left: 50px;
-    margin-bottom: 30px;
+  main {
+    min-height: 90vh;
   }
   .container {
     max-width: 500px;

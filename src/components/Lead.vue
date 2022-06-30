@@ -1,6 +1,6 @@
 <template>
   <div class="leadtext">
-    <p>{{ lead }}</p>
+    <p class="leadtext-paragraph">{{ lead }}</p>
   </div>
 </template>
 
@@ -18,9 +18,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 30px;
+  }
+  .leadtext-paragraph {
     max-width: 750px;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    align-self: center;
   }
 </style>

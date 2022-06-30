@@ -17,6 +17,7 @@ export default {
 
       completedModules: [],
       completionBooleanArray: [],
+      moduleScores: [],
     }
   },
   computed: {
@@ -24,14 +25,20 @@ export default {
     ...mapState(useUserStore, ['userIsLoggedIn']),
     ...mapState(useUserStore, ['completedModulesArray']),
 
-    ...mapState(useUserStore, ['module1Score']),
-    ...mapState(useUserStore, ['module2Score']),
-    ...mapState(useUserStore, ['module3Score']),
-
     ...mapState(useModuleStore, ['allModules']),
   },
   methods: {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+
+    setModuleScores() {
+      this.moduleScores = [];
+
+      this.moduleScores.push(this.userData.module1Score);
+      this.moduleScores.push(this.userData.module2Score);
+      this.moduleScores.push(this.userData.module3Score);
+
+      console.log(this.moduleScores);
+    },
   },
   mounted() {
     if (!this.userData) {
@@ -62,6 +69,7 @@ export default {
            console.log(this.completedModules);
          }
       }
+      this.setModuleScores();
     }
   },
 }
@@ -73,8 +81,13 @@ export default {
       <h2>Willkommen, {{ userName }}!</h2>
     </div>
     <div class="module-progress">
-      <p>Du hast folgende Module abgeschlossen:</p>
-      <p>{{ this.completedModules }}</p>
+      <p v-if="this.completedModules[0] === true">Du hast folgende Kapitel abgeschlossen:</p>
+      <div v-for="item in this.completedModules" :key="item.id">
+        <div class="module-box">
+          <p v-html="item"></p>
+        </div>
+      </div>
+      <p v-if="this.completedModulesArray[0] === false">Du hast noch keine Kapitel abgeschlossen. Wie wäre es, gleich mit Kapitel 1 zu beginnen?</p>
       <div class="module-points">
         <p v-if="this.userData.module1Score">Punktzahl Modul 1: {{ this.userData.module1Score }}</p>
         <p v-if="this.userData.module2Score">Punktzahl Modul 2: {{ this.userData.module2Score }}</p>
@@ -83,8 +96,8 @@ export default {
     </div>
     <div class="user-infos">
       <h3>Deine Profilinfos:</h3>
-      <p>Nutzername: {{ this.userName }}</p>
-      <p>E-Mail Adresse: {{ this.userMail }}</p>
+      <p><b>Nutzername: </b>{{ this.userName }}</p>
+      <p><b>E-Mail Adresse: </b>{{ this.userMail }}</p>
     </div>
   </div>
   <div v-if="!userIsLoggedIn">
@@ -93,4 +106,29 @@ export default {
 </template>
 
 <style lang="css" scoped>
+  .profile {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+    padding-bottom: 100px;
+  }
+  .welcome {
+    margin-bottom: 40px;
+  }
+  .module-box {
+    border-style: solid;
+    min-height: 100px;
+    max-width: 500px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: var(--confirm-color);
+  }
+  .user-infos {
+    background-color: var(--main-accent-color);
+    border-style: solid;
+    border-radius: 5px;
+    max-width: 750px;
+    margin-top: 50px;
+    padding: 15px;
+  }
 </style>
