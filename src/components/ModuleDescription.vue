@@ -76,6 +76,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: var(--main-bg-color);
     border-radius: 10px;
   }
@@ -86,6 +87,10 @@ export default {
   }
   #content {
     max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .module-title {
     margin-top: 25px;

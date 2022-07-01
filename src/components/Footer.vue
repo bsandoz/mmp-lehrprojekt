@@ -26,6 +26,7 @@ export default {
   justify-content: flex-end;
   align-items: center;
   margin-top: 100px;
+  min-height: 150px;
 }
 .footer {
   margin-top: auto;

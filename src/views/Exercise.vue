@@ -1,9 +1,8 @@
 <template>
-  <div class="" v-if="isQuiz">
+  <div class="exercise-if" v-if="isQuiz">
     <Quiz />
   </div>
-  <div class="" v-if="isMemory">
-    <h3>Begriffs-Memory</h3>
+  <div class="exercise-if" v-if="isMemory">
     <Memory />
   </div>
 </template>

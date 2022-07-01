@@ -70,6 +70,24 @@ export default {
   img {
     max-width: 750px;
   }
+  ol {
+    margin-top: 50px;
+    font-weight: bold;
+  }
+  ul {
+    margin-top: 50px;
+    font-weight: bold;
+  }
+  ol li::marker {
+    color: var(--main-accent-color);
+  }
+  ul li::marker {
+    color: var(--main-accent-color);
+  }
+  li::before {
+    content: "";
+    width: 20px;
+  }
   .container {
     max-width: 500px;
     margin: 30px auto;
@@ -132,6 +150,9 @@ export default {
   }
   .temporary-style {
     margin-top: 100px;
+  }
+  .audio {
+    margin-bottom: 25px;
   }
   input[type=text], select {
     max-width: 25%;

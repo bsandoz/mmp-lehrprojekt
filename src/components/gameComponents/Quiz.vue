@@ -274,14 +274,14 @@ export default {
 
 <template>
     <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox" />
-    <div v-if="!isGameRunning">
-      <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
-        Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
-      <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
-      Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
-    </div>
     <div id="quiz-container">
-      <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
+      <div class="intro-message" v-if="!isGameRunning">
+        <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
+          Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
+        <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
+        Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
+        <button v-if="!isGameRunning" type="button" name="button" class="btn start-game-btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
+      </div>
       <div class="quiz">
         <!--
         <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
@@ -349,6 +349,9 @@ export default {
     max-height: 850px;
     background-color: var(--main-bg-color);
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   #question {
     display: grid;
@@ -368,5 +371,15 @@ export default {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+  }
+  .intro-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 50%;
+  }
+  .start-game-btn {
+    font-size: 20pt;
+    margin-top: 25px;
   }
 </style>
