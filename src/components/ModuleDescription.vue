@@ -64,6 +64,20 @@ export default {
 <style lang="css" scoped>
   #main {
     padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 5%;
+    margin-top: 75px;
+    margin-right: 10%;
+    margin-bottom: 75px;
+    min-width: 750px;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
   }
   p {
     max-width: 1000px;

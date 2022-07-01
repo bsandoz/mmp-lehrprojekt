@@ -49,7 +49,7 @@ export default {
   --main-text-color: #000;
   --dark-bg-text-color: #fff;
   --main-accent-color: #ff8c1a;
-  --main-dark-color: #000d1a;
+  --main-dark-color: #001f33;
   --confirm-color: #85e085;
   --mistake-color: #cc2900;
   }
@@ -61,9 +61,14 @@ export default {
   }
   body {
     font-family: 'Poppins', sans-serif;
+    background-color: var(--main-dark-color);
   }
   main {
     min-height: 90vh;
+    background-color: var(--main-dark-color);
+  }
+  img {
+    max-width: 750px;
   }
   .container {
     max-width: 500px;
@@ -76,8 +81,8 @@ export default {
   }
   .btn {
     display: inline-block;
-    background: var(--main-dark-color);
-    color: var(--dark-bg-text-color);
+    background: var(--main-accent-color);
+    color: var(--main-text-color);
     border: none;
     padding: 10px 20px;
     margin: 5px;

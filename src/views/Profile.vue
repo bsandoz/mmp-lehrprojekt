@@ -78,7 +78,8 @@ export default {
 <template>
   <div class="profile" v-if="userIsLoggedIn">
     <div class="welcome">
-      <h2>Willkommen, {{ userName }}!</h2>
+      <h2 id="welcome-title">Willkommen, {{ userName }}!</h2>
+      <p id="welcome-text">Dies ist deine Profilseite. Hier findest du alle deine abgeschlossenen Kapitel, die erreichten Punktzahlen sowie Infos zu deinem Nutzerprofil.</p>
     </div>
     <div class="module-progress">
       <p v-if="this.completedModules[0] === true">Du hast folgende Kapitel abgeschlossen:</p>
@@ -111,24 +112,50 @@ export default {
     padding-right: 50px;
     padding-top: 25px;
     padding-bottom: 100px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    min-width: 750px;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 3fr;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+
   }
   .welcome {
     margin-bottom: 40px;
   }
   .module-box {
     border-style: solid;
+    border-radius: 5px;
+    padding: 15px;
     min-height: 100px;
     max-width: 500px;
-    margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
     background-color: var(--confirm-color);
+  }
+  .module-progress {
+    grid-column-start: 1;
   }
   .user-infos {
     background-color: var(--main-accent-color);
     border-style: solid;
     border-radius: 5px;
     max-width: 750px;
-    margin-top: 50px;
     padding: 15px;
+    grid-column-start: 2;
+    align-self: start;
+  }
+  #welcome-title {
+    grid-column-start: 1;
+    grid-row-start: 1;
+  }
+  #welcome-text {
+    grid-column-start: 1;
+    grid-row-start: 1;
   }
 </style>

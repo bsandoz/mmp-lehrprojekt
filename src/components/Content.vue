@@ -59,10 +59,11 @@ export default {
     border: 1px solid var(--main-dark-color);
     padding: 30px;
     border-radius: 5px;
-    background-color: var(--main-accent-color);
+    background-color: var(--main-bg-color);
   }
   #basics {
     max-width: 60%;
     margin: 30px auto;
+    color: var(--dark-bg-text-color);
   }
 </style>

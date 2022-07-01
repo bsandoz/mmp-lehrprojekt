@@ -273,46 +273,53 @@ export default {
 </script>
 
 <template>
-  <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox" />
-  <div v-if="!isGameRunning">
-    <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
-      Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
-    <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
-    Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
-  </div>
-  <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
-  <div class="quiz">
-    <!--
-    <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
-    <button type="button" name="button" class="btn" @click="filterArrayForAnswers">Start</button>
-    -->
-    <div id="question">
-
+    <MessageBox ref="messageBox" :message="message" @clickedMessageBox="clickedMessageBox" />
+    <div v-if="!isGameRunning">
+      <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
+        Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
+      <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
+      Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
     </div>
-    <div id="answers" class="answer-buttons" :class="{visible: this.isGameRunning}">
-      <button id="answer-1" class="btn" @click="checkAnswer(0)">
+    <div id="quiz-container">
+      <button v-if="!isGameRunning" type="button" name="button" class="btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
+      <div class="quiz">
+        <!--
+        <button type="button" name="button" class="btn" @click="filterArrayForQuestion">Start</button>
+        <button type="button" name="button" class="btn" @click="filterArrayForAnswers">Start</button>
+        -->
+        <div id="question">
 
-      </button>
-      <button id="answer-2" class="btn" @click="checkAnswer(1)">
+        </div>
+        <div id="answers" class="answer-buttons" :class="{visible: this.isGameRunning}">
+          <button id="answer-1" class="btn" @click="checkAnswer(0)">
 
-      </button>
-      <button id="answer-3" class="btn" @click="checkAnswer(2)">
+          </button>
+          <button id="answer-2" class="btn" @click="checkAnswer(1)">
 
-      </button>
-      <button id="answer-4" class="btn" @click="checkAnswer(3)">
+          </button>
+          <button id="answer-3" class="btn" @click="checkAnswer(2)">
 
-      </button>
+          </button>
+          <button id="answer-4" class="btn" @click="checkAnswer(3)">
+
+          </button>
+        </div>
+        <div id="results">
+          <div class="result-message" v-if="answerChosen">
+            <h3 v-if="isAnswerCorrect">Korrekt! Weiter zur nächsten Frage?</h3>
+            <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter zur nächsten Frage?</h3>
+            <button id="next-button" class="btn" @click="nextQuestion">Fortfahren</button>
+          </div>
+          <p id="question-number" v-if="numberOfQuestions">{{ this.questionCounter }}/{{ this.numberOfQuestions }}</p>
+        </div>
+      </div>
     </div>
-    <div class="result-message" v-if="answerChosen">
-      <h3 v-if="isAnswerCorrect">Korrekt! Weiter zur nächsten Frage?</h3>
-      <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter zur nächsten Frage?</h3>
-      <button id="next-button" class="btn" @click="nextQuestion">-></button>
-    </div>
-    <p v-if="numberOfQuestions">{{ this.questionCounter }}/{{ this.numberOfQuestions }}</p>
-  </div>
 </template>
 
 <style lang="css" scoped>
+  .main {
+    background-color: var(--main-dark-color);
+  }
   .answer-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -328,5 +335,38 @@ export default {
 
   .wrong {
     background-color: var(--mistake-color);
+  }
+  #quiz-container {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5vh;
+    max-width: 1500px;
+    min-width: 500px;
+    min-height: 650px;
+    max-height: 850px;
+    background-color: var(--main-bg-color);
+    border-radius: 10px;
+  }
+  #question {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr;
+    justify-items: center;
+    font-weight: bold;
+  }
+  #results {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-items: center;
+    margin-top: 20px;
+  }
+  .result-message {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 </style>

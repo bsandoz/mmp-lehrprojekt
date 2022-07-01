@@ -19,7 +19,7 @@ export default {
 .footer-container {
   width: 100%;
   bottom: 0;
-  background-color: var(--main-dark-color);
+  background-color: #0d0d0d;
   color: #b3b3b3;
   display: flex;
   flex-direction: column;

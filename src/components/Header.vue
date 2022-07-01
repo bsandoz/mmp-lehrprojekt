@@ -95,7 +95,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--main-accent-color);
+  background-color: var(--main-bg-color);
   min-height: 100px;
 }
 .header-left {

@@ -77,8 +77,8 @@ export default {
     padding-bottom: 75px;
     margin-bottom: 50px;
     justify-content: center;
-    background-color: var(--main-dark-color);
-    color: var(--dark-bg-text-color);
+    background-color: var(--main-accent-color);
+    color: var(--main-text-color);
   }
   #basics {
 
