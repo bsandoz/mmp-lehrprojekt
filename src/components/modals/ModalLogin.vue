@@ -9,9 +9,9 @@
 
           <div class="modal-body">
             <form @submit.prevent="login">
-              <input v-model="username" type="text" placeholder="Benutzername">
-              <input v-model="password" type="password" placeholder="Passwort">
-              <input class="btn" type="submit" value="Einloggen">
+              <input v-model="username" type="text" id="username-input" placeholder="Benutzername">
+              <input v-model="password" type="password" id="password-input" placeholder="Passwort">
+              <input class="btn" type="submit" id="login-btn" value="Einloggen">
             </form>
           </div>
 
@@ -19,8 +19,9 @@
             <slot name="footer">
               <button
                 class="modal-default-button btn"
+                id="close-btn"
                 @click="$emit('close')"
-              >Close</button>
+              >Schliessen</button>
             </slot>
           </div>
         </div>
@@ -120,10 +121,6 @@ export default {
   margin: 20px 0;
 }
 
-.modal-default-button {
-  float: right;
-}
-
 /*
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
@@ -146,4 +143,34 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+#username-input {
+  max-width: 75%;
+  margin-top: 5px;
+  margin-left: 0;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+#password-input {
+  max-width: 75%;
+  margin-top: 5px;
+  margin-left: 0;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+
+#login-btn {
+  margin-top: 20px;
+  margin-left: 0;
+  padding: 10px;
+}
+
+#close-btn {
+  margin-left: 0;
+  padding: 10px;
+}
+
 </style>

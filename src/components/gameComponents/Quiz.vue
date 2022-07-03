@@ -106,6 +106,15 @@ export default {
       if (this.questionCounter >= this.numberOfQuestions) {
         console.log("All questions answered");
         this.register();
+        if (this.quizPoints >= 5) {
+          this.message = "Perfekt! Du hast " + this.quizPoints + " von 5 Punkten erreicht.";
+        } else if (this.quizPoints === 4) {
+          this.message = "Gut gemacht! Du hast " + this.quizPoints + " von 5 Punkten erreicht.";
+        } else if (this.quizPoints === 3) {
+          this.message = "Du hast " + this.quizPoints + " von 5 Punkten erreicht. Nicht schlecht, aber du kannst dich noch verbessern!";
+        } else if (this.quizPoints <= 2) {
+          this.message = "Du hast leider nur " + this.quizPoints + " von 5 Punkten erreicht. Schau dir das Kapitel nochmal genau an und versuch es nochmal.";
+        }
         this.$refs.messageBox.showMessageBox();
 
       } else {
@@ -248,7 +257,7 @@ export default {
           console.log(response);
           //this.$refs.messageBox.showMessageBox();
           //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
-          window.alert("Daten in Datenbank gesichert.")
+          //window.alert("Daten in Datenbank gesichert.")
         })
         .catch(err => {
           this.error.errorSubmit = true
