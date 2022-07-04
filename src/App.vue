@@ -159,6 +159,9 @@ export default {
   .audio {
     margin-bottom: 25px;
   }
+  .bold {
+    font-weight: bold;
+  }
   input[type=text], select {
     max-width: 25%;
     padding: 5px;

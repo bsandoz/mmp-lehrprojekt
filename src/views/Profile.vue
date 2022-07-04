@@ -18,6 +18,10 @@ export default {
       completedModules: [],
       completionBooleanArray: [],
       moduleScores: [],
+
+      progressBars: [],
+
+      moduleUrl: "/module/",
     }
   },
   computed: {
@@ -26,9 +30,18 @@ export default {
     ...mapState(useUserStore, ['completedModulesArray']),
 
     ...mapState(useModuleStore, ['allModules']),
+
+    cssVars() {
+      return {
+        '--progress1': this.progressBars[0],
+        '--progress2': this.progressBars[1],
+        '--progress3': this.progressBars[2]
+      }
+    },
   },
   methods: {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+    ...mapActions(useModuleStore, ['setActiveModule']),
 
     setModuleScores() {
       this.moduleScores = [];
@@ -39,8 +52,14 @@ export default {
 
       console.log(this.moduleScores);
     },
+
+    calculateProgressBar(score, maxScore) {
+      let percentScore = score * 100 / maxScore;
+      //console.log(percentScore);
+      return percentScore;
+    },
   },
-  mounted() {
+  created() {
     if (!this.userData) {
       //this.$router.push({ name: 'Home' });
     } else {
@@ -57,6 +76,7 @@ export default {
       this.completionBooleanArray.push(this.userData.module3Completed);
       */
       this.setCompletedModulesArray();
+      this.setModuleScores();
 
       //Compare module IDs with IDs of completed modules saved in userStore
       //console.log("User data: " + this.userData);
@@ -64,12 +84,14 @@ export default {
       console.log("completedModulesArray: " + this.completedModulesArray);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
          if (this.completedModulesArray[i]) {
-           this.completedModules.push(this.allModules[i].title);
+           this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
+           this.progressBars.push(this.calculateProgressBar(this.moduleScores[i], this.allModules[i].maxScore) + "%");
+           console.log(this.progressBars);
+           this.completedModules.push(this.allModules[i]);
            console.log(this.completedModulesArray);
            console.log(this.completedModules);
          }
       }
-      this.setModuleScores();
     }
   },
 }
@@ -79,21 +101,32 @@ export default {
   <div class="profile" v-if="userIsLoggedIn">
     <div class="welcome">
       <h2 id="welcome-title">Willkommen, {{ userName }}!</h2>
-      <p id="welcome-text">Dies ist deine Profilseite. Hier findest du alle deine abgeschlossenen Kapitel, die erreichten Punktzahlen sowie Infos zu deinem Nutzerprofil.</p>
+      <p id="welcome-text">Dies ist deine Profilseite. Hier findest du deinen Fortschritt, die erreichten Punktzahlen sowie Infos zu deinem Nutzerprofil.</p>
     </div>
     <div class="module-progress">
-      <p v-if="this.completedModules[0] === true">Du hast folgende Kapitel abgeschlossen:</p>
-      <div v-for="item in this.completedModules" :key="item.id">
-        <div class="module-box">
-          <p v-html="item"></p>
-        </div>
+      <p id="completed-modules-title" v-if="this.completedModules[0]">Dein Fortschritt:</p>
+      <div class="module-container" v-for="(item, index) in this.allModules" :key="item.id">
+        <router-link class="unstyled-link" :to="this.moduleUrl + item.id" @click="setActiveModule(item)">
+          <div class="module-box" :class="{completed: item.isCompleted}">
+            <p class="bold" v-html="item.title"></p>
+            <div  v-if="item.isCompleted">
+              <p>Erreichte Punktzahl:</p>
+              <p class="bold" v-html="item.score"></p>
+              <div class="progress-bar-outline">
+                <div :id="'progress-bar-' + (index+1)" :style="cssVars"></div>
+              </div>
+            </div>
+          </div>
+        </router-link>
       </div>
       <p v-if="this.completedModulesArray[0] === false">Du hast noch keine Kapitel abgeschlossen. Wie wäre es, gleich mit Kapitel 1 zu beginnen?</p>
+      <!--
       <div class="module-points">
         <p v-if="this.userData.module1Score">Punktzahl Modul 1: {{ this.userData.module1Score }}</p>
         <p v-if="this.userData.module2Score">Punktzahl Modul 2: {{ this.userData.module2Score }}</p>
         <p v-if="this.userData.module3Score">Punktzahl Modul 3: {{ this.userData.module3Score }}</p>
       </div>
+    -->
     </div>
     <div class="user-infos">
       <h3>Deine Profilinfos:</h3>
@@ -128,15 +161,27 @@ export default {
   .welcome {
     margin-bottom: 40px;
   }
+  .module-container {
+    max-width: 600px;
+    margin-right: 300px;
+  }
   .module-box {
     border-style: solid;
     border-radius: 5px;
+    border-color: grey;
+    color: grey;
     padding: 15px;
     min-height: 100px;
+    min-width: 300px;
     max-width: 500px;
     margin-bottom: 10px;
     margin-right: 10px;
-    background-color: var(--confirm-color);
+    background-color: var(--main-bg-color);
+  }
+  .completed {
+    background-color: var(--main-accent-color);
+    border-color: var(--main-dark-color);
+    color: var(--main-dark-color);
   }
   .module-progress {
     grid-column-start: 1;
@@ -157,5 +202,35 @@ export default {
   #welcome-text {
     grid-column-start: 1;
     grid-row-start: 1;
+  }
+  #completed-modules-title {
+    font-size: 14pt;
+    margin-bottom: 15px;
+  }
+  .progress-bar-outline {
+    height: 22px;
+    width: 100%;
+    background-color: var(--main-bg-color);
+    border-style: solid;
+    border-width: thin;
+    border-radius: 2px;
+  }
+  #progress-bar-1 {
+    height: 20px;
+    width: var(--progress1);
+
+    background-color: var(--confirm-color);
+  }
+  #progress-bar-2 {
+    height: 20px;
+    width: var(--progress2);
+
+    background-color: var(--confirm-color);
+  }
+  #progress-bar-3 {
+    height: 20px;
+    width: var(--progress3);
+
+    background-color: var(--confirm-color);
   }
 </style>

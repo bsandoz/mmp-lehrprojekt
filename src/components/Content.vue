@@ -2,7 +2,8 @@
   <div v-if="content">
     <h3 id="basics" v-if="userIsLoggedIn">Die Grundlagen:</h3>
     <SingleModule
-      class="container"
+      class="container btn"
+      id="single-module"
       v-for="singleModule in content"
       :key="singleModule.id"
       @click="setActiveModule(singleModule)"
@@ -65,5 +66,8 @@ export default {
     max-width: 60%;
     margin: 30px auto;
     color: var(--dark-bg-text-color);
+  }
+  #single-module:hover {
+    box-shadow: 3px 6px #000000;
   }
 </style>

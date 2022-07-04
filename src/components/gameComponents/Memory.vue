@@ -9,7 +9,7 @@
     <div class="memory-container" :if="this.testQuizCompleted === false">
       <button class="btn" v-if="this.isGameRunning === false" @click="setMemoryBoxes">Memory starten!</button>
       <div v-for="item in memoryboxArray" :key="item.id" v-if="this.isGameRunning">
-        <div class="memory-box" @click="toggleVisibility(item)"
+        <div class="memory-box btn" @click="toggleVisibility(item)"
         :class="{visible: item.isVisible},{solved: item.isSolved}">
         <div v-html="item.fieldContent" class="memory-image" :class="{visible: item.isVisible},{solved: item.isSolved}"></div>
         </div>
@@ -235,7 +235,8 @@ export default {
     },
     clickedMessageBox() {
       if (this.messageType === "complete") {
-        this.goToQuestions();
+        //this.goToQuestions();
+        this.$router.push({ name: 'Home' });
       } else {
         window.alert("Ein Fehler ist aufgetreten.")
       }
