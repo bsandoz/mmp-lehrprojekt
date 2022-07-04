@@ -5,7 +5,7 @@
     <h4>{{ this.activeModule.text }}</h4>
     <p>{{ this.activeModule.details }}</p>
     <div id="content"></div>
-    <div id="exercise">
+    <div id="exercise" class="btn">
       <router-link v-if="isMounted" :to="this.exerciseLink" class="unstyled-link">
         <div class="next-exercise">
           <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einem kurzen Quiz!</h3>
@@ -107,7 +107,5 @@ export default {
     align-items: center;
     justify-content: center;
   }
-  #exercise:hover {
-    border-style: dashed;
-  }
+
 </style>

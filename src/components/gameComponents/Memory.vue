@@ -198,6 +198,7 @@ export default {
         } else if (this.userScore < 0) {
           this.userScore = 0;
         }
+        this.messageType = "complete";
         this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Punkte: " + this.userScore + "/100";
         //this.setModule2Score(this.userScore);
         this.register();
@@ -260,7 +261,7 @@ export default {
           console.log(response);
           //this.$refs.messageBox.showMessageBox();
           //this.message = "Du hast alle Paare mit " + this.triesNumber + " Versuchen gefunden! Nun folgen noch einige Fragen für die Auswertung des Versuchs.";
-          window.alert("Daten in Datenbank gesichert.")
+          //window.alert("Daten in Datenbank gesichert.")
         })
         .catch(err => {
           this.error.errorSubmit = true

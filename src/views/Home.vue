@@ -69,6 +69,7 @@ export default {
   }
   #notLoggedInWarning {
     color: var(--mistake-color);
+    margin-left: 3%;
   }
   .lead-home {
     font-weight: bold;
@@ -83,4 +84,5 @@ export default {
   #basics {
 
   }
+
 </style>

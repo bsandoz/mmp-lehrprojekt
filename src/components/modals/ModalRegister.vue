@@ -19,8 +19,11 @@
                 </label>
                 <input :type="input.type" :id="input.name" :name="input.name" v-model="input.value">
               </div>
-              <button class="btn">Registrieren</button>
+              <button class="btn" id="register-button">Registrieren</button>
             </form>
+            <div v-if="formSubmitted">
+              <p>Du hast dich erfolgreich registriert. Bitte logge dich nun über den Login-Button ein.</p>
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -57,9 +60,9 @@ export default {
       userForm: [
         {
           name: 'username',
-          placeholder: "Username",
+          placeholder: "Benutzername",
           value: '',
-          type: 'text',
+
           req: true,
           invalid: false
         },
@@ -224,5 +227,9 @@ export default {
 .modal-leave-to .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+#register-button {
+  margin-top: 30px;
 }
 </style>

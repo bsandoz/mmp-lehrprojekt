@@ -68,7 +68,7 @@ export default {
     background-color: var(--main-dark-color);
   }
   img {
-    max-width: 750px;
+    max-width: 450px;
   }
   ol {
     margin-top: 50px;
@@ -109,12 +109,17 @@ export default {
     text-decoration: none;
     font-size: 15px;
     font-family: inherit;
+    transition: 0.2s;
   }
   .btn:focus {
     outline: none;
   }
   .btn:active {
     transform: scale(0.98);
+  }
+  .btn:hover {
+    box-shadow: 3px 6px #888888;
+    transform: scale(1.05);
   }
   .btn-block {
     display: block;
