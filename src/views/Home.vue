@@ -4,19 +4,17 @@
   </div>
   <Lead class="lead-home" lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
   <Content :content="content" />
-  <div class="home-infos">
+  <div class="home-infos" v-if="!userIsLoggedIn">
     <div class="infobox" id="infobox-1">
-      <p class="info-text" id="info-1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+      <p class="info-text" id="info-1">Du hast gerade angefangen, ein Instrument zu spielen und das Notenlesen stellt eine Herausforderung dar?
+        Mit EasyMusicTheory lernst du dies in nur wenig Zeit auf spielerische und kurzweilige Art!
       </p>
       <img class="info-image" src="../assets/img/info-image-1.jpg" alt="Frau, die Gitarre spielt">
     </div>
     <div class="infobox" id="infobox-2">
       <img class="info-image" src="../assets/img/info-image-2.jpg" alt="Bild eines Tonstudios">
-      <p class="info-text" id="info-2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+      <p class="info-text" id="info-2">Du bist Tontechniker*in oder produzierst deine eigene Musik? Ein gutes Verständnis von Musiktheorie wird dir helfen,
+        deine Produktionen und Mixdowns auf das nächste Level zu bringen!
       </p>
     </div>
     <div class="infobox" id="infobox-3">
@@ -25,7 +23,18 @@
         pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
       </p>
     </div>
-    <h3 id="notLoggedInWarning" v-if="!userIsLoggedIn">Bitte logge dich ein, um Zugriff auf die Inhalte dieser Webseite zu erhalten.</h3>
+    <div class="btn" id="notLoggedInWarning" v-if="!userIsLoggedIn" @click="showModalRegister = true">
+      <h3>Wurde dein Interesse geweckt? Registriere dich jetzt kostenlos und fang noch heute an, zu lernen!</h3>
+      <img src="../assets/img/icon-arrow.png" style="width:100px;height:50px;" alt="">
+    </div>
+    <Teleport to="body">
+      <!-- use the modal component, pass in the prop -->
+      <ModalRegister :show="showModalRegister" @close="showModalRegister = false">
+        <template #header>
+          <h3>Registrierung</h3>
+        </template>
+      </ModalRegister>
+    </Teleport>
   </div>
   <!--<router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>-->
 </template>
@@ -33,6 +42,8 @@
 <script>
 import Lead from '../components/Lead.vue'
 import Content from '../components/Content.vue'
+import ModalRegister from '../components/modals/ModalRegister.vue'
+
 import { useUserStore } from '@/store/UserStore.js'
 import { useModuleStore } from '@/store/ModuleStore.js'
 
@@ -44,11 +55,14 @@ export default {
   components: {
     Lead,
     Content,
+    ModalRegister,
   },
   data() {
     return {
       content: null,
       singleModule: null,
+
+      showModalRegister: false,
     }
   },
   computed: {
@@ -147,11 +161,24 @@ export default {
     grid-row-start: 3;
   }
   #notLoggedInWarning {
-    color: var(--mistake-color);
     margin-left: 3%;
     grid-column-start: 2;
     grid-column-end: 5;
     grid-row-start: 4;
+    justify-self: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: var(--main-bg-color);
+    color: var(--main-dark-color);
+    border-radius: 50px;
+    box-shadow: 5px 10px var(--main-accent-color);
+    padding: 25px;
+    max-width: 500px;
+    max-height: 200px;
+  }
+  #notLoggedInWarning:hover {
+    cursor: pointer;
   }
   #basics {
 
