@@ -1,8 +1,9 @@
 <template>
   <div class="header">
     <div class="header-left">
-      <h2>Platzhalter Logo</h2>
-      <router-link class="home-link" to="/">EasyMusicTheory</router-link>
+      <router-link class="home-link" to="/">
+        <img class="logo" src="../assets/img/logo-v1.png" style="width:100px;height:100px;" alt="Logo">
+      </router-link>
     </div>
     <div class="header-right">
       <button type="button" class="btn" name="button-register" v-if="!userIsLoggedIn" @click="showModalRegister = true">Registrieren</button>
@@ -110,5 +111,8 @@ export default {
   font-size: 20pt;
   text-decoration: none;
   color: var(--main-text-color);
+}
+.logo {
+  margin-top: 10px;
 }
 </style>

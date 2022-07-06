@@ -156,6 +156,9 @@ export default {
   .temporary-style {
     margin-top: 100px;
   }
+  .error-message {
+    color: var(--mistake-color);
+  }
   .audio {
     margin-bottom: 25px;
   }

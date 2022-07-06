@@ -7,9 +7,9 @@
             <slot name="header">default header</slot>
           </div>
           <div class="errors msg" v-if="hasErrors">
-            <p v-if="errors.invalidFields">Bitte überprüfe deine Eingaben.</p>
-            <p v-if="errors.errorSubmit">Das Formular konnte nicht abgeschickt werden.</p>
-            <p v-if="errors.missingFields">Du hast nicht alle Felder ausgefüllt.</p>
+            <p class="error-message" v-if="errors.invalidFields">Bitte überprüfe deine Eingaben.</p>
+            <p class="error-message" v-if="errors.errorSubmit">Das Formular konnte nicht abgeschickt werden.</p>
+            <p class="error-message" v-if="errors.missingFields">Du hast nicht alle Felder ausgefüllt.</p>
           </div>
           <div class="modal-body">
             <form v-if="!formSubmitted" @submit.prevent="handleForm" class="user-form">
@@ -32,7 +32,7 @@
               <button
                 class="btn"
                 @click="$emit('close')"
-              >Close</button>
+              >Abbrechen</button>
             </slot>
           </div>
         </div>
@@ -165,7 +165,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 9998;

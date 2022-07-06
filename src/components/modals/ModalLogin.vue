@@ -8,7 +8,9 @@
           </div>
 
           <div class="modal-body">
-            <form @submit.prevent="login">
+            <p class="error-message" v-if="usernameIncorrect">Dieser Benutzername existiert nicht.</p>
+            <p class="error-message" v-if="passwordIncorrect">Das Passwort ist nicht korrekt.</p>
+            <form id="form" @submit.prevent="login">
               <input v-model="username" type="text" id="username-input" placeholder="Benutzername">
               <input v-model="password" type="password" id="password-input" placeholder="Passwort">
               <input class="btn" type="submit" id="login-btn" value="Einloggen">
@@ -21,7 +23,7 @@
                 class="modal-default-button btn"
                 id="close-btn"
                 @click="$emit('close')"
-              >Schliessen</button>
+              >Abbrechen</button>
             </slot>
           </div>
         </div>
@@ -47,6 +49,9 @@ export default {
     return {
       username: "",
       password: "",
+
+      usernameIncorrect: false,
+      passwordIncorrect: false,
     }
   },
   computed: {
@@ -63,19 +68,25 @@ export default {
       await console.log(this.username);
       let filteredUsersData = this.userData.filter(item => item.username === this.username);
       await console.log(filteredUsersData);
-      await console.log(filteredUsersData[0].password);
-      await console.log(this.password);
-      const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
-      if (res) {
-        console.log("Login successful");
-        this.userLogIn();
-        this.setUserData(filteredUsersData[0]);
-        localStorage.setItem('username', filteredUsersData[0].username);
-        localStorage.setItem('userId', filteredUsersData[0].id);
-        localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
-        this.$emit('close');
+      if (filteredUsersData.length > 0) {
+        await console.log(filteredUsersData[0].password);
+        await console.log(this.password);
+        const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
+        if (res) {
+          console.log("Login successful");
+          this.userLogIn();
+          this.setUserData(filteredUsersData[0]);
+          localStorage.setItem('username', filteredUsersData[0].username);
+          localStorage.setItem('userId', filteredUsersData[0].id);
+          localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);
+          this.$emit('close');
+        } else {
+          console.log("Password is not correct");
+          this.passwordIncorrect = true;
+        }
       } else {
-        console.log("Password is not correct");
+        console.log("Username not found in database");
+        this.usernameIncorrect = true;
       }
     }
   }
@@ -84,7 +95,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -92,7 +103,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--main-bg-color);
+  background-color: rgba(0, 0, 0, 0.5);
   display: table;
   transition: opacity 0.3s ease;
 }
