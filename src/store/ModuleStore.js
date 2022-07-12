@@ -8,16 +8,19 @@ export const useModuleStore = defineStore("ModuleStore", {
       activeModule: {
         id: Number,
         title: '',
-      }
-    };
+      },
+
+      apiToken: "uvyeeZOz_TrK-xcsz0s8dJmPhxMLlNEI",
+    }
   },
   //actions
   actions: {
     async getAllModules(api) {
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
       try {
         await console.log("Called getAllModules from ModuleStore.js");
         await axios
-          .get (api)
+          .get (api, { headers })
           .then (response => (this.allModules = response.data.data))
           .catch (function(error) {
             console.log(error);

@@ -55,8 +55,10 @@ export default {
         } else {
           await console.log("Started game");
 
+          const headers = { "Authorization": `Bearer ${this.apiToken}` };
+
           await axios
-            .get (this.apiLink)
+            .get (this.apiLink, { headers })
             .then (response => (this.elementsArray = response.data.data))
             .catch (function(error) {
               console.log(error);
@@ -252,7 +254,8 @@ export default {
       let id = localStorage.getItem("userId");
       await console.log("Called register function in Quiz.vue");
       const user = this.prepareUserData();
-      await axios.patch("https://ifuu2646.directus.app/items/users/" + id, user)
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
+      await axios.patch("https://ifuu2646.directus.app/items/users/" + id, user, { headers })
         .then((response) => {
           console.log(response);
           //this.$refs.messageBox.showMessageBox();
@@ -272,6 +275,8 @@ export default {
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useModuleStore, ['apiToken']),
+    ...mapState(useUserStore, ['apiToken']),
     ...mapState(useUserStore, ['userData']),
   },
   created() {

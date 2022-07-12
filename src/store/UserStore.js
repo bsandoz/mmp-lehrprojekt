@@ -8,6 +8,8 @@ export const useUserStore = defineStore("UserStore", {
       userData: null,
       completedModulesArray: [],
 
+      apiToken: "uvyeeZOz_TrK-xcsz0s8dJmPhxMLlNEI",
+
       //Module user data
       //module1Completed: null,
       //module1Score: null,
@@ -51,10 +53,11 @@ export const useUserStore = defineStore("UserStore", {
       this.userIsLoggedIn = false;
     },
     async getAllUsersData(api) {
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
       try {
         await console.log("Called getAllUsersData from UserStore.js");
         await axios
-          .get (api)
+          .get (api, { headers })
           .then (response => (this.userData = response.data.data))
           .catch (function(error) {
             console.log(error);
