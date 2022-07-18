@@ -76,7 +76,7 @@ export default {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
   async mounted() {
-    await this.getAllModules('https://ifuu2646.directus.app/items/modules')
+    await this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
     this.content = this.allModules;
     await console.log(this.content);
   },

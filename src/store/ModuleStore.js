@@ -10,7 +10,7 @@ export const useModuleStore = defineStore("ModuleStore", {
         title: '',
       },
 
-      apiToken: "uvyeeZOz_TrK-xcsz0s8dJmPhxMLlNEI",
+      apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
     }
   },
   //actions

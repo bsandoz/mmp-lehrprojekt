@@ -150,7 +150,7 @@ export default {
     async register() {
       await console.log("Called register function in ModalRegister.vue");
       const user = this.prepareUserData()
-      await axios.post("https://ifuu2646.directus.app/items/users", user)
+      await axios.post("https://db-easymusictheory.directus.app/items/users", user)
         .then((response) => {
           this.formSubmitted = true
         })

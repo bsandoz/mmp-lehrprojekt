@@ -64,7 +64,7 @@ export default {
     ...mapActions(useUserStore, ['setUserData']),
 
     async login() {
-      await this.getAllUsersData("https://ifuu2646.directus.app/items/users");
+      await this.getAllUsersData("https://db-easymusictheory.directus.app/items/users");
       await console.log(this.username);
       let filteredUsersData = this.userData.filter(item => item.username === this.username);
       await console.log(filteredUsersData);

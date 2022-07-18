@@ -88,7 +88,7 @@ import { mapActions } from 'pinia';
             await console.log("Started game");
 
             await axios
-              .get ("https://ifuu2646.directus.app/items/hangmanGameElements")
+              .get ("https://db-easymusictheory.directus.app/items/hangmanGameElements")
               .then (response => (this.wordsArray = response.data.data))
               .catch (function(error) {
                 console.log(error);

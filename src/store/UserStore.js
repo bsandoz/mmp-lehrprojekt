@@ -8,7 +8,7 @@ export const useUserStore = defineStore("UserStore", {
       userData: null,
       completedModulesArray: [],
 
-      apiToken: "uvyeeZOz_TrK-xcsz0s8dJmPhxMLlNEI",
+      apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
 
       //Module user data
       //module1Completed: null,

@@ -68,7 +68,7 @@ export default {
 
     createApiLink() {
       let id = this.activeModule.id + 1;
-      this.apiLink = "https://ifuu2646.directus.app/items/module" + id + "GameElements";
+      this.apiLink = "https://db-easymusictheory.directus.app/items/module" + id + "GameElements";
       console.log(this.apiLink);
     },
 
@@ -260,7 +260,7 @@ export default {
       await console.log("Called register function in Memory.vue");
       const user = this.prepareUserData();
       const headers = { "Authorization": `Bearer ${this.apiToken}` };
-      await axios.patch("https://ifuu2646.directus.app/items/users/" + id, user, { headers })
+      await axios.patch("https://db-easymusictheory.directus.app/items/users/" + id, user, { headers })
         .then((response) => {
           console.log(response);
           //this.$refs.messageBox.showMessageBox();
@@ -270,7 +270,7 @@ export default {
         .catch(err => {
           this.error.errorSubmit = true
         })
-      await this.getAllUsersData("https://ifuu2646.directus.app/items/users/" + id);
+      await this.getAllUsersData("https://db-easymusictheory.directus.app/items/users/" + id);
       await this.setCompletedModulesArray();
     },
 
