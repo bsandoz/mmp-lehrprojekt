@@ -92,7 +92,8 @@ export default {
         invalidFields: false,
         missingFields: false,
         errorSubmit: false,
-      }
+      },
+      apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
     }
   },
   computed: {
@@ -148,16 +149,21 @@ export default {
       }
     },
     async register() {
-      await console.log("Called register function in ModalRegister.vue");
-      const user = this.prepareUserData()
-      await axios.post("https://db-easymusictheory.directus.app/items/users", user)
-        .then((response) => {
-          this.formSubmitted = true
-        })
-        .catch(err => {
-          this.error.errorSubmit = true
-        }
-      )
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
+      const user = this.prepareUserData();
+      try {
+        await console.log("Called register function in ModalRegister.vue");
+        await axios.post("https://db-easymusictheory.directus.app/items/users", user, { headers })
+          .then((response) => {
+            this.formSubmitted = true
+          })
+          .catch(err => {
+            this.error.errorSubmit = true
+          }
+        )
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 }
