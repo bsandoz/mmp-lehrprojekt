@@ -238,7 +238,7 @@ export default {
     clickedMessageBox() {
       if (this.messageType === "complete") {
         //this.goToQuestions();
-        this.$router.push({ name: 'Home' });
+        this.$router.push({ name: 'Profile' });
       } else {
         window.alert("Ein Fehler ist aufgetreten.")
       }

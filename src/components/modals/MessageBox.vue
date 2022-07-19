@@ -1,15 +1,21 @@
 <template>
+  <Leaderboard ref="leaderboard" />
   <div id="messagebox-mask">
     <div id="confirmation-box">
       <p class="confirmation-text"> {{ message }} </p>
-      <button class="btn" id="confirmation-btn">OK</button>
+      <button class="btn" id="confirmation-btn">Ok</button>
     </div>
   </div>
 </template>
 
 <script>
+import Leaderboard from './Leaderboard.vue'
+
 export default {
   name: "MessageBox",
+  components: {
+    Leaderboard,
+  },
   props: {
     message: String,
     wordsArray: Array,
@@ -32,6 +38,9 @@ export default {
          self.$emit('clickedMessageBox');
          self.mask.style.display="none";
       };
+    },
+    showLeaderboard(id) {
+      this.$refs.leaderboard.showLeaderboard(id);
     },
   },
   mounted() {
