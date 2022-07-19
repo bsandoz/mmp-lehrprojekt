@@ -10,6 +10,12 @@ export const useUserStore = defineStore("UserStore", {
 
       apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
 
+      activeLeaderboard: null,
+
+      userDataForLeaderboard: [],
+      userDataForLeaderboard2: [],
+      userDataForLeaderboard3: [],
+
       //Module user data
       //module1Completed: null,
       //module1Score: null,
@@ -90,6 +96,78 @@ export const useUserStore = defineStore("UserStore", {
 
     setModule3Score(score) {
       this.module3Score = score;
+    },
+
+    async getUsersDataForLeaderboard(api, id) {
+      this.userDataForLeaderboard = [];
+      this.userDataForLeaderboard2 = [];
+      this.userDataForLeaderboard3 = [];
+
+      let usersData = [];
+
+      console.log(id);
+      this.activeLeaderboard = id;
+
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
+      try {
+        await console.log("Called getUsersDataForLeaderboard from UserStore.js");
+        await axios
+          .get (api, { headers })
+          .then (response => (usersData = response.data.data))
+          .catch (function(error) {
+            console.log(error);
+          })
+          } catch (error) {
+            console.log(error);
+          }
+
+      if (id === 1) {
+        for (var i = 0; i < usersData.length; i++) {
+          if (usersData[i].module1Completed) {
+            await this.userDataForLeaderboard.push(usersData[i]);
+            await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard);
+            //Sort by descending score
+            await this.userDataForLeaderboard.sort((a, b) => b.module1Score - a.module1Score);
+          }
+        }
+      } else if (id === 2) {
+        for (var i = 0; i < usersData.length; i++) {
+          if (usersData[i].module2Completed) {
+            await this.userDataForLeaderboard.push(usersData[i]);
+            await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard);
+            //Sort by descending score
+            await this.userDataForLeaderboard.sort((a, b) => b.module2Score - a.module2Score);
+          }
+        }
+      } else if (id === 3) {
+        for (var i = 0; i < usersData.length; i++) {
+          if (usersData[i].module3Completed) {
+            await this.userDataForLeaderboard.push(usersData[i]);
+            await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard);
+            //Sort by descending score
+            await this.userDataForLeaderboard.sort((a, b) => b.module3Score - a.module3Score);
+          }
+        }
+      }
+
+      /*
+
+      for (var i = 0; i < usersData.length; i++) {
+        if (usersData[i].module1Completed) {
+          await this.userDataForLeaderboard1.push(usersData[i]);
+          await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard1);
+        } if (usersData[i].module2Completed) {
+          await this.userDataForLeaderboard2.push(usersData[i]);
+          await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard2);
+        } if (usersData[i].module3Completed) {
+          await this.userDataForLeaderboard3.push(usersData[i]);
+          await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard3);
+        } else {
+          await console.log("No data found");
+        }
+      }
+
+      */
     },
 
       //Actions for Test

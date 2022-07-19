@@ -24,7 +24,7 @@
           </template>
         </ModalRegister>
       </Teleport>
-      <span v-if="userIsLoggedIn">Willkommen, {{ userName }}!</span>
+      <span id="welcome-message" v-if="userIsLoggedIn">Willkommen, {{ userName }}!</span>
       <!-- Temporary profile link -->
       <router-link v-if="userIsLoggedIn" :to="this.profileLink" custom v-slot="{ navigate }">
         <button class="btn" @click="navigate" @keypress.enter="navigate" role="link">Mein Profil</button>
@@ -114,5 +114,8 @@ export default {
 }
 .logo {
   margin-top: 10px;
+}
+#welcome-message {
+  margin-right: 15px;
 }
 </style>

@@ -5,10 +5,12 @@ import { useModuleStore } from '@/store/ModuleStore.js'
 import { mapState } from 'pinia';
 import { mapActions } from 'pinia';
 
+import Leaderboard from '../components/modals/Leaderboard.vue'
+
 export default {
   name: "Profile",
   components: {
-
+    Leaderboard,
   },
   data() {
     return {
@@ -58,6 +60,18 @@ export default {
       //console.log(percentScore);
       return percentScore;
     },
+
+    showLeaderboard(id) {
+      this.$refs.leaderboard.showLeaderboard(id);
+    },
+
+    gotoModule(id, item) {
+      const path = this.moduleUrl + id;
+      this.setActiveModule(item);
+
+      this.$router.push(path);
+    }
+
   },
   created() {
     if (!this.userData) {
@@ -98,6 +112,7 @@ export default {
 </script>
 
 <template>
+  <Leaderboard ref="leaderboard" />
   <div class="profile" v-if="userIsLoggedIn">
     <div class="welcome">
       <h2 id="welcome-title">Willkommen, {{ userName }}!</h2>
@@ -106,7 +121,7 @@ export default {
     <div class="module-progress">
       <p id="completed-modules-title" v-if="this.completedModules[0]">Dein Fortschritt:</p>
       <div class="module-container" v-for="(item, index) in this.allModules" :key="item.id">
-        <router-link class="unstyled-link" :to="this.moduleUrl + item.id" @click="setActiveModule(item)">
+        <div>
           <div class="module-box" :class="{completed: item.isCompleted}">
             <p class="bold" v-html="item.title"></p>
             <div  v-if="item.isCompleted">
@@ -116,8 +131,12 @@ export default {
                 <div :id="'progress-bar-' + (index+1)" :style="cssVars"></div>
               </div>
             </div>
+            <div id="buttons">
+              <button class="btn" id="show-leaderboard-btn" @click="showLeaderboard(index + 1)">Rangliste anzeigen</button>
+              <button class="btn" id="goto-module-btn" @click="gotoModule(item.id, item)">Zum Kapitel</button>
+            </div>
           </div>
-        </router-link>
+        </div>
       </div>
       <p v-if="this.completedModulesArray[0] === false">Du hast noch keine Kapitel abgeschlossen. Wie wäre es, gleich mit Kapitel 1 zu beginnen?</p>
       <!--
@@ -232,5 +251,18 @@ export default {
     width: var(--progress3);
 
     background-color: var(--confirm-color);
+  }
+  #buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+  #show-leaderboard-btn {
+    background-color: var(--main-bg-color);
+  }
+  #goto-module-btn {
+    background-color: var(--main-bg-color);
   }
 </style>
