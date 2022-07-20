@@ -6,8 +6,8 @@
   <Content :content="content" />
   <div class="home-infos" v-if="!userIsLoggedIn">
     <div class="infobox" id="infobox-1">
-      <p class="info-text" id="info-1">Du hast gerade angefangen, ein Instrument zu spielen und das Notenlesen stellt eine Herausforderung dar?
-        Mit EasyMusicTheory lernst du dies in nur wenig Zeit auf spielerische und kurzweilige Art!
+      <p class="info-text" id="info-1">Du hast vor kurzem angefangen, ein Instrument zu erlernen und das Notenlesen fällt dir noch schwer?
+        Mit EasyMusicTheory lernst du dies in kurzer Zeit auf spielerische Art!
       </p>
       <img class="info-image" src="../assets/img/info-image-1.jpg" alt="Frau, die Gitarre spielt">
     </div>

@@ -185,12 +185,14 @@ export default {
     margin-right: 300px;
   }
   .module-box {
+    display: flex;
+    flex-direction: column;
     border-style: solid;
     border-radius: 5px;
     border-color: grey;
     color: grey;
     padding: 15px;
-    min-height: 100px;
+    min-height: 150px;
     min-width: 300px;
     max-width: 500px;
     margin-bottom: 10px;
@@ -233,6 +235,7 @@ export default {
     border-style: solid;
     border-width: thin;
     border-radius: 2px;
+    margin-bottom: 15px;
   }
   #progress-bar-1 {
     height: 20px;
@@ -255,14 +258,23 @@ export default {
   #buttons {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 10px;
+    align-items: baseline;
+    justify-content: space-evenly;
+
+    margin-top: auto;
   }
   #show-leaderboard-btn {
-    background-color: var(--main-bg-color);
+    background-color: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
+  }
+  #show-leaderboard-btn:hover {
+    box-shadow: 3px 6px #000000;
   }
   #goto-module-btn {
-    background-color: var(--main-bg-color);
+    background-color: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
+  }
+  #goto-module-btn:hover {
+    box-shadow: 3px 6px #000000;
   }
 </style>

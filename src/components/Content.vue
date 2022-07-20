@@ -8,6 +8,7 @@
       :key="singleModule.id"
       @click="setActiveModule(singleModule)"
       :single-module="singleModule"
+      :class= "{ bgcompleted: singleModule.isCompleted }"
     />
   </div>
 </template>
@@ -69,5 +70,8 @@ export default {
   }
   #single-module:hover {
     box-shadow: 3px 6px #000000;
+  }
+  .bgcompleted {
+    background-image: linear-gradient(to right, var(--main-bg-color) , var(--confirm-color));
   }
 </style>

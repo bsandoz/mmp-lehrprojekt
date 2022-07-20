@@ -67,6 +67,11 @@ export default {
     font-size: 14pt;
     color: var(--confirm-color);
     margin-top: 25px;
+    text-shadow: 0.5px 0.5px 0 #000,
+     -0.5px -0.5px 0 #000,
+      0.5px -0.5px 0 #000,
+      -0.5px 0.5px 0 #000,
+       0.5px 0.5px 0 #000;
 
   }
   .progress-bar {

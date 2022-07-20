@@ -183,4 +183,15 @@ export default {
     margin-bottom: 0px;
     margin-top: 20px;
   }
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  figcaption {
+    font-style: italic;
+  }
 </style>
