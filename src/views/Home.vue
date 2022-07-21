@@ -102,7 +102,7 @@ export default {
   }
   .lead-home {
     font-weight: bold;
-    font-size: 16pt;
+    font-size: 18pt;
     padding-top: 65px;
     padding-bottom: 65px;
     margin-bottom: 50px;
@@ -141,7 +141,7 @@ export default {
   }
   .info-text {
     padding: 25px;
-    font-size: 12pt;
+    font-size: 14pt;
     margin-right: 10px;
     margin-left: 10px;
   }

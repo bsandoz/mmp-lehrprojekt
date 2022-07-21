@@ -3,7 +3,7 @@
     <h3 id="basics" v-if="userIsLoggedIn">Die Grundlagen:</h3>
     <SingleModule
       class="container btn"
-      id="single-module"
+      :id="'single-module-' + singleModule.id"
       v-for="singleModule in content"
       :key="singleModule.id"
       @click="setActiveModule(singleModule)"
@@ -68,10 +68,33 @@ export default {
     margin: 30px auto;
     color: var(--dark-bg-text-color);
   }
-  #single-module:hover {
+  #single-module-1 {
+    background-image: url(../assets/img/module1bg.png);
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  #single-module-1:hover {
+    box-shadow: 3px 6px #000000;
+  }
+  #single-module-2 {
+    background-image: url(../assets/img/module2bg.png);
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  #single-module-2:hover {
+    box-shadow: 3px 6px #000000;
+  }
+  #single-module-3 {
+    background-image: url(../assets/img/module3bg.png);
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  #single-module-3:hover {
     box-shadow: 3px 6px #000000;
   }
   .bgcompleted {
     background-image: linear-gradient(to right, var(--main-bg-color) , var(--confirm-color));
+    border-color: var(--confirm-color);
+    border-width: thick;
   }
 </style>

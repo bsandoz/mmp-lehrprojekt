@@ -49,7 +49,7 @@ export default {
 <template>
   <div id="leaderboard-mask">
     <div id="leaderboard-box">
-      <h3>Rangliste</h3>
+      <h3 class="leaderboard-title">Rangliste</h3>
       <table class="leaderboard-table">
         <tr>
           <th>Position</th>
@@ -57,19 +57,19 @@ export default {
           <th>Punktzahl</th>
         </tr>
         <tr v-if="this.activeLeaderboard === 1" v-for="(item, index) in this.userDataForLeaderboard">
-          <th v-html="index + 1"></th>
-          <th v-html="item.username"></th>
-          <th v-html="item.module1Score"></th>
+          <td v-html="index + 1"></td>
+          <td v-html="item.username"></td>
+          <td v-html="item.module1Score"></td>
         </tr>
         <tr v-if="this.activeLeaderboard === 2" v-for="(item, index) in this.userDataForLeaderboard">
-          <th v-html="index + 1"></th>
-          <th v-html="item.username"></th>
-          <th v-html="item.module2Score"></th>
+          <td v-html="index + 1"></td>
+          <td v-html="item.username"></td>
+          <td v-html="item.module2Score"></td>
         </tr>
         <tr v-if="this.activeLeaderboard === 3" v-for="(item, index) in this.userDataForLeaderboard">
-          <th v-html="index + 1"></th>
-          <th v-html="item.username"></th>
-          <th v-html="item.module3Score"></th>
+          <td v-html="index + 1"></td>
+          <td v-html="item.username"></td>
+          <td v-html="item.module3Score"></td>
         </tr>
       </table>
       <button class="btn" id="close-btn">Schliessen</button>
@@ -97,13 +97,45 @@ export default {
     border-radius: 5px;
     border: 1px solid #aaa;
     position: fixed;
-    width: 300px;
-    left: 50%;
+    width: 500px;
+    left: 40%;
     top: 25%;
     margin-left: -150px;
-    padding: 6px 8px 8px;
+    padding: 10px 12px 12px;
     box-sizing: border-box;
-    text-align: center;
+    text-align: left;
     box-shadow: 5px 10px #444444;
   }
+
+  .leaderboard-table {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    border-spacing: 0px;
+  }
+
+  .leaderboard-title {
+    margin-bottom: 25px;
+  }
+
+  th {
+    background-color: var(--main-accent-color);
+  }
+
+  td {
+    color: var(--main-text-color);
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  #close-btn {
+    display: block;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 </style>

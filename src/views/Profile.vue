@@ -179,6 +179,7 @@ export default {
   }
   .welcome {
     margin-bottom: 40px;
+    margin-right: 75px;
   }
   .module-container {
     max-width: 600px;
@@ -213,6 +214,7 @@ export default {
     border-radius: 5px;
     max-width: 750px;
     padding: 15px;
+    grid-row-start: 1;
     grid-column-start: 2;
     align-self: start;
   }

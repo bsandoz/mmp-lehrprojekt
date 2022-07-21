@@ -1,8 +1,8 @@
 <template>
   <router-link class="unstyled-link" v-if="singleModule && userIsLoggedIn" :to="moduleLink">
     <div>
-      <h3>{{ singleModule.title }}</h3>
-      <p>{{ singleModule.text }}</p>
+      <h3 class="module-title">{{ singleModule.title }}</h3>
+      <p class="module-summary">{{ singleModule.text }}</p>
       <p class="completed" v-if="singleModule.isCompleted">Du hast dieses Kapitel erfolgreich abgeschlossen!</p>
       <!--Change Progress to Users db
       <p class="progress-bar">Progress: {{ singleModule.progress }}%</p>
@@ -76,5 +76,11 @@ export default {
   }
   .progress-bar {
     font-style: italic;
+  }
+  .module-title {
+    font-size: 18pt;
+  }
+  .module-summary {
+    font-size: 14pt;
   }
 </style>

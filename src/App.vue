@@ -78,6 +78,9 @@ export default {
     margin-top: 50px;
     font-weight: bold;
   }
+  li {
+    padding-left: 10px;
+  }
   ol li::marker {
     color: var(--main-accent-color);
   }
@@ -164,6 +167,9 @@ export default {
   }
   .bold {
     font-weight: bold;
+  }
+  .header-summary {
+    margin-top: 100px;
   }
   input[type=text], select {
     max-width: 25%;
