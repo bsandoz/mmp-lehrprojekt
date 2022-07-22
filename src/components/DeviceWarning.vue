@@ -26,7 +26,7 @@ export default {
     <div class="warning-container">
       <img id="logo" src="../assets/img/logo-v1.png" alt="">
       <div class="warning-text">
-        <h2>Für diese Webseite existiert noch keine Mobile-Version!</h2>
+        <h3>Für diese Webseite existiert noch keine Mobile-Version!</h3>
         <p>Bitte nutze diese Webseite auf einem Laptop- oder Desktop-Bildschirm.</p>
       </div>
     </div>
@@ -34,13 +34,15 @@ export default {
 </template>
 
 <style lang="css" scoped>
+  
   .mobile-warning {
     position: fixed;
     background-color: var(--main-accent-color);
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .warning-container {

@@ -1,5 +1,5 @@
 <template>
-  <DeviceWarning v-show="isMobile" @mobile="setIsMobile" />
+  <DeviceWarning v-if="isMobile" @mobile="setIsMobile" />
   <header>
     <Header />
     <div class="wrapper">
