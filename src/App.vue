@@ -1,4 +1,5 @@
 <template>
+  <DeviceWarning v-show="isMobile" @mobile="setIsMobile" />
   <header>
     <Header />
     <div class="wrapper">
@@ -16,15 +17,20 @@
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
+import DeviceWarning from './components/DeviceWarning.vue'
+
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
+    DeviceWarning,
   },
   data() {
     return {
       content: null,
+
+      isMobile: false,
     }
   },
   methods: {
@@ -33,6 +39,11 @@ export default {
       axios.get('system/ajax/getModules.php').then(response => (this.content = response.data));
     },
     */
+
+    setIsMobile(bool) {
+      this.isMobile = bool;
+    }
+
   },
   created() {
     //this.fetchData();
@@ -200,4 +211,7 @@ export default {
   figcaption {
     font-style: italic;
   }
+
+
+
 </style>
