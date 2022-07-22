@@ -1,5 +1,5 @@
 <template>
-  <DeviceWarning v-if="isMobile" @mobile="setIsMobile" />
+  <DeviceWarning v-show="isMobile" @mobile="setIsMobile" />
   <header>
     <Header />
     <div class="wrapper">
@@ -42,6 +42,15 @@ export default {
 
     setIsMobile(bool) {
       this.isMobile = bool;
+      this.hideOverflow(bool);
+    },
+    hideOverflow(bool) {
+      if (bool) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "visible";
+      }
+
     }
 
   },
