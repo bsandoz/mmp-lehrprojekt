@@ -5,6 +5,11 @@
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
+    <div id="timer-container">
+      <div id="timer">
+        <div id="timer-bar"></div>
+      </div>
+    </div>
     <!--<button class="btn continue-btn" :class="{ active: canContinue }" v-if="showContinueButton" @click="makeBoxesInvisible">Weiter</button>-->
     <div class="memory-container" :if="this.testQuizCompleted === false">
       <button class="btn" v-if="this.isGameRunning === false" @click="setMemoryBoxes">Memory starten!</button>
@@ -51,6 +56,8 @@ export default {
       canContinue: false,
       message: "",
       messageType: String,
+
+      barTimer: 0,
 
       //testQuizCompleted: null,
       userScore: Number,
@@ -120,7 +127,9 @@ export default {
           if (this.visibilityCounter >= 2) {
             this.stopRevealing = true;
             this.compareBoxes(this.firstBoxClicked, this.secondBoxClicked);
+            this.timer();
             setTimeout(this.makeBoxesInvisible, 3000);
+            this.barTimer = 0;
           }
         } else {
           console.log("Not allowed to reveal more boxes right now.");
@@ -247,6 +256,26 @@ export default {
       this.$emit("hideTestLead");
     },
 
+    timer() {
+      //console.log("Called timer function, barTimer is :" + this.barTimer);
+      if (this.barTimer == 0) {
+        this.barTimer = 1;
+        let elem = document.getElementById("timer-bar");
+        let width = 1;
+        let id = setInterval(frame, 28);
+        function frame() {
+          if (width >= 100) {
+            clearInterval(id);
+            this.barTimer = 0;
+            elem.style.width = 0 + "%";
+          } else {
+            width++;
+            elem.style.width = width + "%";
+          }
+        }
+      }
+    },
+
     prepareUserData() {
       //console.log(this.userScore);
       return {
@@ -370,6 +399,27 @@ export default {
     color: var(--dark-bg-text-color);
     cursor: pointer;
   }
+
+  #timer-container {
+    width: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #timer {
+    width: 100%;
+    background-color: var(--main-dark-color);
+    border-radius: 20px;
+  }
+
+  #timer-bar {
+    width: 0%;
+    height: 30px;
+    background-color: var(--confirm-color);
+    border-radius: 20px;
+  }
+
 </style>
 
 <!--

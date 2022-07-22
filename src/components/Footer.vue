@@ -30,9 +30,11 @@ export default {
 }
 .footer {
   margin-top: auto;
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
 .link {
   position: relative;
