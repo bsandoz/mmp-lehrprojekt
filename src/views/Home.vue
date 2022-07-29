@@ -1,8 +1,8 @@
 <template>
-  <div class="hero">
+  <div class="hero" v-if="!userIsLoggedIn">
     <img id="hero-image" src="../assets/img/hero-image-notext.jpg" alt="">
   </div>
-  <Lead class="lead-home" lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
+  <Lead class="lead-home" v-if="!userIsLoggedIn" lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
   <Content :content="content" />
   <div class="home-infos" v-if="!userIsLoggedIn">
     <div class="infobox" id="infobox-1">
@@ -18,9 +18,8 @@
       </p>
     </div>
     <div class="infobox" id="infobox-3">
-      <p class="info-text" id="info-3">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate
+      <img class="info-image" src="../assets/img/info-image-3.jpg" alt="Screenshot eines Quiz von EasyMusicTheory">
+      <p class="info-text" id="info-3">EasyMusicTheory setzt auf spielerisches, interaktives Lernen mit Quizzes und Minispielen. Sammle Punkte und messe dich mit anderen Spielern!
       </p>
     </div>
     <div class="btn" id="notLoggedInWarning" v-if="!userIsLoggedIn" @click="showModalRegister = true">
@@ -110,6 +109,7 @@ export default {
     background-color: var(--main-accent-color);
     box-shadow: 3px 6px #000000;
     color: var(--main-text-color);
+    text-align: center;
   }
   .home-infos {
     display: grid;
