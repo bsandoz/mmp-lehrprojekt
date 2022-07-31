@@ -108,6 +108,22 @@ export default {
       }
     }
   },
+  /*
+  updated() {
+    this.setCompletedModulesArray();
+    this.setModuleScores();
+    console.log("completedModulesArray: " + this.completedModulesArray);
+    for (var i = 0; i < this.completedModulesArray.length; i++) {
+       if (this.completedModulesArray[i]) {
+         this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
+         this.progressBars.push(this.calculateProgressBar(this.moduleScores[i], this.allModules[i].maxScore) + "%");
+         console.log(this.progressBars);
+         this.completedModules.push(this.allModules[i]);
+         console.log(this.completedModulesArray);
+         console.log(this.completedModules);
+       }
+    }
+  }*/
 }
 </script>
 
@@ -116,17 +132,17 @@ export default {
   <div class="profile" v-if="userIsLoggedIn">
     <div class="welcome">
       <h2 id="welcome-title">Willkommen, {{ userName }}!</h2>
-      <p id="welcome-text">Dies ist deine Profilseite. Hier findest du deinen Fortschritt, die erreichten Punktzahlen sowie Infos zu deinem Nutzerprofil.</p>
+      <p class="nomargin" id="welcome-text">Dies ist deine Profilseite. Hier findest du deinen Fortschritt, die erreichten Punktzahlen sowie Infos zu deinem Nutzerprofil.</p>
     </div>
     <div class="module-progress">
-      <p id="completed-modules-title" v-if="this.completedModules[0]">Dein Fortschritt:</p>
+      <p id="completed-modules-title" class="nomargin" v-if="this.completedModules[0]">Dein Fortschritt:</p>
       <div class="module-container" v-for="(item, index) in this.allModules" :key="item.id">
         <div>
           <div class="module-box" :class="{completed: item.isCompleted}">
-            <p class="bold" v-html="item.title"></p>
+            <p class="bold nomargin" v-html="item.title"></p>
             <div  v-if="item.isCompleted">
-              <p>Erreichte Punktzahl:</p>
-              <p class="bold" v-html="item.score"></p>
+              <p class="nomargin">Erreichte Punktzahl:</p>
+              <p class="bold nomargin" v-html="item.score"></p>
               <div class="progress-bar-outline">
                 <div :id="'progress-bar-' + (index+1)" :style="cssVars"></div>
               </div>
@@ -149,8 +165,8 @@ export default {
     </div>
     <div class="user-infos">
       <h3>Deine Profilinfos:</h3>
-      <p><b>Nutzername: </b>{{ this.userName }}</p>
-      <p><b>E-Mail Adresse: </b>{{ this.userMail }}</p>
+      <p class="nomargin"><b>Nutzername: </b>{{ this.userName }}</p>
+      <p class="nomargin"><b>E-Mail Adresse: </b>{{ this.userMail }}</p>
     </div>
   </div>
   <div v-if="!userIsLoggedIn">

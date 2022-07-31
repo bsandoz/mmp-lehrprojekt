@@ -90,6 +90,9 @@ export default {
   p {
     margin-bottom: 25px;
   }
+  .nomargin {
+    margin-bottom: 0px;
+  }
   img {
     max-width: 450px;
   }

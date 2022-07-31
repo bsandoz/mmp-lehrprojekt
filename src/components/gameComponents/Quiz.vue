@@ -320,8 +320,8 @@ export default {
         </div>
         <div id="results">
           <div class="result-message" v-if="answerChosen">
-            <h3 v-if="isAnswerCorrect">Korrekt! Weiter zur nächsten Frage?</h3>
-            <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter zur nächsten Frage?</h3>
+            <h3 v-if="isAnswerCorrect">Korrekt! Weiter?</h3>
+            <h3 v-if="!isAnswerCorrect">Das war leider die falsche Antwort! Weiter?</h3>
             <button id="next-button" class="btn" @click="nextQuestion">Fortfahren</button>
           </div>
           <p id="question-number" v-if="numberOfQuestions">{{ this.questionCounter }}/{{ this.numberOfQuestions }}</p>

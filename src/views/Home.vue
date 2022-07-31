@@ -144,6 +144,7 @@ export default {
     font-size: clamp(10pt, 1.3vw, 14pt);
     margin-right: 10px;
     margin-left: 10px;
+    margin-bottom: 0px;
   }
   #infobox-1 {
     grid-column-start: 2;
