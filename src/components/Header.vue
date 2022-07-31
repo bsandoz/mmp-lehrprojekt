@@ -2,7 +2,7 @@
   <div class="header">
     <div class="header-left">
       <router-link class="home-link" to="/">
-        <img class="logo" src="../assets/img/logo-v1.png" style="width:100px;height:100px;" alt="Logo">
+        <img class="logo" src="../assets/img/logo-v1.png" style="width:130px;height:130px;" alt="Logo">
       </router-link>
     </div>
     <div class="header-right">
@@ -18,7 +18,7 @@
       </Teleport>
       <Teleport to="body">
         <!-- use the modal component, pass in the prop -->
-        <ModalRegister :show="showModalRegister" @close="showModalRegister = false">
+        <ModalRegister :show="showModalRegister" @close="showModalRegister = false" @openLogin="this.showModalLogin = true">
           <template #header>
             <h3>Registrierung</h3>
           </template>

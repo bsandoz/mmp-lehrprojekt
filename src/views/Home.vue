@@ -137,11 +137,11 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 10px var(--main-accent-color);
+    box-shadow: 5px -10px var(--main-accent-color);
   }
   .info-text {
     padding: 25px;
-    font-size: 14pt;
+    font-size: clamp(10pt, 1.3vw, 14pt);
     margin-right: 10px;
     margin-left: 10px;
   }
@@ -172,7 +172,7 @@ export default {
     background-color: var(--main-bg-color);
     color: var(--main-dark-color);
     border-radius: 50px;
-    box-shadow: 5px 10px var(--main-accent-color);
+    box-shadow: 5px -10px var(--main-accent-color);
     padding: 25px;
     max-width: 500px;
     max-height: 200px;

@@ -22,7 +22,7 @@
               <button
                 class="modal-default-button btn"
                 id="close-btn"
-                @click="$emit('close')"
+                @click="$emit('close'); this.setPasswordIncorrect();"
               >Abbrechen</button>
             </slot>
           </div>
@@ -74,6 +74,7 @@ export default {
         const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
         if (res) {
           console.log("Login successful");
+          this.passwordIncorrect = false;
           this.userLogIn();
           this.setUserData(filteredUsersData[0]);
           localStorage.setItem('username', filteredUsersData[0].username);
@@ -88,6 +89,10 @@ export default {
         console.log("Username not found in database");
         this.usernameIncorrect = true;
       }
+    },
+    setPasswordIncorrect() {
+      //console.log("Set passwordIncorrect false");
+      this.passwordIncorrect = false;
     }
   }
 }

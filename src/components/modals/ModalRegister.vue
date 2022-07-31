@@ -31,8 +31,14 @@
 
               <button
                 class="btn"
+                v-show="!formSubmitted"
                 @click="$emit('close')"
-              >Abbrechen</button>
+              >{{ this.buttonText }}</button>
+              <button
+                class="btn"
+                v-show="formSubmitted"
+                @click="$emit('openLogin'), $emit('close')"
+              >Zum Login</button>
             </slot>
           </div>
         </div>
@@ -56,6 +62,8 @@ export default {
   },
   data() {
     return {
+      buttonText: "Abbrechen",
+
       formSubmitted: false,
       userForm: [
         {

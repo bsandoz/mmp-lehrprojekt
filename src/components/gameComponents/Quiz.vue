@@ -305,16 +305,16 @@ export default {
 
         </div>
         <div id="answers" class="answer-buttons" :class="{visible: this.isGameRunning}">
-          <button id="answer-1" class="btn" @click="checkAnswer(0)">
+          <button id="answer-1" class="btn answer-btn" @click="checkAnswer(0)">
 
           </button>
-          <button id="answer-2" class="btn" @click="checkAnswer(1)">
+          <button id="answer-2" class="btn answer-btn" @click="checkAnswer(1)">
 
           </button>
-          <button id="answer-3" class="btn" @click="checkAnswer(2)">
+          <button id="answer-3" class="btn answer-btn" @click="checkAnswer(2)">
 
           </button>
-          <button id="answer-4" class="btn" @click="checkAnswer(3)">
+          <button id="answer-4" class="btn answer-btn" @click="checkAnswer(3)">
 
           </button>
         </div>
@@ -340,15 +340,21 @@ export default {
     grid-template-rows: 1fr 1fr;
     visibility: hidden;
   }
+  .answer-btn {
+    background-color: var(--main-bg-color);
+    border-style: solid;
+    border-width: thick;
+    border-color: var(--main-accent-color);
+  }
   .visible {
     visibility: visible;
   }
   .correct {
-    background-color: var(--confirm-color);
+    border-color: var(--confirm-color);
   }
 
   .wrong {
-    background-color: var(--mistake-color);
+    border-color: var(--mistake-color);
   }
   #quiz-container {
     padding-left: 5%;

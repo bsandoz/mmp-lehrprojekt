@@ -87,6 +87,9 @@ export default {
     min-height: 90vh;
     background-color: var(--main-dark-color);
   }
+  p {
+    margin-bottom: 25px;
+  }
   img {
     max-width: 450px;
   }
