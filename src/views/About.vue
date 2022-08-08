@@ -1,7 +1,7 @@
 <template>
   <div class="about-box">
-    <h3>v0.0.1a</h3>
-    <p>Es handelt sich bei dieser Seite um eine Alpha-Version, die sich noch im Aufbau befindet.</p>
+    <h3>v0.5.1</h3>
+    <p>Es handelt sich bei dieser Seite um eine Beta-Version, die sich noch im Aufbau befindet.</p>
     <div class="credits">
       <p>Arrow by unlimicon from NounProject.com</p>
     </div>

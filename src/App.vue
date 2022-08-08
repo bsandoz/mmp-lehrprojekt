@@ -93,6 +93,15 @@ export default {
   .nomargin {
     margin-bottom: 0px;
   }
+  .note {
+    border-style: groove;
+    border-width: thin;
+    border-color: var(--main-accent-color);
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
   img {
     max-width: 450px;
   }

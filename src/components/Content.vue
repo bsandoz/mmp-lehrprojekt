@@ -1,6 +1,6 @@
 <template>
   <div v-if="content">
-    <h3 id="basics" v-if="userIsLoggedIn">Die Grundlagen:</h3>
+    <h3 id="basics" v-if="userIsLoggedIn">Teil 1 - Die Grundlagen:</h3>
     <SingleModule
       class="container btn"
       :id="'single-module-' + singleModule.id"
@@ -10,11 +10,25 @@
       :single-module="singleModule"
       :class= "{ bgcompleted: singleModule.isCompleted }"
     />
+    <SingleChallenge
+      class="container btn"
+      :id="'challenge-' + challenge.id"
+      v-for="challenge in challenges"
+      :key="challenge.id"
+      @click="setActiveModule(challenge)"
+      :single-challenge="challenge"
+      :class= "{ bgcompleted: challenge.isCompleted }"
+    />
+    <h3 id ="basics" v-if="userIsLoggedIn">Teil 2 - Für Fortgeschrittene:</h3>
+    <div id="coming-soon-box" class="container btn" v-if="userIsLoggedIn">
+      <h2 id="coming-soon-text">Coming Soon!</h2>
+    </div>
   </div>
 </template>
 
 <script>
 import SingleModule from './SingleModule.vue';
+import SingleChallenge from './SingleChallenge.vue';
 
 import { useModuleStore } from '@/store/ModuleStore.js'
 import { useUserStore } from '@/store/UserStore.js'
@@ -26,9 +40,11 @@ export default {
   name: 'Content',
   components: {
     SingleModule,
+    SingleChallenge,
   },
   props: {
     content: Object,
+    challenges: Object,
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
@@ -96,5 +112,11 @@ export default {
     background-image: linear-gradient(to right, var(--main-bg-color) , var(--confirm-color));
     border-color: var(--confirm-color);
     border-width: thick;
+  }
+  #coming-soon-text {
+    font-size: clamp(24pt, 4vw, 48pt);
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

@@ -17,6 +17,7 @@
                 <label :for="input.name">{{ input.placeholder }}
                   <span :class="input.req">*</span>
                 </label>
+                <br>
                 <input :type="input.type" :id="input.name" :name="input.name" v-model="input.value">
               </div>
               <button class="btn" id="register-button">Registrieren</button>

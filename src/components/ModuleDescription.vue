@@ -5,8 +5,7 @@
     <h4>{{ this.activeModule.text }}</h4>
     <p>{{ this.activeModule.details }}</p>
     <div id="content"></div>
-    <div id="exercise" class="btn">
-      <router-link v-if="isMounted" :to="this.exerciseLink" class="unstyled-link">
+    <router-link v-if="isMounted" :to="this.exerciseLink" class="btn unstyled-link" id="exercise">
         <div class="next-exercise">
           <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einem kurzen Quiz!</h3>
         </div>
@@ -16,8 +15,7 @@
           <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
           -->
         </div>
-      </router-link>
-    </div>
+    </router-link>
   </div>
 </template>
 

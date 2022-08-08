@@ -3,7 +3,7 @@
     <img id="hero-image" src="../assets/img/hero-image-notext.jpg" alt="">
   </div>
   <Lead class="lead-home" v-if="!userIsLoggedIn" lead="Mit EasyMusicTheory lernst du Musiktheorie auf leicht verständliche und spielerische Art. Lege jetzt los und lerne die Grundbausteine der Musik! "/>
-  <Content :content="content" />
+  <Content :content="content" :challenges="challenges" />
   <div class="home-infos" v-if="!userIsLoggedIn">
     <div class="infobox" id="infobox-1">
       <p class="info-text" id="info-1">Du hast vor kurzem angefangen, ein Instrument zu erlernen und das Notenlesen fällt dir noch schwer?
@@ -59,7 +59,9 @@ export default {
   data() {
     return {
       content: null,
+      challenges: null,
       singleModule: null,
+      singleChallenge: null,
 
       showModalRegister: false,
     }
@@ -69,20 +71,27 @@ export default {
     ...mapState(useUserStore, ['userData']),
     ...mapState(useUserStore, ['completedModulesArray']),
     ...mapState(useModuleStore, ['allModules']),
+    ...mapState(useModuleStore, ['allChallenges']),
   },
   methods: {
     ...mapActions(useModuleStore, ['getAllModules']),
+    ...mapActions(useModuleStore, ['getAllChallenges']),
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
   async mounted() {
     await this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
     this.content = this.allModules;
     await console.log(this.content);
+
+    await this.getAllChallenges('https://db-easymusictheory.directus.app/items/challenges')
+    this.challenges = this.allChallenges;
+    await console.log(this.challenges);
   },
   updated() {
     //Show completed modules
     if (this.userData) {
       this.setCompletedModulesArray();
+      console.log(this.content);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
         if (this.completedModulesArray[i]) {
           this.content[i].isCompleted = true;

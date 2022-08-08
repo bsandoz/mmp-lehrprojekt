@@ -5,6 +5,7 @@ export const useModuleStore = defineStore("ModuleStore", {
   state: () => {
     return {
       allModules: null,
+      allChallenges: null,
       activeModule: {
         id: Number,
         title: '',
@@ -26,6 +27,21 @@ export const useModuleStore = defineStore("ModuleStore", {
             console.log(error);
           })
         await console.log(this.allModules);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getAllChallenges(api) {
+      const headers = { "Authorization": `Bearer ${this.apiToken}` };
+      try {
+        await console.log("Called getAllChallenges from ModuleStore.js");
+        await axios
+          .get (api, { headers })
+          .then (response => (this.allChallenges = response.data.data))
+          .catch (function(error) {
+            console.log(error);
+          })
+        await console.log(this.allChallenges);
       } catch (error) {
         console.log(error);
       }
