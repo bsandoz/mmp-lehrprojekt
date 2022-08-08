@@ -45,6 +45,7 @@ export default {
 
       message: null,
       moduleId: null,
+      challengeId: null,
     }
   },
   methods: {
@@ -74,9 +75,15 @@ export default {
     },
 
     createApiLink() {
-      this.moduleId = this.activeModule.id + 1;
-      this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
-      console.log(this.apiLink);
+      if (this.activeModule) {
+        this.moduleId = this.activeModule.id + 1;
+        this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
+        console.log(this.apiLink);
+      } else if (this.activeChallenge) {
+        this.challengeId = this.activeChallenge.id + 1;
+        this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
+        console.log(this.apiLink);
+      }
     },
 
     splitArray(array) {
@@ -235,19 +242,35 @@ export default {
     },
 
     prepareUserData() {
+      //do this if moduleId is set
+      if (this.moduleId) {
+        if (this.moduleId === 1) {
+          return {
+            module1Completed: true,
+            module1Score: this.quizPoints,
+          }
+        } else if (this.moduleId === 3) {
+          return {
+            module3Completed: true,
+            module3Score: this.quizPoints,
+          }
+        }
+      } else if (this.challengeId) {
+          if (this.challengeId === 1) {
+            return {
+              challenge1Completed: true,
+              challenge1Score: this.quizPoints,
+            }
+          } /* else if (this.challengeId === 3) {
+            return {
+              challenge3Completed: true,
+              challenge3Score: this.quizPoints,
+            }
+          }*/
+      }
       //console.log(this.activeModule.id);
       //let moduleId = this.activeModule.id + 1;
-      if (this.moduleId === 1) {
-        return {
-          module1Completed: true,
-          module1Score: this.quizPoints,
-        }
-      } else if (this.moduleId === 3) {
-        return {
-          module3Completed: true,
-          module3Score: this.quizPoints,
-        }
-      }
+
     },
 
     async register() {
@@ -266,15 +289,22 @@ export default {
           this.error.errorSubmit = true
         })
       await this.getAllUsersData("https://db-easymusictheory.directus.app/items/users/" + id);
-      await this.setCompletedModulesArray();
+      if (this.moduleId) {
+        await this.setCompletedModulesArray();
+      } else if (this.challengeId) {
+        await this.setCompletedChallengesArray();
+      }
+
     },
 
     ...mapActions(useUserStore, ['getAllUsersData']),
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+    ...mapActions(useUserStore, ['setCompletedChallengesArray']),
 
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useModuleStore, ['activeChallenge']),
     ...mapState(useModuleStore, ['apiToken']),
     ...mapState(useUserStore, ['apiToken']),
     ...mapState(useUserStore, ['userData']),
@@ -292,7 +322,7 @@ export default {
       <div class="intro-message" v-if="!isGameRunning">
         <p v-if="this.moduleId === 1">Überprüfe nun dein Wissen zum Notensystem mit diesem Quiz! Benenne die gezeigten Noten richtig.
           Als Erinnerung: Das E liegt auf der unteren Notenlinie. Viel Erfolg! </p>
-        <p v-if="this.moduleId === 3">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
+        <p v-if="this.challengeId === 1">In diesem Quiz wird nun dein erlerntes Wissen aus allen drei vorangegangenen Kapiteln auf die Probe gestellt.
         Hör genau hin und wähle die Antwort aus, die zum Audioclip passt! </p>
         <button v-if="!isGameRunning" type="button" name="button" class="btn start-game-btn" @click="splitArray(this.elementsArray); nextQuestion();">Spiel starten</button>
       </div>

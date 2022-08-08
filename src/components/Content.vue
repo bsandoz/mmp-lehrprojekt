@@ -15,7 +15,7 @@
       :id="'challenge-' + challenge.id"
       v-for="challenge in challenges"
       :key="challenge.id"
-      @click="setActiveModule(challenge)"
+      @click="setActiveChallenge(challenge)"
       :single-challenge="challenge"
       :class= "{ bgcompleted: challenge.isCompleted }"
     />
@@ -61,6 +61,7 @@ export default {
     */
 
     ...mapActions(useModuleStore, ['setActiveModule']),
+    ...mapActions(useModuleStore, ['setActiveChallenge']),
   },
 }
 </script>

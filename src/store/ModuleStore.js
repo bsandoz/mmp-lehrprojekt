@@ -10,6 +10,10 @@ export const useModuleStore = defineStore("ModuleStore", {
         id: Number,
         title: '',
       },
+      activeChallenge: {
+        id: Number,
+        title: '',
+      },
 
       apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
     }
@@ -47,6 +51,9 @@ export const useModuleStore = defineStore("ModuleStore", {
       }
     },
     setActiveModule(clickedModule) {
+      //Clear activeModule and activeChallenge
+      this.activeModule = null;
+      this.activeChallenge = null;
       console.log("Called setActiveModule from ModuleStore.js");
       //Subtract 1 from id to correctly correspond to array id (database IDs start with 1, array with 0)
       clickedModule.id -= 1;
@@ -54,6 +61,18 @@ export const useModuleStore = defineStore("ModuleStore", {
       console.log(this.activeModule);
       console.log("activeModule ID is " + this.activeModule.id);
       console.log("activeModule Title is " + this.activeModule.title);
+    },
+    setActiveChallenge(clickedChallenge) {
+      //Clear activeModule and activeChallenge
+      this.activeModule = null;
+      this.activeChallenge = null;
+      console.log("Called setActiveChallenge from ModuleStore.js");
+      //Subtract 1 from id to correctly correspond to array id (database IDs start with 1, array with 0)
+      clickedChallenge.id -= 1;
+      this.activeChallenge = this.allChallenges[clickedChallenge.id];
+      console.log(this.activeChallenge);
+      console.log("activeChallenge ID is " + this.activeChallenge.id);
+      console.log("activeChallenge Title is " + this.activeChallenge.title);
     },
   },
   //getters

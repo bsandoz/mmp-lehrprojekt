@@ -5,6 +5,7 @@ import Module from '../views/Module.vue'
 import Exercise from '../views/Exercise.vue'
 import Test from '../views/Test.vue'
 import Profile from '../views/Profile.vue'
+import Challenge from '../views/Challenge.vue'
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/module/:id',
     name: 'Module',
     component: Module,
+  },
+  {
+    path: '/challenge/:id',
+    name: 'Challenge',
+    component: Challenge,
   },
   {
     path: '/exercise-memory',

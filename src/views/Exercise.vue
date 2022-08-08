@@ -30,13 +30,23 @@ export default {
   },
   computed: {
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useModuleStore, ['activeChallenge']),
   },
   mounted() {
-    console.log(this.activeModule.gameType);
-    if (this.activeModule.gameType === "memory") {
-      this.isMemory = true;
-    } else if (this.activeModule.gameType === "quiz") {
-      this.isQuiz = true;
+    if (this.activeModule) {
+      console.log(this.activeModule.gameType);
+      if (this.activeModule.gameType === "memory") {
+        this.isMemory = true;
+      } else if (this.activeModule.gameType === "quiz") {
+        this.isQuiz = true;
+      }
+    } else if (this.activeChallenge) {
+      console.log(this.activeChallenge.gameType);
+      if (this.activeChallenge.gameType === "memory") {
+        this.isMemory = true;
+      } else if (this.activeChallenge.gameType === "quiz") {
+        this.isQuiz = true;
+      }
     }
   }
 }

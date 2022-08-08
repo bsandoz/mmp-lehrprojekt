@@ -7,6 +7,7 @@ export const useUserStore = defineStore("UserStore", {
       userIsLoggedIn: false,
       userData: null,
       completedModulesArray: [],
+      completedChallengesArray: [],
 
       apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
 
@@ -53,6 +54,7 @@ export const useUserStore = defineStore("UserStore", {
     userLogOut() {
       this.userData = null;
       this.completedModulesArray = [];
+      this.completedChallengesArray = [];
       this.module1Score = null;
       this.module2Score = null;
       this.module3Score = null;
@@ -85,6 +87,15 @@ export const useUserStore = defineStore("UserStore", {
         this.completedModulesArray.push(this.userData.module3Completed);
     },
 
+    setCompletedChallengesArray() {
+        //clear array before filling
+        this.completedChallengesArray = [];
+
+        this.completedChallengesArray.push(this.userData.challenge1Completed);
+        this.completedChallengesArray.push(this.userData.challenge2Completed);
+        this.completedChallengesArray.push(this.userData.challenge3Completed);
+    },
+
     setModule1Score(score) {
       this.module1Score = score;
     },
@@ -96,6 +107,10 @@ export const useUserStore = defineStore("UserStore", {
 
     setModule3Score(score) {
       this.module3Score = score;
+    },
+
+    setChallenge1Score(score) {
+      this.challenge1Score = score;
     },
 
     async getUsersDataForLeaderboard(api, id) {

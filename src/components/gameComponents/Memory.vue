@@ -5,6 +5,8 @@
   <div class="exercise" v-if="!questionsActive">
     <Lead lead="In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt.
     Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
+    <!--<Lead v-if="this.moduleId === 3" lead="In diesem Memory verschiedene Notenlängen und Pausenlängen versteckt.
+    Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken." />-->
     <div id="timer-container">
       <div id="timer">
         <div id="timer-bar"></div>
@@ -73,10 +75,24 @@ export default {
   },
   methods: {
 
+    /*
     createApiLink() {
       let id = this.activeModule.id + 1;
       this.apiLink = "https://db-easymusictheory.directus.app/items/module" + id + "GameElements";
       console.log(this.apiLink);
+    },
+    */
+
+    createApiLink() {
+      if (this.activeModule) {
+        this.moduleId = this.activeModule.id + 1;
+        this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
+        console.log(this.apiLink);
+      } else if (this.activeChallenge) {
+        this.challengeId = this.activeChallenge.id + 1;
+        this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
+        console.log(this.apiLink);
+      }
     },
 
     async startGame() {
@@ -276,12 +292,34 @@ export default {
       }
     },
 
+    /*Outdated
     prepareUserData() {
       //console.log(this.userScore);
       return {
         module2Completed: true,
         module2Score: this.userScore,
       }
+    },
+    */
+
+    prepareUserData() {
+      //do this if moduleId is set
+      if (this.moduleId) {
+        if (this.moduleId === 2) {
+          return {
+            module2Completed: true,
+            module2Score: this.userScore,
+          }
+        } else if (this.moduleId === 3) {
+          return {
+            module3Completed: true,
+            module3Score: this.userScore,
+          }
+        }
+      }
+      //console.log(this.activeModule.id);
+      //let moduleId = this.activeModule.id + 1;
+
     },
 
     async register() {
@@ -300,7 +338,11 @@ export default {
           this.error.errorSubmit = true
         })
       await this.getAllUsersData("https://db-easymusictheory.directus.app/items/users/" + id);
-      await this.setCompletedModulesArray();
+      if (this.moduleId) {
+        await this.setCompletedModulesArray();
+      } else if (this.challengeId) {
+        await this.setCompletedChallengesArray();
+      }
     },
 
     /*Test functions no longer needed
@@ -311,6 +353,7 @@ export default {
     ...mapActions(useUserStore, ['setModule2Score']),
     ...mapActions(useUserStore, ['getAllUsersData']),
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+    ...mapActions(useUserStore, ['setCompletedChallengesArray']),
   },
   computed: {
     /* Test variables no longer needed
@@ -324,6 +367,7 @@ export default {
     */
 
     ...mapState(useModuleStore, ['activeModule']),
+    ...mapState(useModuleStore, ['activeChallenge']),
     ...mapState(useModuleStore, ['apiToken']),
     ...mapState(useUserStore, ['apiToken']),
     ...mapState(useUserStore, ['module2Score']),
