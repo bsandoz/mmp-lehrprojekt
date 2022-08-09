@@ -36,6 +36,7 @@ export default {
       content: null,
       exerciseLink: null,
       isMounted: false,
+      adjustedId: null,
     }
   },
   computed: {
@@ -49,8 +50,9 @@ export default {
     let doc = document.getElementById("content");
     doc.innerHTML = this.content;
     */
+    this.adjustedId = this.activeChallenge.id - 1;
 
-    this.exerciseLink = "/exercise/" + this.activeChallenge.id;
+    this.exerciseLink = "/exercise/" + this.adjustedId;
     console.log(this.exerciseLink);
 
     console.log(this.activeChallenge);

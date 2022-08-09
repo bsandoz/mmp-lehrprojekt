@@ -27,7 +27,6 @@
       <img src="../assets/img/icon-arrow.png" style="width:100px;height:50px;" alt="">
     </div>
     <Teleport to="body">
-      <!-- use the modal component, pass in the prop -->
       <ModalRegister :show="showModalRegister" @close="showModalRegister = false">
         <template #header>
           <h3>Registrierung</h3>
@@ -80,34 +79,41 @@ export default {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
     ...mapActions(useUserStore, ['setCompletedChallengesArray']),
   },
-  async mounted() {
-    await this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
+  created() {
+    if (this.userIsLoggedIn === false) {
+      this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
+      this.getAllChallenges('https://db-easymusictheory.directus.app/items/challenges')
+    }
+  },
+  mounted() {
     this.content = this.allModules;
-    await console.log(this.content);
-
-    await this.getAllChallenges('https://db-easymusictheory.directus.app/items/challenges')
+    console.log(this.content);
     this.challenges = this.allChallenges;
-    await console.log(this.challenges);
+    console.log(this.challenges);
+  },
 
-    if (this.userData) {
-      await this.setCompletedChallengesArray();
+  beforeUpdate() {
+    this.content = this.allModules;
+    console.log(this.content);
+    this.challenges = this.allChallenges;
+    console.log(this.challenges);
+    console.log(this.allChallenges);
+    //Show completed modules
+    if (this.userData && this.content && this.challenges) {
+      this.setCompletedChallengesArray();
       for (var i = 0; i < this.completedChallengesArray.length; i++) {
         if (this.completedChallengesArray[i]) {
           this.challenges[i].isCompleted = true;
         }
       }
-      await this.setCompletedModulesArray();
-      await console.log(this.content);
+      this.setCompletedModulesArray();
       for (var i = 0; i < this.completedModulesArray.length; i++) {
         if (this.completedModulesArray[i]) {
           this.content[i].isCompleted = true;
         }
       }
+      console.log(this.content);
     }
-  },
-  updated() {
-    //Show completed modules
-
   }
 }
 </script>

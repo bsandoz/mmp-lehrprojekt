@@ -137,16 +137,16 @@ export default {
            console.log(this.allModules);
          }
       }
-      console.log("completedChallengesArray: " + this.completedChallengesArray);
+      //console.log("completedChallengesArray: " + this.completedChallengesArray);
       for (var i = 0; i < this.completedChallengesArray.length; i++) {
          if (this.completedChallengesArray[i]) {
            this.allChallenges[i].score = this.challengeScores[i] + " von " + this.allChallenges[i].maxScore;
            this.challengeProgressBars.push(this.calculateProgressBar(this.challengeScores[i], this.allChallenges[i].maxScore) + "%");
-           console.log(this.challengeProgressBars);
+           //console.log(this.challengeProgressBars);
            this.completedChallenges.push(this.allChallenges[i]);
-           console.log(this.completedChallengesArray);
-           console.log(this.completedChallenges);
-           console.log(this.allChallenges);
+           //console.log(this.completedChallengesArray);
+           //console.log(this.completedChallenges);
+           //console.log(this.allChallenges);
          }
       }
     }

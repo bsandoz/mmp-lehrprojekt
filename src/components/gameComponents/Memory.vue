@@ -90,12 +90,12 @@ export default {
 
     createApiLink() {
       if (this.activeModule) {
-        this.moduleId = this.activeModule.id + 1;
+        this.moduleId = this.activeModule.id;
         this.idForLead = this.moduleId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
         console.log(this.apiLink);
       } else if (this.activeChallenge) {
-        this.challengeId = this.activeChallenge.id + 1;
+        this.challengeId = this.activeChallenge.id;
         this.idForLead = this.challengeId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
         console.log(this.apiLink);

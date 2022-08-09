@@ -70,7 +70,7 @@ export default {
       await console.log(filteredUsersData);
       if (filteredUsersData.length > 0) {
         await console.log(filteredUsersData[0].password);
-        await console.log(this.password);
+        //await console.log(this.password);
         const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
         if (res) {
           console.log("Login successful");

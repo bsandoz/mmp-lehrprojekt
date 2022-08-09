@@ -37,6 +37,7 @@ export default {
       content: null,
       exerciseLink: null,
       isMounted: false,
+      adjustedId: null,
     }
   },
   computed: {
@@ -48,7 +49,9 @@ export default {
     let doc = document.getElementById("content");
     doc.innerHTML = this.content;
 
-    this.exerciseLink = "/exercise/" + this.activeModule.id;
+    this.adjustedId = this.activeModule.id - 1;
+
+    this.exerciseLink = "/exercise/" + this.adjustedId;
     console.log(this.exerciseLink);
 
     console.log(this.activeModule);
