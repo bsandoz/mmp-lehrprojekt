@@ -36,7 +36,6 @@ export default {
     ...mapState(useUserStore, ['completedModulesArray']),
 
     moduleLink() {
-      //return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
       return this.moduleUrl + this.singleModule.id;
     },
   },

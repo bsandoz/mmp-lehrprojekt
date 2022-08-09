@@ -238,7 +238,7 @@ export default {
       }
     },
     clickedMessageBox() {
-      this.$router.push({ name: 'Profile' });
+      this.$router.push({ name: 'Home' });
     },
 
     prepareUserData() {

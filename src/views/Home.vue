@@ -80,12 +80,15 @@ export default {
     ...mapActions(useUserStore, ['setCompletedChallengesArray']),
   },
   created() {
+    console.log("created() hook in Home executed");
     if (this.userIsLoggedIn === false) {
+      console.log("Refreshed allModules and allChallenges from API");
       this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
       this.getAllChallenges('https://db-easymusictheory.directus.app/items/challenges')
     }
   },
   mounted() {
+    console.log("mounted() hook in Home executed");
     this.content = this.allModules;
     console.log(this.content);
     this.challenges = this.allChallenges;
@@ -93,6 +96,7 @@ export default {
   },
 
   beforeUpdate() {
+    console.log("beforeUpdate() hook in Home executed");
     this.content = this.allModules;
     console.log(this.content);
     this.challenges = this.allChallenges;

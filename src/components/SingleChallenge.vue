@@ -33,7 +33,6 @@ export default {
     ...mapState(useUserStore, ['completedModulesArray']),
 
     challengeLink() {
-      //return this.singleModule.id ? this.moduleUrl + this.singleModule.id : null
       return this.challengeUrl + this.singleChallenge.id;
     },
   },

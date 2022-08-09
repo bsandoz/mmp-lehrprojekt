@@ -77,6 +77,7 @@ export default {
           this.passwordIncorrect = false;
           this.userLogIn();
           this.setUserData(filteredUsersData[0]);
+          //Following localStorage items should not be needed anymore?
           localStorage.setItem('username', filteredUsersData[0].username);
           localStorage.setItem('userId', filteredUsersData[0].id);
           localStorage.setItem('testQuizCompleted', filteredUsersData[0].testQuizCompleted);

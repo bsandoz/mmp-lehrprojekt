@@ -100,8 +100,45 @@ export default {
       this.$router.push(path);
     },
 
+    updateModulesAndChallenges() {
+      this.setCompletedModulesArray();
+      this.setCompletedChallengesArray();
+      //Compare module IDs with IDs of completed modules saved in userStore
+      //console.log("User data: " + this.userData);
+      //console.log("allModules Array: " + this.allModules);
+
+      this.setModuleScores();
+      this.setChallengeScores();
+
+      console.log("completedModulesArray: " + this.completedModulesArray);
+      for (var i = 0; i < this.completedModulesArray.length; i++) {
+         if (this.completedModulesArray[i]) {
+           this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
+           this.progressBars.push(this.calculateProgressBar(this.moduleScores[i], this.allModules[i].maxScore) + "%");
+           //console.log(this.progressBars);
+           this.completedModules.push(this.allModules[i]);
+           //console.log(this.completedModulesArray);
+           //console.log(this.completedModules);
+           //console.log(this.allModules);
+         }
+      }
+      //console.log("completedChallengesArray: " + this.completedChallengesArray);
+      for (var i = 0; i < this.completedChallengesArray.length; i++) {
+         if (this.completedChallengesArray[i]) {
+           this.allChallenges[i].score = this.challengeScores[i] + " von " + this.allChallenges[i].maxScore;
+           this.challengeProgressBars.push(this.calculateProgressBar(this.challengeScores[i], this.allChallenges[i].maxScore) + "%");
+           //console.log(this.challengeProgressBars);
+           this.completedChallenges.push(this.allChallenges[i]);
+           //console.log(this.completedChallengesArray);
+           //console.log(this.completedChallenges);
+           //console.log(this.allChallenges);
+         }
+      }
+    },
+
   },
   created() {
+    console.log("created() hook in Profile executed");
     if (!this.userData) {
       //this.$router.push({ name: 'Home' });
     } else {
@@ -117,38 +154,8 @@ export default {
       this.completionBooleanArray.push(this.userData.module2Completed);
       this.completionBooleanArray.push(this.userData.module3Completed);
       */
-      this.setCompletedModulesArray();
-      this.setCompletedChallengesArray();
-      this.setModuleScores();
-      this.setChallengeScores();
 
-      //Compare module IDs with IDs of completed modules saved in userStore
-      //console.log("User data: " + this.userData);
-      //console.log("allModules Array: " + this.allModules);
-      console.log("completedModulesArray: " + this.completedModulesArray);
-      for (var i = 0; i < this.completedModulesArray.length; i++) {
-         if (this.completedModulesArray[i]) {
-           this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
-           this.progressBars.push(this.calculateProgressBar(this.moduleScores[i], this.allModules[i].maxScore) + "%");
-           console.log(this.progressBars);
-           this.completedModules.push(this.allModules[i]);
-           console.log(this.completedModulesArray);
-           console.log(this.completedModules);
-           console.log(this.allModules);
-         }
-      }
-      //console.log("completedChallengesArray: " + this.completedChallengesArray);
-      for (var i = 0; i < this.completedChallengesArray.length; i++) {
-         if (this.completedChallengesArray[i]) {
-           this.allChallenges[i].score = this.challengeScores[i] + " von " + this.allChallenges[i].maxScore;
-           this.challengeProgressBars.push(this.calculateProgressBar(this.challengeScores[i], this.allChallenges[i].maxScore) + "%");
-           //console.log(this.challengeProgressBars);
-           this.completedChallenges.push(this.allChallenges[i]);
-           //console.log(this.completedChallengesArray);
-           //console.log(this.completedChallenges);
-           //console.log(this.allChallenges);
-         }
-      }
+      this.updateModulesAndChallenges();
     }
   },
   /*
