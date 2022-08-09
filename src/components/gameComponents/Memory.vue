@@ -3,11 +3,12 @@
   <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
   <!--<button type="button" name="button" @click="setMemoryBoxes">test</button>-->
   <div class="exercise" v-if="!questionsActive">
-    <Lead lead="In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt.
-    Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken." />
+    <Lead :lead = "this.leadText" />
     <!--<Lead v-if="this.moduleId === 3" lead="In diesem Memory verschiedene Notenlängen und Pausenlängen versteckt.
     Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken." />-->
+
     <div id="timer-container">
+      <h3 id="timer-text"> {{ this.timerText }} </h3>
       <div id="timer">
         <div id="timer-bar"></div>
       </div>
@@ -59,7 +60,11 @@ export default {
       message: "",
       messageType: String,
 
+      idForLead: Number,
+      leadText: "",
+
       barTimer: 0,
+      timerText: "Bereit",
 
       //testQuizCompleted: null,
       userScore: Number,
@@ -86,10 +91,12 @@ export default {
     createApiLink() {
       if (this.activeModule) {
         this.moduleId = this.activeModule.id + 1;
+        this.idForLead = this.moduleId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
         console.log(this.apiLink);
       } else if (this.activeChallenge) {
         this.challengeId = this.activeChallenge.id + 1;
+        this.idForLead = this.challengeId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
         console.log(this.apiLink);
       }
@@ -112,6 +119,7 @@ export default {
               console.log(error);
             })
           //await this.setMemoryBoxes();
+          await this.setLeadText(this.idForLead);
           await this.shuffle(this.memoryboxArray);
           this.isGameRunning = true;
           this.showContinueButton = true;
@@ -119,6 +127,14 @@ export default {
       }
       catch (error) {
         console.log(error);
+      }
+    },
+
+    setLeadText(id) {
+      if (id === 2) {
+        this.leadText = "In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt. Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken";
+      } else if (id === 3) {
+        this.leadText = "In diesem Memory sind verschiedene Notenlängen und Pausenlängen versteckt. Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken";
       }
     },
 
@@ -187,6 +203,7 @@ export default {
       return array;
     },
     makeBoxesInvisible() {
+      this.timerText = "Bereit";
       if (this.visibilityCounter >= 2) {
         for (var i = 0; i < this.memoryboxArray.length; i++) {
           this.memoryboxArray[i].isVisible = false;
@@ -276,6 +293,7 @@ export default {
       //console.log("Called timer function, barTimer is :" + this.barTimer);
       if (this.barTimer == 0) {
         this.barTimer = 1;
+        this.timerText = "Bitte warten...";
         let elem = document.getElementById("timer-bar");
         let width = 1;
         let id = setInterval(frame, 28);
@@ -462,6 +480,11 @@ export default {
     height: 30px;
     background-color: var(--confirm-color);
     border-radius: 20px;
+  }
+
+  #timer-text {
+    text-align: center;
+    margin: 5px;
   }
 
 </style>

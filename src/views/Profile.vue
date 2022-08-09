@@ -18,32 +18,45 @@ export default {
       userMail: null,
 
       completedModules: [],
+      completedChallenges: [],
       completionBooleanArray: [],
       moduleScores: [],
+      challengeScores: [],
 
       progressBars: [],
+      challengeProgressBars: [],
 
       moduleUrl: "/module/",
+      challengeUrl: "/challenge/",
     }
   },
   computed: {
     ...mapState(useUserStore, ['userData']),
     ...mapState(useUserStore, ['userIsLoggedIn']),
     ...mapState(useUserStore, ['completedModulesArray']),
+    ...mapState(useUserStore, ['completedChallengesArray']),
 
     ...mapState(useModuleStore, ['allModules']),
+    ...mapState(useModuleStore, ['allChallenges']),
 
     cssVars() {
       return {
         '--progress1': this.progressBars[0],
         '--progress2': this.progressBars[1],
-        '--progress3': this.progressBars[2]
+        '--progress3': this.progressBars[2],
       }
     },
+    cssVarsChallenges() {
+      return {
+        '--challenge-progress1': this.challengeProgressBars[0],
+      }
+    }
   },
   methods: {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+    ...mapActions(useUserStore, ['setCompletedChallengesArray']),
     ...mapActions(useModuleStore, ['setActiveModule']),
+    ...mapActions(useModuleStore, ['setActiveChallenge']),
 
     setModuleScores() {
       this.moduleScores = [];
@@ -53,6 +66,14 @@ export default {
       this.moduleScores.push(this.userData.module3Score);
 
       console.log(this.moduleScores);
+    },
+
+    setChallengeScores() {
+      this.challengeScores = [];
+
+      this.challengeScores.push(this.userData.challenge1Score);
+
+      console.log(this.challengeScores);
     },
 
     calculateProgressBar(score, maxScore) {
@@ -70,7 +91,14 @@ export default {
       this.setActiveModule(item);
 
       this.$router.push(path);
-    }
+    },
+
+    gotoChallenge(id, item) {
+      const path = this.challengeUrl + id;
+      this.setActiveChallenge(item);
+
+      this.$router.push(path);
+    },
 
   },
   created() {
@@ -90,7 +118,9 @@ export default {
       this.completionBooleanArray.push(this.userData.module3Completed);
       */
       this.setCompletedModulesArray();
+      this.setCompletedChallengesArray();
       this.setModuleScores();
+      this.setChallengeScores();
 
       //Compare module IDs with IDs of completed modules saved in userStore
       //console.log("User data: " + this.userData);
@@ -104,6 +134,19 @@ export default {
            this.completedModules.push(this.allModules[i]);
            console.log(this.completedModulesArray);
            console.log(this.completedModules);
+           console.log(this.allModules);
+         }
+      }
+      console.log("completedChallengesArray: " + this.completedChallengesArray);
+      for (var i = 0; i < this.completedChallengesArray.length; i++) {
+         if (this.completedChallengesArray[i]) {
+           this.allChallenges[i].score = this.challengeScores[i] + " von " + this.allChallenges[i].maxScore;
+           this.challengeProgressBars.push(this.calculateProgressBar(this.challengeScores[i], this.allChallenges[i].maxScore) + "%");
+           console.log(this.challengeProgressBars);
+           this.completedChallenges.push(this.allChallenges[i]);
+           console.log(this.completedChallengesArray);
+           console.log(this.completedChallenges);
+           console.log(this.allChallenges);
          }
       }
     }
@@ -163,6 +206,28 @@ export default {
       </div>
     -->
     </div>
+    <div class="challenge-progress">
+      <p id="completed-modules-title" class="nomargin" v-if="this.completedChallenges[0]">Deine abgeschlossenen Challenges:</p>
+      <p v-if="this.completedChallengesArray[0] === false">Du hast noch keine Challenges abgeschlossen.</p>
+      <div class="challenge-container" v-for="(item, index) in this.allChallenges" :key="item.id">
+        <div>
+          <div class="challenge-box" :class="{completed: item.isCompleted}">
+            <p class="bold nomargin" v-html="item.title"></p>
+            <div  v-if="item.isCompleted">
+              <p class="nomargin">Erreichte Punktzahl:</p>
+              <p class="bold nomargin" v-html="item.score"></p>
+              <div class="progress-bar-outline">
+                <div :id="'challenge-progress-bar-' + (index+1)" :style="cssVarsChallenges"></div>
+              </div>
+            </div>
+            <div id="buttons">
+              <!--<button class="btn" id="show-leaderboard-btn" @click="showLeaderboard(index + 1)">Rangliste anzeigen</button>-->
+              <button class="btn" id="goto-challenge-btn" @click="gotoChallenge(item.id, item)">Zur Challenge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="user-infos">
       <h3>Deine Profilinfos:</h3>
       <p class="nomargin"><b>Nutzername: </b>{{ this.userName }}</p>
@@ -187,7 +252,7 @@ export default {
     min-width: 750px;
     max-width: 1200px;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.8fr 1fr;
     grid-template-rows: 1fr 3fr;
     background-color: var(--main-bg-color);
     border-radius: 10px;
@@ -200,6 +265,9 @@ export default {
   .module-container {
     max-width: 600px;
     margin-right: 300px;
+  }
+  .challenge-container {
+    max-width: 600px;
   }
   .module-box {
     display: flex;
@@ -216,6 +284,21 @@ export default {
     margin-right: 10px;
     background-color: var(--main-bg-color);
   }
+  .challenge-box {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: grey;
+    color: grey;
+    padding: 15px;
+    min-height: 150px;
+    min-width: 300px;
+    max-width: 500px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: var(--main-bg-color);
+  }
   .completed {
     background-color: var(--main-accent-color);
     border-color: var(--main-dark-color);
@@ -223,6 +306,9 @@ export default {
   }
   .module-progress {
     grid-column-start: 1;
+  }
+  .challenge-progress {
+    grid-column-start: 2;
   }
   .user-infos {
     background-color: var(--main-accent-color);
@@ -273,6 +359,12 @@ export default {
 
     background-color: var(--confirm-color);
   }
+  #challenge-progress-bar-1 {
+    height: 20px;
+    width: var(--challenge-progress1);
+
+    background-color: var(--confirm-color);
+  }
   #buttons {
     display: flex;
     flex-direction: row;
@@ -292,7 +384,14 @@ export default {
     background-color: var(--main-dark-color);
     color: var(--dark-bg-text-color);
   }
+  #goto-challenge-btn {
+    background-color: var(--main-dark-color);
+    color: var(--dark-bg-text-color);
+  }
   #goto-module-btn:hover {
+    box-shadow: 3px 6px #000000;
+  }
+  #goto-challenge-btn:hover {
     box-shadow: 3px 6px #000000;
   }
 </style>

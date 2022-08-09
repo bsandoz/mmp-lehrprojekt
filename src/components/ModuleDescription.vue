@@ -7,7 +7,7 @@
     <div id="content"></div>
     <router-link v-if="isMounted" :to="this.exerciseLink" class="btn unstyled-link" id="exercise">
         <div class="next-exercise">
-          <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einem kurzen Quiz!</h3>
+          <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einer kurzen Übung!</h3>
         </div>
         <div class="start-exercise">
           <!--

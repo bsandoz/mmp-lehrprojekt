@@ -3,7 +3,6 @@
     <router-link to="/">Zurück zur Übersicht</router-link>
     <h2 class="module-title">{{ this.activeChallenge.title }}</h2>
     <h4>{{ this.activeChallenge.text }}</h4>
-    <p>{{ this.activeChallenge.details }}</p>
     <div id="content"></div>
     <router-link v-if="isMounted" :to="this.exerciseLink" class="btn unstyled-link" id="exercise">
         <div class="next-exercise">
@@ -45,9 +44,11 @@ export default {
   },
   mounted() {
     console.log("Mounted");
+    /*
     this.content = this.activeChallenge.content;
     let doc = document.getElementById("content");
     doc.innerHTML = this.content;
+    */
 
     this.exerciseLink = "/exercise/" + this.activeChallenge.id;
     console.log(this.exerciseLink);

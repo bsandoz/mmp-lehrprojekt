@@ -92,8 +92,8 @@ export const useUserStore = defineStore("UserStore", {
         this.completedChallengesArray = [];
 
         this.completedChallengesArray.push(this.userData.challenge1Completed);
-        this.completedChallengesArray.push(this.userData.challenge2Completed);
-        this.completedChallengesArray.push(this.userData.challenge3Completed);
+        //this.completedChallengesArray.push(this.userData.challenge2Completed);
+        //this.completedChallengesArray.push(this.userData.challenge3Completed);
     },
 
     setModule1Score(score) {

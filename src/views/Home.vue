@@ -70,6 +70,7 @@ export default {
     ...mapState(useUserStore, ['userIsLoggedIn']),
     ...mapState(useUserStore, ['userData']),
     ...mapState(useUserStore, ['completedModulesArray']),
+    ...mapState(useUserStore, ['completedChallengesArray']),
     ...mapState(useModuleStore, ['allModules']),
     ...mapState(useModuleStore, ['allChallenges']),
   },
@@ -77,6 +78,7 @@ export default {
     ...mapActions(useModuleStore, ['getAllModules']),
     ...mapActions(useModuleStore, ['getAllChallenges']),
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
+    ...mapActions(useUserStore, ['setCompletedChallengesArray']),
   },
   async mounted() {
     await this.getAllModules('https://db-easymusictheory.directus.app/items/modules')
@@ -86,18 +88,26 @@ export default {
     await this.getAllChallenges('https://db-easymusictheory.directus.app/items/challenges')
     this.challenges = this.allChallenges;
     await console.log(this.challenges);
-  },
-  updated() {
-    //Show completed modules
+
     if (this.userData) {
-      this.setCompletedModulesArray();
-      console.log(this.content);
+      await this.setCompletedChallengesArray();
+      for (var i = 0; i < this.completedChallengesArray.length; i++) {
+        if (this.completedChallengesArray[i]) {
+          this.challenges[i].isCompleted = true;
+        }
+      }
+      await this.setCompletedModulesArray();
+      await console.log(this.content);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
         if (this.completedModulesArray[i]) {
           this.content[i].isCompleted = true;
         }
       }
     }
+  },
+  updated() {
+    //Show completed modules
+
   }
 }
 </script>
