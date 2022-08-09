@@ -64,7 +64,7 @@ export default {
     padding-bottom: 20%;
   }
   .completed {
-    font-size: 14pt;
+    font-size: clamp(10pt, 1.3vw, 14pt);
     color: var(--confirm-color);
     margin-top: 25px;
     text-shadow: 0.5px 0.5px 0 #000,
@@ -81,6 +81,6 @@ export default {
     font-size: 18pt;
   }
   .module-summary {
-    font-size: 14pt;
+    font-size: clamp(10pt, 1.3vw, 14pt);
   }
 </style>
