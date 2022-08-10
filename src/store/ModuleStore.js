@@ -30,7 +30,7 @@ export const useModuleStore = defineStore("ModuleStore", {
           .catch (function(error) {
             console.log(error);
           })
-        await console.log(this.allModules);
+        //await console.log(this.allModules);
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +45,7 @@ export const useModuleStore = defineStore("ModuleStore", {
           .catch (function(error) {
             console.log(error);
           })
-        await console.log(this.allChallenges);
+        //await console.log(this.allChallenges);
       } catch (error) {
         console.log(error);
       }
