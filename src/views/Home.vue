@@ -19,7 +19,7 @@
     </div>
     <div class="infobox" id="infobox-3">
       <img class="info-image" src="../assets/img/info-image-3.jpg" alt="Screenshot eines Quiz von EasyMusicTheory">
-      <p class="info-text" id="info-3">EasyMusicTheory setzt auf spielerisches, interaktives Lernen mit Quizzes und Minispielen. Sammle Punkte und messe dich mit anderen Spielern!
+      <p class="info-text" id="info-3">EasyMusicTheory setzt auf spielerisches, interaktives Lernen mit Quizzes und Minispielen. Sammle Punkte und messe dich mit anderen Spieler*innen!
       </p>
     </div>
     <div class="btn" id="notLoggedInWarning" v-if="!userIsLoggedIn" @click="showModalRegister = true">
@@ -81,6 +81,7 @@ export default {
   },
   created() {
     console.log("created() hook in Home executed");
+    //console.log(import.meta.env.VITE_API_KEY);
     if (this.userIsLoggedIn === false) {
       console.log("Refreshed allModules and allChallenges from API");
       this.getAllModules('https://db-easymusictheory.directus.app/items/modules')

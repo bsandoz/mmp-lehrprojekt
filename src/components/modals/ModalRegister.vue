@@ -102,7 +102,7 @@ export default {
         missingFields: false,
         errorSubmit: false,
       },
-      apiToken: "C0l2X9yCEevB2a1ibOWT8YWbJ34HE3c8",
+      apiToken: import.meta.env.VITE_API_KEY,
     }
   },
   computed: {

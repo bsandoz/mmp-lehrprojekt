@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="footer">
       <router-link class="unstyled-link link" id="about" to="/about">About & Impressum</router-link>
-      <p>Bachelor-Projekt von Bénédict Sandoz, 2022</p>
+      <p>© Bénédict Sandoz, 2022</p>
     </div>
   </div>
 </template>
