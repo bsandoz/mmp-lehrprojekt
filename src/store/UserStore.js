@@ -113,7 +113,7 @@ export const useUserStore = defineStore("UserStore", {
       this.challenge1Score = score;
     },
 
-    async getUsersDataForLeaderboard(api, id) {
+    async getUsersDataForLeaderboard(api, type, id) {
       this.userDataForLeaderboard = [];
       this.userDataForLeaderboard2 = [];
       this.userDataForLeaderboard3 = [];
@@ -121,7 +121,7 @@ export const useUserStore = defineStore("UserStore", {
       let usersData = [];
 
       console.log(id);
-      this.activeLeaderboard = id;
+      console.log(type);
 
       const headers = { "Authorization": `Bearer ${this.apiToken}` };
       try {
@@ -136,31 +136,48 @@ export const useUserStore = defineStore("UserStore", {
             console.log(error);
           }
 
-      if (id === 1) {
-        for (var i = 0; i < usersData.length; i++) {
-          if (usersData[i].module1Completed) {
-            await this.userDataForLeaderboard.push(usersData[i]);
-            await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard);
-            //Sort by descending score
-            await this.userDataForLeaderboard.sort((a, b) => b.module1Score - a.module1Score);
+      if (type === "module") {
+        if (id === 1) {
+          for (var i = 0; i < usersData.length; i++) {
+            if (usersData[i].module1Completed) {
+              await this.userDataForLeaderboard.push(usersData[i]);
+              await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard);
+              //Sort by descending score
+              await this.userDataForLeaderboard.sort((a, b) => b.module1Score - a.module1Score);
+              this.activeLeaderboard = "module" + id;
+            }
+          }
+        } else if (id === 2) {
+          for (var i = 0; i < usersData.length; i++) {
+            if (usersData[i].module2Completed) {
+              await this.userDataForLeaderboard.push(usersData[i]);
+              await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard);
+              //Sort by descending score
+              await this.userDataForLeaderboard.sort((a, b) => b.module2Score - a.module2Score);
+              this.activeLeaderboard = "module" + id;
+            }
+          }
+        } else if (id === 3) {
+          for (var i = 0; i < usersData.length; i++) {
+            if (usersData[i].module3Completed) {
+              await this.userDataForLeaderboard.push(usersData[i]);
+              await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard);
+              //Sort by descending score
+              await this.userDataForLeaderboard.sort((a, b) => b.module3Score - a.module3Score);
+              this.activeLeaderboard = "module" + id;
+            }
           }
         }
-      } else if (id === 2) {
-        for (var i = 0; i < usersData.length; i++) {
-          if (usersData[i].module2Completed) {
-            await this.userDataForLeaderboard.push(usersData[i]);
-            await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard);
-            //Sort by descending score
-            await this.userDataForLeaderboard.sort((a, b) => b.module2Score - a.module2Score);
-          }
-        }
-      } else if (id === 3) {
-        for (var i = 0; i < usersData.length; i++) {
-          if (usersData[i].module3Completed) {
-            await this.userDataForLeaderboard.push(usersData[i]);
-            await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard);
-            //Sort by descending score
-            await this.userDataForLeaderboard.sort((a, b) => b.module3Score - a.module3Score);
+      } else if (type === "challenge") {
+        if (id === 1) {
+          for (var i = 0; i < usersData.length; i++) {
+            if (usersData[i].challenge1Completed) {
+              await this.userDataForLeaderboard.push(usersData[i]);
+              await console.log("Challenge 1 Leaderboard: " + this.userDataForLeaderboard);
+              //Sort by descending score
+              await this.userDataForLeaderboard.sort((a, b) => b.challenge1Score - a.challenge1Score);
+              this.activeLeaderboard = "challenge" + id;
+            }
           }
         }
       }

@@ -22,7 +22,7 @@ export default {
       //let box = document.getElementById('confirmation-box');
       this.mask.style.display="block";
 
-      this.getUsersDataForLeaderboard("https://db-easymusictheory.directus.app/items/users", id);
+      this.getUsersDataForLeaderboard("https://db-easymusictheory.directus.app/items/users", "module", id);
 
       document.getElementById('close-btn').onclick = function(){
          console.log("Click");
@@ -30,6 +30,21 @@ export default {
          self.mask.style.display="none";
       };
     },
+
+    showChallengeLeaderboard(id) {
+      let self = this;
+      //let box = document.getElementById('confirmation-box');
+      this.mask.style.display="block";
+
+      this.getUsersDataForLeaderboard("https://db-easymusictheory.directus.app/items/users", "challenge", id);
+
+      document.getElementById('close-btn').onclick = function(){
+         console.log("Click");
+         self.$emit('clickedLeaderboard');
+         self.mask.style.display="none";
+      };
+    },
+
     ...mapActions(useUserStore, ['getUsersDataForLeaderboard']),
   },
   computed: {
@@ -56,20 +71,25 @@ export default {
           <th>Name</th>
           <th>Punktzahl</th>
         </tr>
-        <tr v-if="this.activeLeaderboard === 1" v-for="(item, index) in this.userDataForLeaderboard">
+        <tr v-if="this.activeLeaderboard === 'module1'" v-for="(item, index) in this.userDataForLeaderboard">
           <td v-html="index + 1"></td>
           <td v-html="item.username"></td>
           <td v-html="item.module1Score"></td>
         </tr>
-        <tr v-if="this.activeLeaderboard === 2" v-for="(item, index) in this.userDataForLeaderboard">
+        <tr v-if="this.activeLeaderboard === 'module2'" v-for="(item, index) in this.userDataForLeaderboard">
           <td v-html="index + 1"></td>
           <td v-html="item.username"></td>
           <td v-html="item.module2Score"></td>
         </tr>
-        <tr v-if="this.activeLeaderboard === 3" v-for="(item, index) in this.userDataForLeaderboard">
+        <tr v-if="this.activeLeaderboard === 'module3'" v-for="(item, index) in this.userDataForLeaderboard">
           <td v-html="index + 1"></td>
           <td v-html="item.username"></td>
           <td v-html="item.module3Score"></td>
+        </tr>
+        <tr v-if="this.activeLeaderboard === 'challenge1'" v-for="(item, index) in this.userDataForLeaderboard">
+          <td v-html="index + 1"></td>
+          <td v-html="item.username"></td>
+          <td v-html="item.challenge1Score"></td>
         </tr>
       </table>
       <button class="btn" id="close-btn">Schliessen</button>

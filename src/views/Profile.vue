@@ -86,6 +86,11 @@ export default {
       this.$refs.leaderboard.showLeaderboard(id);
     },
 
+    showChallengeLeaderboard(id) {
+      console.log(id);
+      this.$refs.leaderboard.showChallengeLeaderboard(id);
+    },
+
     gotoModule(id, item) {
       const path = this.moduleUrl + id;
       this.setActiveModule(item);
@@ -228,7 +233,7 @@ export default {
               </div>
             </div>
             <div id="buttons">
-              <!--<button class="btn" id="show-leaderboard-btn" @click="showLeaderboard(index + 1)">Rangliste anzeigen</button>-->
+              <button class="btn" id="show-leaderboard-btn" @click="showChallengeLeaderboard(index + 1)">Rangliste anzeigen</button>
               <button class="btn" id="goto-challenge-btn" @click="gotoChallenge(item.id, item)">Zur Challenge</button>
             </div>
           </div>

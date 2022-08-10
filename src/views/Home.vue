@@ -91,18 +91,18 @@ export default {
   mounted() {
     console.log("mounted() hook in Home executed");
     this.content = this.allModules;
-    console.log(this.content);
+    //console.log(this.content);
     this.challenges = this.allChallenges;
-    console.log(this.challenges);
+    //console.log(this.challenges);
   },
 
   beforeUpdate() {
     console.log("beforeUpdate() hook in Home executed");
     this.content = this.allModules;
-    console.log(this.content);
+    //console.log(this.content);
     this.challenges = this.allChallenges;
-    console.log(this.challenges);
-    console.log(this.allChallenges);
+    //console.log(this.challenges);
+    //console.log(this.allChallenges);
     //Show completed modules
     if (this.userData && this.content && this.challenges) {
       this.setCompletedChallengesArray();
@@ -117,7 +117,7 @@ export default {
           this.content[i].isCompleted = true;
         }
       }
-      console.log(this.content);
+      //console.log(this.content);
     }
   }
 }
