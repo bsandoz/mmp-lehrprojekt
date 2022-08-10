@@ -126,6 +126,9 @@ export default {
         }
         this.$refs.messageBox.showMessageBox();
 
+        let doc = document.getElementById("question");
+        doc.innerHTML = "";
+
       } else {
         this.questionCounter++;
         this.resetQuestion();
