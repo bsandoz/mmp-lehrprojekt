@@ -15,7 +15,7 @@
         <br/>
         <p class="nomargin"><strong><i>Kontakt-Adresse</i></strong></p>
         <p class="nomargin">Bénédict Sandoz<br/>Kirschenweg 6<br/>4112 B&auml;ttwil<br/>Schweiz</p>
-        <p class="nomargin">E-Mail:<br/>benedict.sandoz@bluewin.ch</p>
+        <p class="nomargin">E-Mail:<br/>admin@benedict-sandoz.ch</p>
         <br/><br/>
         <p class="nomargin"><strong><i>Haftungsausschluss</i></strong></p><p class="nomargin">Der Autor &uuml;bernimmt keinerlei Gew&auml;hr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualit&auml;t, Zuverl&auml;ssigkeit und Vollst&auml;ndigkeit der Informationen.</p>
         <p class="nomargin">Haftungsanspr&uuml;che gegen den Autor wegen Sch&auml;den materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der ver&ouml;ffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische St&ouml;rungen entstanden sind, werden ausgeschlossen.</p><p>Alle Angebote sind unverbindlich. Der Autor beh&auml;lt es sich ausdr&uuml;cklich vor, Teile der Seiten oder das gesamte Angebot ohne besondere Ank&uuml;ndigung zu ver&auml;ndern, zu erg&auml;nzen, zu l&ouml;schen oder die Ver&ouml;ffentlichung zeitweise oder endg&uuml;ltig einzustellen.</p>

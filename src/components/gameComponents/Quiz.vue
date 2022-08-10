@@ -395,8 +395,8 @@ export default {
     margin-top: 5vh;
     max-width: 1500px;
     min-width: 500px;
-    min-height: 650px;
-    max-height: 850px;
+    min-height: 850px;
+    max-height: 1250px;
     background-color: var(--main-bg-color);
     border-radius: 10px;
     display: flex;
@@ -411,16 +411,19 @@ export default {
     font-weight: bold;
   }
   #results {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     justify-items: center;
+    align-items: center;
     margin-top: 20px;
   }
+  .intro-message {
+    font-weight: bold;
+  }
   .result-message {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
   }
   .intro-message {
     display: flex;

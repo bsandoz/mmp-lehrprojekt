@@ -68,7 +68,7 @@ export default {
   --main-bg-color: #fff;
   --main-text-color: #000;
   --dark-bg-text-color: #fff;
-  --main-accent-color: #ff8c1a;
+  --main-accent-color: #f5971d;
   --main-dark-color: #001f33;
   --confirm-color: #85e085;
   --mistake-color: #cc2900;

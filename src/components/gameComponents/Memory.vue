@@ -3,7 +3,7 @@
   <TestQuestions v-if="questionsActive" @hideTestLead="hideTestLead"/>
   <!--<button type="button" name="button" @click="setMemoryBoxes">test</button>-->
   <div class="exercise" v-if="!questionsActive">
-    <Lead :lead = "this.leadText" />
+    <Lead id="instructions" :lead = "this.leadText" />
     <!--<Lead v-if="this.moduleId === 3" lead="In diesem Memory verschiedene Notenlängen und Pausenlängen versteckt.
     Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken." />-->
 
@@ -64,7 +64,7 @@ export default {
       leadText: "",
 
       barTimer: 0,
-      timerText: "Bereit",
+      timerText: "Bereit, klicke auf eine Karte!",
 
       //testQuizCompleted: null,
       userScore: Number,
@@ -132,9 +132,9 @@ export default {
 
     setLeadText(id) {
       if (id === 2) {
-        this.leadText = "In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt. Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken";
+        this.leadText = "In diesem Memory sind Abbildungen der verschiedenen Notenwerte und ihre Definitionen versteckt. Kannst Du sie alle finden und richtig zuordnen? Klicke auf die Felder, um sie aufzudecken!";
       } else if (id === 3) {
-        this.leadText = "In diesem Memory sind verschiedene Notenlängen und Pausenlängen versteckt. Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken";
+        this.leadText = "In diesem Memory sind verschiedene Notenlängen und Pausenlängen versteckt. Ordne die Pausenlängen denjenigen Noten zu, die gleich lange dauern. Klicke auf die Felder, um sie aufzudecken!";
       }
     },
 
@@ -203,7 +203,7 @@ export default {
       return array;
     },
     makeBoxesInvisible() {
-      this.timerText = "Bereit";
+      this.timerText = "Bereit, klicke auf eine Karte!";
       if (this.visibilityCounter >= 2) {
         for (var i = 0; i < this.memoryboxArray.length; i++) {
           this.memoryboxArray[i].isVisible = false;
@@ -413,9 +413,10 @@ export default {
   .memory-container {
     display: grid;
     margin: 50px;
+    margin-left: auto;
+    margin-right: auto;
     width: 75%;
     height: auto;
-    align-self: center;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .memory-box {
@@ -428,6 +429,8 @@ export default {
     border-color: var(--main-dark-color);
     border-radius: 5px;
     margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 0;
     display: flex;
     text-align: center;
@@ -445,9 +448,10 @@ export default {
     visibility: visible;
   }
   .solved {
-    background-color: var(--confirm-color);
     font-size: 12pt;
-    border-color: var(--main-dark-color);
+    background-color: var(--main-bg-color);
+    border-color: var(--confirm-color);
+    border-width: thick;
     visibility: visible;
   }
   .continue-btn {
@@ -485,6 +489,10 @@ export default {
   #timer-text {
     text-align: center;
     margin: 5px;
+  }
+
+  #instructions {
+    font-weight: bold;
   }
 
 </style>
