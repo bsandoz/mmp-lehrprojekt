@@ -44,7 +44,7 @@ export default {
     ...mapState(useModuleStore, ['activeChallenge']),
   },
   mounted() {
-    console.log("Mounted");
+    //console.log("Mounted");
     /*
     this.content = this.activeChallenge.content;
     let doc = document.getElementById("content");
@@ -53,9 +53,9 @@ export default {
     this.adjustedId = this.activeChallenge.id - 1;
 
     this.exerciseLink = "/exercise/" + this.adjustedId;
-    console.log(this.exerciseLink);
+    //console.log(this.exerciseLink);
 
-    console.log(this.activeChallenge);
+    //console.log(this.activeChallenge);
 
     this.isMounted = true;
 

@@ -85,7 +85,7 @@ import { mapActions } from 'pinia';
           if (this.isGameRunning) {
             await console.log("Already running game");
           } else {
-            await console.log("Started game");
+            //await console.log("Started game");
 
             await axios
               .get ("https://db-easymusictheory.directus.app/items/hangmanGameElements")
@@ -102,7 +102,7 @@ import { mapActions } from 'pinia';
             await this.createEmptyDefinition();
             let today = new Date();
             let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            console.log(time);
+            //console.log(time);
             this.startTime = time;
             this.setTestUserStartTime(this.startTime);
           }
@@ -121,7 +121,7 @@ import { mapActions } from 'pinia';
         let word = this.wordsArray[this.currentDefinition].concept;
         let wordArray = word.split('');
         //wordArray = wordArray.replaceAll(" ", "");
-        console.log(wordArray);
+        //console.log(wordArray);
         for (var i = 0; i < this.currentStringLength; i++) {
           if (wordArray[i] === false) {
             //skip spaces

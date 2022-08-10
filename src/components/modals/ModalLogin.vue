@@ -65,12 +65,11 @@ export default {
 
     async login() {
       await this.getAllUsersData("https://db-easymusictheory.directus.app/items/users");
-      await console.log(this.username);
+      //await console.log(this.username);
       let filteredUsersData = this.userData.filter(item => item.username === this.username);
-      await console.log(filteredUsersData);
+      //await console.log(filteredUsersData);
       if (filteredUsersData.length > 0) {
-        await console.log(filteredUsersData[0].password);
-        //await console.log(this.password);
+        //await console.log(filteredUsersData[0].password);
         const res = await bcrypt.compare(this.password, filteredUsersData[0].password);
         if (res) {
           console.log("Login successful");

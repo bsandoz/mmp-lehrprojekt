@@ -13,9 +13,7 @@ export default {
 </script>
 
 <style scoped>
-* {
 
-}
 .footer-container {
   width: 100%;
   bottom: 0;

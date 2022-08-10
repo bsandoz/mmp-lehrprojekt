@@ -54,7 +54,7 @@ export default {
         if (this.isGameRunning) {
           await console.log("Already running game");
         } else {
-          await console.log("Started game");
+          //await console.log("Started game");
 
           const headers = { "Authorization": `Bearer ${this.apiToken}` };
 
@@ -78,11 +78,11 @@ export default {
       if (this.activeModule) {
         this.moduleId = this.activeModule.id;
         this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
-        console.log(this.apiLink);
+        //console.log(this.apiLink);
       } else if (this.activeChallenge) {
         this.challengeId = this.activeChallenge.id;
         this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
-        console.log(this.apiLink);
+        //console.log(this.apiLink);
       }
     },
 
@@ -93,9 +93,9 @@ export default {
       this.question4Array = array.slice(15, 20);
       this.question5Array = array.slice(20, 25);
 
-      console.log(this.question1Array);
-      console.log(this.question2Array);
-      console.log(this.question3Array);
+      //console.log(this.question1Array);
+      //console.log(this.question2Array);
+      //console.log(this.question3Array);
     },
 
     setNumberOfQuestions() {
@@ -104,7 +104,7 @@ export default {
           this.numberOfQuestions++;
         }
       }
-      console.log(this.numberOfQuestions);
+      //console.log(this.numberOfQuestions);
     },
 
     nextQuestion() {
@@ -158,7 +158,7 @@ export default {
           this.filteredQuestionsArray.push(array[i]);
         }
       }
-      console.log(this.filteredQuestionsArray);
+      //console.log(this.filteredQuestionsArray);
 
       this.question = this.filteredQuestionsArray[0].fieldContent;
       let doc = document.getElementById("question");
@@ -171,7 +171,7 @@ export default {
           this.filteredAnswersArray.push(array[i]);
         }
       }
-      console.log(this.filteredAnswersArray);
+      //console.log(this.filteredAnswersArray);
 
       let doc1 = document.getElementById("answer-1");
       doc1.innerHTML = this.filteredAnswersArray[0].fieldContent;
@@ -187,9 +187,9 @@ export default {
     saveCorrectAnswer() {
       for (var i = 0; i < this.filteredAnswersArray.length; i++) {
         if (this.filteredAnswersArray[i].isCorrect === true) {
-          console.log(this.filteredAnswersArray);
+          //console.log(this.filteredAnswersArray);
           this.correctAnswer = this.filteredAnswersArray[i].answerNumber;
-          console.log(this.correctAnswer);
+          //console.log(this.correctAnswer);
         }
       }
     },
@@ -197,19 +197,19 @@ export default {
     checkAnswer(id) {
       this.saveCorrectAnswer();
       if (this.answerChosen === false) {
-        console.log("Clicked answer button with id " + id + ".");
+        //console.log("Clicked answer button with id " + id + ".");
         if (this.filteredAnswersArray[id].isCorrect === true) {
-          console.log("Correct answer!");
+          //console.log("Correct answer!");
           this.quizPoints++;
           this.message = "Du hast " + this.quizPoints + " Punkte erreicht.";
-          console.log(this.quizPoints);
+          //console.log(this.quizPoints);
           this.answerChosen = true;
           this.isAnswerCorrect = true;
           let adjustedId = id + 1;
           let btn = document.getElementById("answer-" + adjustedId);
           btn.classList.add("correct");
         } else {
-          console.log("Wrong answer.");
+          //console.log("Wrong answer.");
           this.answerChosen = true;
           this.isAnswerCorrect = false;
           let adjustedId = id + 1;
@@ -219,7 +219,7 @@ export default {
           btnWrong.classList.add("wrong");
         }
       } else {
-        console.log("Answer already given.");
+        //console.log("Answer already given.");
       }
     },
 

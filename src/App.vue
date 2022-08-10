@@ -34,12 +34,6 @@ export default {
     }
   },
   methods: {
-    /*
-    fetchData() {
-      axios.get('system/ajax/getModules.php').then(response => (this.content = response.data));
-    },
-    */
-
     setIsMobile(bool) {
       this.isMobile = bool;
       this.hideOverflow(bool);
@@ -53,9 +47,6 @@ export default {
 
     }
 
-  },
-  created() {
-    //this.fetchData();
   },
 }
 

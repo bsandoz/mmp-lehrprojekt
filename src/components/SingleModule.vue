@@ -4,9 +4,6 @@
       <h3 class="module-title">{{ singleModule.title }}</h3>
       <p class="module-summary">{{ singleModule.text }}</p>
       <p class="completed" v-if="singleModule.isCompleted">Du hast dieses Kapitel erfolgreich abgeschlossen!</p>
-      <!--Change Progress to Users db
-      <p class="progress-bar">Progress: {{ singleModule.progress }}%</p>
-      -->
     </div>
   </router-link>
 </template>
@@ -42,17 +39,6 @@ export default {
   methods: {
     ...mapActions(useUserStore, ['setCompletedModulesArray']),
   },
-  mounted() {
-    /* Needs to be moved to Home?
-    if (this.userData) {
-      this.setCompletedModulesArray();
-      for (var i = 0; i < this.completedModulesArray.length; i++) {
-        if (this.completedModulesArray[i]) {
-
-        }
-      }
-    } */
-  }
 }
 </script>
 

@@ -34,7 +34,7 @@ export default {
       this.mask.style.display="block";
 
       document.getElementById('confirmation-btn').onclick = function(){
-         console.log("Click");
+         //console.log("Click");
          self.$emit('clickedMessageBox');
          self.mask.style.display="none";
       };

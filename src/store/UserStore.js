@@ -25,7 +25,7 @@ export const useUserStore = defineStore("UserStore", {
       //module3Completed: null,
       //module3Score: null,
 
-      //Data for test
+      //Data for test, no longer needed
       testUserId: null,
       testUserAge: null,
       testUserGender: null,
@@ -141,7 +141,7 @@ export const useUserStore = defineStore("UserStore", {
           for (var i = 0; i < usersData.length; i++) {
             if (usersData[i].module1Completed) {
               await this.userDataForLeaderboard.push(usersData[i]);
-              await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard);
+              //await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard);
               //Sort by descending score
               await this.userDataForLeaderboard.sort((a, b) => b.module1Score - a.module1Score);
               this.activeLeaderboard = "module" + id;
@@ -151,7 +151,7 @@ export const useUserStore = defineStore("UserStore", {
           for (var i = 0; i < usersData.length; i++) {
             if (usersData[i].module2Completed) {
               await this.userDataForLeaderboard.push(usersData[i]);
-              await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard);
+              //await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard);
               //Sort by descending score
               await this.userDataForLeaderboard.sort((a, b) => b.module2Score - a.module2Score);
               this.activeLeaderboard = "module" + id;
@@ -161,7 +161,7 @@ export const useUserStore = defineStore("UserStore", {
           for (var i = 0; i < usersData.length; i++) {
             if (usersData[i].module3Completed) {
               await this.userDataForLeaderboard.push(usersData[i]);
-              await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard);
+              //await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard);
               //Sort by descending score
               await this.userDataForLeaderboard.sort((a, b) => b.module3Score - a.module3Score);
               this.activeLeaderboard = "module" + id;
@@ -173,7 +173,7 @@ export const useUserStore = defineStore("UserStore", {
           for (var i = 0; i < usersData.length; i++) {
             if (usersData[i].challenge1Completed) {
               await this.userDataForLeaderboard.push(usersData[i]);
-              await console.log("Challenge 1 Leaderboard: " + this.userDataForLeaderboard);
+              //await console.log("Challenge 1 Leaderboard: " + this.userDataForLeaderboard);
               //Sort by descending score
               await this.userDataForLeaderboard.sort((a, b) => b.challenge1Score - a.challenge1Score);
               this.activeLeaderboard = "challenge" + id;
@@ -181,28 +181,9 @@ export const useUserStore = defineStore("UserStore", {
           }
         }
       }
-
-      /*
-
-      for (var i = 0; i < usersData.length; i++) {
-        if (usersData[i].module1Completed) {
-          await this.userDataForLeaderboard1.push(usersData[i]);
-          await console.log("Module 1 Leaderboard: " + this.userDataForLeaderboard1);
-        } if (usersData[i].module2Completed) {
-          await this.userDataForLeaderboard2.push(usersData[i]);
-          await console.log("Module 2 Leaderboard: " + this.userDataForLeaderboard2);
-        } if (usersData[i].module3Completed) {
-          await this.userDataForLeaderboard3.push(usersData[i]);
-          await console.log("Module 3 Leaderboard: " + this.userDataForLeaderboard3);
-        } else {
-          await console.log("No data found");
-        }
-      }
-
-      */
     },
 
-      //Actions for Test
+      //Actions for Test, no longer needed
       setTestUserId(id) {
         this.testUserId = id;
       },

@@ -93,12 +93,12 @@ export default {
         this.moduleId = this.activeModule.id;
         this.idForLead = this.moduleId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/module" + this.moduleId + "GameElements";
-        console.log(this.apiLink);
+        //console.log(this.apiLink);
       } else if (this.activeChallenge) {
         this.challengeId = this.activeChallenge.id;
         this.idForLead = this.challengeId;
         this.apiLink = "https://db-easymusictheory.directus.app/items/challenge" + this.challengeId + "GameElements";
-        console.log(this.apiLink);
+        //console.log(this.apiLink);
       }
     },
 
@@ -108,7 +108,7 @@ export default {
         if (this.isGameRunning) {
           await console.log("Already running game");
         } else {
-          await console.log("Started game");
+          //await console.log("Started game");
 
           const headers = { "Authorization": `Bearer ${this.apiToken}` };
 
@@ -141,17 +141,17 @@ export default {
     toggleVisibility(item) {
       if (item.isSolved === false) {
         if (item.isVisible) {
-          console.log("Already visible");
+          //console.log("Already visible");
         } else if (this.stopRevealing === false) {
           if (this.visibilityCounter === 0) {
             this.firstBoxPair = item.pair;
             this.firstBoxClicked = item;
-            console.log(this.firstBoxPair);
+            //console.log(this.firstBoxPair);
           }
           if (this.visibilityCounter === 1) {
             this.secondBoxPair = item.pair;
             this.secondBoxClicked = item;
-            console.log(this.secondBoxPair);
+            //console.log(this.secondBoxPair);
           }
           item.isVisible = true;
 
@@ -167,7 +167,7 @@ export default {
           console.log("Not allowed to reveal more boxes right now.");
         }
       } else {
-        console.log("Clicked box is already solved");
+        //console.log("Clicked box is already solved");
       }
     },
 
@@ -230,7 +230,7 @@ export default {
       for (var i = 0; i < array.length; i++) {
         if (array[i].isSolved) {
           counter++;
-          console.log(counter);
+          //console.log(counter);
         }
       }
       if (array.length === counter) {
@@ -393,8 +393,8 @@ export default {
   },
   created() {
     this.testQuizCompleted = localStorage.getItem("testQuizCompleted");
-    console.log("Get localstorage");
-    console.log(this.testQuizCompleted);
+    //console.log("Get localstorage");
+    //console.log(this.testQuizCompleted);
     this.startGame();
   },
   emits: ['hideTestLead']

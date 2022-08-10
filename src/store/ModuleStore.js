@@ -55,26 +55,22 @@ export const useModuleStore = defineStore("ModuleStore", {
       this.activeModule = null;
       this.activeChallenge = null;
       console.log("Called setActiveModule from ModuleStore.js");
-      //Subtract 1 from id to correctly correspond to array id (database IDs start with 1, array with 0)
-      //clickedModule.id -= 1;
       this.activeModule = this.allModules[clickedModule.id - 1];
-      console.log(this.activeModule);
-      console.log("activeModule ID is " + this.activeModule.id);
-      console.log("activeModule Title is " + this.activeModule.title);
+      //console.log(this.activeModule);
+      //console.log("activeModule ID is " + this.activeModule.id);
+      //console.log("activeModule Title is " + this.activeModule.title);
     },
     setActiveChallenge(clickedChallenge) {
       //Clear activeModule and activeChallenge
       this.activeModule = null;
       this.activeChallenge = null;
-      console.log("Called setActiveChallenge from ModuleStore.js");
-      console.log(clickedChallenge);
-      console.log(clickedChallenge.id);
-      //Subtract 1 from id to correctly correspond to array id (database IDs start with 1, array with 0) BUG
-      //clickedChallenge.id -= 1;
+      //console.log("Called setActiveChallenge from ModuleStore.js");
+      //console.log(clickedChallenge);
+      //console.log(clickedChallenge.id);
       this.activeChallenge = this.allChallenges[clickedChallenge.id - 1];
-      console.log(this.activeChallenge);
-      console.log("activeChallenge ID is " + this.activeChallenge.id);
-      console.log("activeChallenge Title is " + this.activeChallenge.title);
+      //console.log(this.activeChallenge);
+      //console.log("activeChallenge ID is " + this.activeChallenge.id);
+      //console.log("activeChallenge Title is " + this.activeChallenge.title);
 
 
     },

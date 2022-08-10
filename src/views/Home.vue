@@ -34,7 +34,6 @@
       </ModalRegister>
     </Teleport>
   </div>
-  <!--<router-link class="clickbox site-title unstyled-link" to="/test">Hier geht es zur Versuchsdurchführung</router-link>-->
 </template>
 
 <script>

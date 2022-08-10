@@ -25,7 +25,7 @@ export default {
       this.getUsersDataForLeaderboard("https://db-easymusictheory.directus.app/items/users", "module", id);
 
       document.getElementById('close-btn').onclick = function(){
-         console.log("Click");
+         //console.log("Click");
          self.$emit('clickedLeaderboard');
          self.mask.style.display="none";
       };
@@ -39,7 +39,7 @@ export default {
       this.getUsersDataForLeaderboard("https://db-easymusictheory.directus.app/items/users", "challenge", id);
 
       document.getElementById('close-btn').onclick = function(){
-         console.log("Click");
+         //console.log("Click");
          self.$emit('clickedLeaderboard');
          self.mask.style.display="none";
       };

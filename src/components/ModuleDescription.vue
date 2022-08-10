@@ -9,12 +9,7 @@
         <div class="next-exercise">
           <h3>Überprüfe dein Wissen zu diesem Kapitel nun mit einer kurzen Übung!</h3>
         </div>
-        <div class="start-exercise">
-          <!--
-          <router-link to="/exercise-memory">Übung starten (Memory)</router-link>
-          <router-link to="/exercise-hangman">Übung starten (Hangman)</router-link>
-          -->
-        </div>
+        <div class="start-exercise"></div>
     </router-link>
   </div>
 </template>
@@ -44,7 +39,7 @@ export default {
     ...mapState(useModuleStore, ['activeModule']),
   },
   mounted() {
-    console.log("Mounted");
+    //console.log("Mounted");
     this.content = this.activeModule.content;
     let doc = document.getElementById("content");
     doc.innerHTML = this.content;
@@ -52,9 +47,9 @@ export default {
     this.adjustedId = this.activeModule.id - 1;
 
     this.exerciseLink = "/exercise/" + this.adjustedId;
-    console.log(this.exerciseLink);
+    //console.log(this.exerciseLink);
 
-    console.log(this.activeModule);
+    //console.log(this.activeModule);
 
     this.isMounted = true;
 

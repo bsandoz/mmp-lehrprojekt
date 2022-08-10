@@ -65,7 +65,7 @@ export default {
       this.moduleScores.push(this.userData.module2Score);
       this.moduleScores.push(this.userData.module3Score);
 
-      console.log(this.moduleScores);
+      //console.log(this.moduleScores);
     },
 
     setChallengeScores() {
@@ -73,7 +73,7 @@ export default {
 
       this.challengeScores.push(this.userData.challenge1Score);
 
-      console.log(this.challengeScores);
+      //console.log(this.challengeScores);
     },
 
     calculateProgressBar(score, maxScore) {
@@ -87,7 +87,6 @@ export default {
     },
 
     showChallengeLeaderboard(id) {
-      console.log(id);
       this.$refs.leaderboard.showChallengeLeaderboard(id);
     },
 
@@ -115,7 +114,7 @@ export default {
       this.setModuleScores();
       this.setChallengeScores();
 
-      console.log("completedModulesArray: " + this.completedModulesArray);
+      //console.log("completedModulesArray: " + this.completedModulesArray);
       for (var i = 0; i < this.completedModulesArray.length; i++) {
          if (this.completedModulesArray[i]) {
            this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
@@ -149,36 +148,11 @@ export default {
     } else {
       this.userName = this.userData.username;
       this.userMail = this.userData.email;
-      console.log(this.userName);
-
-      /*
-      //clear array before filling it
-      this.completionBooleanArray = [];
-
-      this.completionBooleanArray.push(this.userData.module1Completed);
-      this.completionBooleanArray.push(this.userData.module2Completed);
-      this.completionBooleanArray.push(this.userData.module3Completed);
-      */
+      //console.log(this.userName);
 
       this.updateModulesAndChallenges();
     }
   },
-  /*
-  updated() {
-    this.setCompletedModulesArray();
-    this.setModuleScores();
-    console.log("completedModulesArray: " + this.completedModulesArray);
-    for (var i = 0; i < this.completedModulesArray.length; i++) {
-       if (this.completedModulesArray[i]) {
-         this.allModules[i].score = this.moduleScores[i] + " von " + this.allModules[i].maxScore;
-         this.progressBars.push(this.calculateProgressBar(this.moduleScores[i], this.allModules[i].maxScore) + "%");
-         console.log(this.progressBars);
-         this.completedModules.push(this.allModules[i]);
-         console.log(this.completedModulesArray);
-         console.log(this.completedModules);
-       }
-    }
-  }*/
 }
 </script>
 
@@ -210,13 +184,6 @@ export default {
         </div>
       </div>
       <p v-if="this.completedModulesArray[0] === false">Du hast noch keine Kapitel abgeschlossen. Wie wäre es, gleich mit Kapitel 1 zu beginnen?</p>
-      <!--
-      <div class="module-points">
-        <p v-if="this.userData.module1Score">Punktzahl Modul 1: {{ this.userData.module1Score }}</p>
-        <p v-if="this.userData.module2Score">Punktzahl Modul 2: {{ this.userData.module2Score }}</p>
-        <p v-if="this.userData.module3Score">Punktzahl Modul 3: {{ this.userData.module3Score }}</p>
-      </div>
-    -->
     </div>
     <div class="challenge-progress">
       <p id="completed-modules-title" class="nomargin" v-if="this.completedChallenges[0]">Deine abgeschlossenen Challenges:</p>

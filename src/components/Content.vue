@@ -53,15 +53,6 @@ export default {
     ...mapState(useUserStore, ['userIsLoggedIn']),
   },
   methods: {
-    /*
-    setModulesCompleted() {
-      let containers = document.getElementsByClassName("container");
-      let containersArray = Array.from(containers);
-      console.log(containersArray);
-      containersArray.classList.add("complete");
-    },
-    */
-
     ...mapActions(useModuleStore, ['setActiveModule']),
     ...mapActions(useModuleStore, ['setActiveChallenge']),
   },
