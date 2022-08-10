@@ -1,6 +1,6 @@
-# bachelor-lerntool
+# EasyMusicTheory
 
-This is the frontend for my bachelor thesis' project, a gamified online learning tool.
+This is the frontend for my bachelor thesis' project EasyMusicTheory, a gamified online learning tool. It is built as a HeadlessCMS application and only works together with the backend, which was created and hosted with Directus. 
 
 ## Project Setup
 
