@@ -4,8 +4,8 @@
       <router-link to="/">Zurück zur Startseite</router-link>
     </div>
     <div class="about-content">
-      <h3>v0.5.1</h3>
-      <p>Es handelt sich bei dieser Seite um eine Beta-Version, die sich noch im Aufbau befindet. Diese Webseite entstand im Rahmen meiner Bachelorarbeit im Studiengang Multimedia Production der Fachhochschule Graubünden.</p>
+      <h3>Über EasyMusicTheory:</h3>
+      <p>Diese Webseite entstand im Rahmen meiner Bachelorarbeit im Studiengang Multimedia Production der Fachhochschule Graubünden. Es handelt sich bei dieser Seite um eine Beta-Version. </p>
       <div class="credits">
         <h3>Credits:</h3>
         <p>Arrow by unlimicon from NounProject.com</p>
